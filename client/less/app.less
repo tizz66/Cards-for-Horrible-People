@@ -1,0 +1,38 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Helvetica', sans-serif;
+	background: #373737;
+	background-image: url( '../images/irongrip_@2X.png' );
+	background-size: 300px 301px;
+
+	&.is-indev {
+		padding-right: 300px;
+	}
+
+	h1 {
+		color: #fff;
+		text-align: center;
+		font-family: 'Pacifico';
+		font-size: 50px;
+		text-shadow: 0px 3px 0px #000;
+		margin-top: 40px;
+	}
+}
+
+.btn-dark {
+	background: #333;
+	border-color: #333;
+	color: #fff;
+
+	&:hover,
+	&:focus {
+		color: #fff;
+		background: #000;
+		border-color: #000;
+	}
+}

@@ -1,0 +1,5 @@
+export const JOIN_GAME = 'JOIN_GAME';
+export const JOIN_GAME_PENDING = 'JOIN_GAME_PENDING';
+export const JOIN_GAME_FULFILLED = 'JOIN_GAME_FULFILLED';
+export const JOIN_GAME_REJECTED = 'JOIN_GAME_REJECTED';
+export const NEW_GAME = 'NEW_GAME';
