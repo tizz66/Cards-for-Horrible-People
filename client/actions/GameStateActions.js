@@ -1,12 +1,10 @@
 import * as types from '../constants/ActionTypes';
-import * as LaunchHandlers from '../handlers/LaunchHandlers';
+import * as GameStateHandlers from '../handlers/GameStateHandlers';
 
 export function joinGame(data) {
     return {
         type: types.JOIN_GAME,
-        payload: {
-        	promise: LaunchHandlers.joinGame(data),
-        }
+    	promise: GameStateHandlers.joinGame( data )
     };
 }
 

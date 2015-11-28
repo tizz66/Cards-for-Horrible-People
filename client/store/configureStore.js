@@ -1,8 +1,8 @@
 import { createStore as initialCreateStore, combineReducers, applyMiddleware, compose } from 'redux';  
 import thunk from 'redux-thunk';
-import promiseMiddleware from 'redux-promise-middleware';
+import promiseMiddleware from '../middleware/promiseMiddleware';
 import { devTools, persistState } from 'redux-devtools';
-import * as reducers from '../reducers';
+import reducers from '../reducers';
 
 const reducer = combineReducers(reducers);
 

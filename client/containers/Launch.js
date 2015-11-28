@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
-import * as LaunchActions from '../actions/LaunchActions';
+import * as GameStateActions from '../actions/GameStateActions';
 import './Launch.less';
 
 let mapStateToProps = (state) => ({
-	gameData: state.gameData
+	gameState: state.gameState
 });
 
 let Launch = React.createClass({
@@ -18,7 +17,7 @@ let Launch = React.createClass({
 		let gameKey = this._gameKey.value;
 		let nickname = this._nick0.value;
 
-		dispatch( LaunchActions.joinGame({
+		dispatch( GameStateActions.joinGame({
 			gameKey,
 			nickname
 		}));
@@ -30,20 +29,19 @@ let Launch = React.createClass({
 		e.preventDefault();
 		let nickname = this._nick0.value;
 
-		dispatch( LaunchActions.newGame({
+		dispatch( GameStateActions.newGame({
 			nickname
 		}));
 	},
 
 	render: function () {
-		const { dispatch } = this.props;
-		const launchActions = bindActionCreators( LaunchActions, dispatch );
+		const { gameState, dispatch } = this.props;
 
 		return (
 			<div>
 				<h1>Cards for Offensive People.</h1>
 				<div className='Launch'>
-					<div className='Launch-panel'>
+					<div className={ 'Launch-panel' + ( gameState.loading ? ' Launch-panel-isLoading' : '' )}>
 						<h2><span>Join</span> an existing game</h2>
 						<div className='row'>
 							<div className="col-md-5 form-group">

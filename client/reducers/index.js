@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import launch from './launch';
+import gameState from './gameState';
 
-export default combineReducers({
-	launch
-});
+const reducers = {
+	gameState
+};
+
+export default reducers;
