@@ -21,8 +21,30 @@ export default function gameState( state = initialState, action ) {
 			return Object.assign( {}, state, { 
 				loading: false,
 				loaded: true,
+				started: false,
+				gameKey: action.result.gameKey,
+				owner: action.result.ownerID,
+				playerID: action.result.playerID,
+				isOwner: false
+			} ); 
+
+		case types.JOIN_GAME_FAIL:
+			return Object.assign( {}, state, { 
+				loading: false,
+				loaded: false,
 				started: false
 			} ); 
+
+		case types.NEW_GAME_SUCCESS:
+			return Object.assign( {}, state, {
+				loading: false,
+				loaded: true,
+				started: false,
+				gameKey: action.result.gameKey,
+				owner: action.result.playerID,
+				playerID: action.result.playerID,
+				isOwner: true
+			} );
 
 		default:
 			return state;

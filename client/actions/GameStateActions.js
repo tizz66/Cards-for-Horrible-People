@@ -8,10 +8,9 @@ export function joinGame(data) {
     };
 }
 
-export function newGame(name) {
-	console.log('here');
+export function newGame(data) {
     return {
         type: types.NEW_GAME,
-        name
+        promise: GameStateHandlers.newGame( data )
     };
 }

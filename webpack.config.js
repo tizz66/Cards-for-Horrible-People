@@ -33,7 +33,7 @@ module.exports = {
 				loader: 'style!css!less'
 			},
 			{
-				test: /\.png$/,
+				test: /\.(png|svg)$/,
 				loader: 'url??mimetype=image/png'
 			}
 		]

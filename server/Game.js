@@ -1,0 +1,38 @@
+import _ from 'lodash';
+
+export default class Game {
+	constructor (options, namespace) {
+		this.gameKey = options.key;
+		this.players = {};
+		this.socket = namespace;
+
+		this.socketEvents();
+	}
+
+	socketEvents () {
+		this.socket.on( 'connection', function (socket) {
+			socket.on('start-game', () => {
+				socket.emit('game-started');
+			});
+		});
+	}
+
+	addPlayer (nickname) {
+		let playerID = new Buffer( nickname ).toString('base64');
+
+		this.players[ playerID ] = {
+			nickname: nickname,
+			cards: [],
+			score: 0
+		}
+
+		console.log( this.players );
+
+		return playerID;
+	}
+
+	playerExists (nickname) {
+		let playerID = new Buffer( nickname ).toString('base64');
+		return !_.isUndefined( this.players[ playerID ] );
+	}
+}

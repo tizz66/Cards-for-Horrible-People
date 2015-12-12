@@ -1,0 +1,21 @@
+@import '../less/_mixins.less';
+
+.Hand {
+	background: rgba(0,0,0,0.2);
+	position: absolute;
+	bottom: 0;
+	left: 375px;
+	right: 0;
+	height: 208px;
+	padding: 15px;
+
+	> ul {
+		.reset;
+
+		> li {
+			display: inline-block;
+			float: left;
+			margin-right: 15px;
+		}
+	}
+}

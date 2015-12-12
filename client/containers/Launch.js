@@ -1,17 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux'; 
+import _ from 'lodash';
 import * as GameStateActions from '../actions/GameStateActions';
 import './Launch.less';
 
 let mapStateToProps = (state) => ({
-	gameState: state.gameState
+	gameState: state.gameState,
+	errors: state.errors
 });
 
 let Launch = React.createClass({
 
+	getInitialState: function () {
+		return {
+			joinError: false
+		};
+	},
+
 	joinGame: function (e) {
-		const { dispatch } = this.props;
+		const { history, dispatch } = this.props;
 
 		e.preventDefault();
 		let gameKey = this._gameKey.value;
@@ -20,18 +27,24 @@ let Launch = React.createClass({
 		dispatch( GameStateActions.joinGame({
 			gameKey,
 			nickname
-		}));
+		})).then( () => {
+			if( this.props.gameState.loaded ){
+				history.pushState(null, '/game');	
+			}
+		});
 	},
 
 	newGame: function (e) {
-		const { dispatch } = this.props;
+		const { history, dispatch } = this.props;
 
 		e.preventDefault();
 		let nickname = this._nick0.value;
 
 		dispatch( GameStateActions.newGame({
 			nickname
-		}));
+		})).then( () => {
+			history.pushState(null, '/game');
+		});
 	},
 
 	render: function () {
@@ -50,6 +63,7 @@ let Launch = React.createClass({
 							<div className="col-md-7 form-group">
 								<input type='text' placeholder='Your nickname' className='form-control input-lg' ref={ (ref) => { this._nick0 = ref } } />
 							</div>
+							{!_.isUndefined( this.props.errors.joinError ) ? this.props.errors.joinError : ''}
 						</div>
 						<button className='btn btn-dark btn-block' onClick={this.joinGame}>Join Game</button>
 					</div>

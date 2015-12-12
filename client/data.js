@@ -4,7 +4,8 @@ let data = {
 		loading: false,
 		loaded: true,
 		started: false,
-		owner: 1
+		owner: 1,
+		players: 0
 	},
 	playState: {
 		dealer: 1,
@@ -21,15 +22,18 @@ let data = {
 			score: 0
 		}
 	},
-	hand: {
-		245: {
+	hand: [
+		{
+			id: 145,
 			text: "black text"
 		},
-		260: {
+		{
+			id: 146,
 			text: "black text"
 		},
-		180: {
+		{
+			id: 147,
 			text: "black text"
 		}
-	}
+	]
 }
