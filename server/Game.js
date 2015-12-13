@@ -5,6 +5,7 @@ export default class Game {
 		this.gameKey = options.key;
 		this.players = {};
 		this.socket = namespace;
+		this.ownerID = '';
 
 		this.socketEvents();
 	}
@@ -17,7 +18,7 @@ export default class Game {
 		});
 	}
 
-	addPlayer (nickname) {
+	addPlayer (nickname, owner) {
 		let playerID = new Buffer( nickname ).toString('base64');
 
 		this.players[ playerID ] = {
@@ -26,7 +27,9 @@ export default class Game {
 			score: 0
 		}
 
-		console.log( this.players );
+		if( owner ){
+			this.ownerID = playerID;
+		}
 
 		return playerID;
 	}

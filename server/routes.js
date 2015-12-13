@@ -1,14 +1,28 @@
-export default function gameRoutes (router, gameManager) {
+import Game from './Game';
+import randomstring from 'randomstring';
+import _ from 'lodash';
+
+let games = {};
+
+function gameManager (router, io) {
+
+	function gameExists (gameKey) {
+		return !_.isUndefined( games[ gameKey ] );
+	}
+
+	//-------------------------------------------
+	// Join a game (ajax endpoint)
+	//-------------------------------------------
 	router.post('/join', function (req, res) {
 
-		let game = gameManager.getGame( req.body.gameKey );
+		let game = games[ req.body.gameKey ];
 
-		if( !game ){
+		if( _.isUndefined( game ) ){
 			res.status(500).json({
 				error: "GAME_NOT_FOUND"
 			});
 			return;
-		}		
+		}
 
 		if( game.playerExists( req.body.nickname ) ){
 			res.status(500).json({
@@ -17,26 +31,37 @@ export default function gameRoutes (router, gameManager) {
 			return;
 		}
 
-		let gameData = gameManager.joinGame( req.body.nickname );
+		let playerID = game.addPlayer( req.body.nickname );
 
-		req.session.gameKey = gameData.gameKey;
-		req.session.playerID = gameData.playerID;
+		req.session.gameKey = req.body.gameKey;
+		req.session.playerID = playerID;
 
 		res.json({
-			gameKey: gameData.gameKey,
-			playerID: gameData.playerID
+			gameKey: req.body.gameKey,
+			playerID: playerID,
+			ownerID: game.ownerID
 		});
 	});
 
+	//-------------------------------------------
+	// Create a new game (ajax endpoint)
+	//-------------------------------------------
 	router.post('/new', function (req, res) {
-		let gameData = gameManager.newGame('test user');
+		let gameKey = randomstring.generate({ length: 6, readable: true }).toUpperCase();
+		let game = new Game({ key: gameKey }, io);
+		
+		games[ gameKey ] = game;
 
-		req.session.gameKey = gameData.gameKey;
-		req.session.playerID = gameData.playerID;
+		let playerID = game.addPlayer( req.body.nickname, true );
+
+		req.session.gameKey = gameKey;
+		req.session.playerID = playerID;
 
 		res.json({
-			gameKey: gameData.gameKey,
-			playerID: gameData.playerID
+			gameKey: gameKey,
+			playerID: playerID
 		});
 	});
 } 
+
+export default gameManager;

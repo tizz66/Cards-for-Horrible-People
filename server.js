@@ -9,8 +9,8 @@ import iosession from 'socket.io-express-session';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import * as config from './webpack.config'; 
-import gameRoutes from './server/routes';
-import gameManager from './server/GameManager';
+//import gameRoutes from './server/routes';
+import gameManager from './server/routes';
 
 let compiler = webpack( config );
 let port = 3002;
@@ -45,4 +45,4 @@ let server = app.listen( port, 'localhost', function (err) {
 
 let socket = Server( server );
 socket.use( iosession( serverSession ) );
-gameRoutes( gameRouter, gameManager( socket ) );
+gameManager( gameRouter, socket );
