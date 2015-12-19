@@ -38,12 +38,14 @@ let Launch = React.createClass({
 		const { history, dispatch } = this.props;
 
 		e.preventDefault();
-		let nickname = this._nick0.value;
-
+		let nickname = this._nick1.value;
+		
 		dispatch( GameStateActions.newGame({
 			nickname
 		})).then( () => {
-			history.pushState(null, '/game');
+			if( this.props.gameState.loaded ){
+				history.pushState(null, '/game');
+			}
 		});
 	},
 

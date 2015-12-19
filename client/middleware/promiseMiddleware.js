@@ -8,7 +8,7 @@ export default function promiseMiddleware() {
 	return (next) => (action) => {
 		const { promise, type, ...rest } = action;
 		
-		if(!isPromise) {
+		if(!isPromise(action)) {
 			return next(action);
 		}
 		

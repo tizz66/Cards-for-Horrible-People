@@ -46,6 +46,13 @@ export default function gameState( state = initialState, action ) {
 				isOwner: true
 			} );
 
+		case types.START_GAME:
+			return Object.assign( {}, state, {
+				loading: false,
+				loaded: true,
+				started: true
+			} );
+
 		default:
 			return state;
 	}

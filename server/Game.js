@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Deck from './Deck';
 
 export default class Game {
 	constructor (options, namespace) {
@@ -6,16 +7,44 @@ export default class Game {
 		this.players = {};
 		this.socket = namespace;
 		this.ownerID = '';
+		this.deck = new Deck();
 
 		this.socketEvents();
 	}
 
 	socketEvents () {
-		this.socket.on( 'connection', function (socket) {
+		this.socket.on( 'connection', (socket) => {
+
+			this.players[ socket.handshake.session.playerID ]['socket'] = socket;
+
 			socket.on('start-game', () => {
-				socket.emit('game-started');
+				if( socket.handshake.session.playerID == this.ownerID ){
+					this.socket.emit( 'game-started', {
+						judgeID: this.ownerID,
+						players: this.getPlayers()
+					} );
+
+					this.launchGame();
+				}				
 			});
 		});
+	}
+
+	launchGame () {
+		_.forOwn( this.players, (player, playerID) => {
+			player.cards = this.deck.drawAnswers(8);
+			player.socket.emit( 'starting-hand', player.cards );
+		});
+	}
+
+	getPlayers () {
+		let players = {};
+
+		_.forOwn( this.players, (player, playerID) => {
+			players[ playerID ] = _.pick( player, 'nickname', 'score' );
+		} );
+
+		return players;
 	}
 
 	addPlayer (nickname, owner) {
@@ -30,6 +59,8 @@ export default class Game {
 		if( owner ){
 			this.ownerID = playerID;
 		}
+
+		console.log("Added player " + playerID + " to " + this.gameKey);
 
 		return playerID;
 	}

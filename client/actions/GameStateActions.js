@@ -14,3 +14,11 @@ export function newGame(data) {
         promise: GameStateHandlers.newGame( data )
     };
 }
+
+export function startGame(data) {
+    return {
+        type: types.START_GAME,
+        judgeID: data.judgeID,
+        players: data.players
+    };
+}

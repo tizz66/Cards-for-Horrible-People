@@ -1,334 +1,79 @@
-let questions = {
-	459: {
-		"text": "_____?  There's an app for that.",
-		"numAnswers":1,
-		"expansion": "Base"
-	},
-    460: {
-    	"text": "Why can't I sleep at night?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    461: {
-    	"text": "What's that smell?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    462: {
-    	"text": "I got 99 problems but _____ ain't one.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    463: {
-    	"text": "Maybe she's born with it.  Maybe it's _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    464: {
-    	"text": "What's the next Happy Meal&reg; toy?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    465: {
-    	"text": "Anthropologists have recently discovered a primitive tribe that worships _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    466: {
-    	"text": "It's a pity that kids these days are all getting involved with _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    467: {
-    	"text": "During Picasso's often-overlooked Brown Period, he produced hundreds of paintings of _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    468: {
-    	"text": "Alternative medicine is now embracing the curative powers of _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    469: {
-    	"text": "And the Academy Award for _____ goes to _____.",
-    	"numAnswers":2,
-    	"expansion": "Base"
-    },
-    470: {
-    	"text": "What's that sound?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    471: {
-    	"text": "What ended my last relationship?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    472: {
-    	"text": "MTV's new reality show features eight washed-up celebrities living with _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    473: {
-    	"text": "I drink to forget _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    474: {
-    	"text": "I'm sorry professor, but I couldn't complete my homework because of _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    475: {
-    	"text": "What is Batman's guilty pleasure?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    476: {
-    	"text": "This is the way the world ends <br> This is the way the world ends <br> Not with a bang but with _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    477: {
-    	"text": "What's a girl's best friend?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    478: {
-    	"text": "TSA guidelines now prohibit _____ on airplanes.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    479: {
-    	"text": "_____.  That's how I want to die.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    480: {
-    	"text": "For my next trick, I will pull _____ out of _____.",
-    	"numAnswers":2,
-    	"expansion": "Base"
-    },
-    481: {
-    	"text": "In the new Disney Channel Original Movie, Hannah Montana struggles with _____ for the first time.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    482: {
-    	"text": "_____ is a slippery slope that leads to _____.",
-    	"numAnswers":2,
-    	"expansion": "Base"
-    },
-    483: {
-    	"text": "What does Dick Cheney prefer?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    484: {
-    	"text": "Dear Abby, I'm having some trouble with _____ and would like your advice.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    485: {
-    	"text": "Instead of coal, Santa now gives the bad children _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    486: {
-    	"text": "What's the most emo?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    487: {
-    	"text": "In 1,000 years when paper money is but a distant memory, _____ will be our currency.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    488: {
-    	"text": "What's the next superhero/sidekick duo?",
-    	"numAnswers":2,
-    	"expansion": "Base"
-    },
-    489: {
-    	"text": "In M. Night Shyamalan's new movie, Bruce Willis discovers that _____ had really been _____ all along.",
-    	"numAnswers":2,
-    	"expansion": "Base"
-    },
-    490: {
-    	"text": "A romantic, candlelit dinner would be incomplete without _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    491: {
-    	"text": "_____.  Becha can't have just one!",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    492: {
-    	"text": "White people like _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    493: {
-    	"text": "_____.  High five, bro.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    494: {
-    	"text": "Next from J.K. Rowling: Harry Potter and the Chamber of _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    495: {
-    	"text": "BILLY MAYS HERE FOR _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    496: {
-    	"text": "In a world ravaged by _____, our only solace is _____.",
-    	"numAnswers":2,
-    	"expansion": "Base"
-    },
-    497: {
-    	"text": "War!  What is it good for?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    498: {
-    	"text": "During sex, I like to think about _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    499: {
-    	"text": "What are my parents hiding from me?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    500: {
-    	"text": "What will always get you laid?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    501: {
-    	"text": "In L.A. County Jail, word is you can trade 200 cigarettes for _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    502: {
-    	"text": "What did I bring back from Mexico?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    503: {
-    	"text": "What don't you want to find in your Chinese food?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    504: {
-    	"text": "What will I bring back in time to convince people that I am a powerful wizard?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    505: {
-    	"text": "How am I maintaining my relationship status?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    506: {
-    	"text": "_____.  It's a trap!",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    507: {
-    	"text": "Coming to Broadway this season, _____: The Musical.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    509: {
-    	"text": "After the earthquake, Sean Penn brought _____ to the people of Haiti.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    510: {
-    	"text": "Next on ESPN2, the World Series of _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    511: {
-    	"text": "Step 1: _____.  Step 2: _____.  Step 3: Profit.",
-    	"numAnswers":2,
-    	"expansion": "Base"
-    },
-    512: {
-    	"text": "Rumor has it that Vladimir Putin's favorite dish is _____ stuffed with _____.",
-    	"numAnswers":2,
-    	"expansion": "Base"
-    },
-    513: {
-    	"text": "But before I kill you, Mr. Bond, I must show you _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    514: {
-    	"text": "What gives me uncontrollable gas?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    515: {
-    	"text": "What do old people smell like?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    516: {
-    	"text": "The class field trip was completely ruined by _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    517: {
-    	"text": "When Pharaoh remained unmoved, Moses called down a Plague of _____.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    518: {
-    	"text": "What's my secret power?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    519: {
-    	"text": "What's there a ton of in heaven?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    520: {
-    	"text": "What would grandma find disturbing, yet oddly charming?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    521: {
-    	"text": "I never truly understood _____ until I encountered _____.",
-    	"numAnswers":2,
-    	"expansion": "Base"
-    },
-    522: {
-    	"text": "What did the U.S. airdrop to the children of Afghanistan?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    523: {
-    	"text": "What helps Obama unwind?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    524: {
-    	"text": "What did Vin Diesel eat for dinner?",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    },
-    525: {
-    	"text": "_____: good to the last drop.",
-    	"numAnswers":1,
-    	"expansion": "Base"
-    }
-};
+let questions = [
+    {"id":459,"cardType":"Q","text":"_____?  There's an app for that.","numAnswers":1,"expansion": "Base"},
+    {"id":460,"cardType":"Q","text":"Why can't I sleep at night?","numAnswers":1,"expansion": "Base"},
+    {"id":461,"cardType":"Q","text":"What's that smell?","numAnswers":1,"expansion": "Base"},
+    {"id":462,"cardType":"Q","text":"I got 99 problems but _____ ain't one.","numAnswers":1,"expansion": "Base"},
+    {"id":463,"cardType":"Q","text":"Maybe she's born with it.  Maybe it's _____.","numAnswers":1,"expansion": "Base"},
+    {"id":464,"cardType":"Q","text":"What's the next Happy Meal&reg; toy?","numAnswers":1,"expansion": "Base"},
+    {"id":465,"cardType":"Q","text":"Anthropologists have recently discovered a primitive tribe that worships _____.","numAnswers":1,"expansion": "Base"},
+    {"id":466,"cardType":"Q","text":"It's a pity that kids these days are all getting involved with _____.","numAnswers":1,"expansion": "Base"},
+    {"id":467,"cardType":"Q","text":"During Picasso's often-overlooked Brown Period, he produced hundreds of paintings of _____.","numAnswers":1,"expansion": "Base"},
+    {"id":468,"cardType":"Q","text":"Alternative medicine is now embracing the curative powers of _____.","numAnswers":1,"expansion": "Base"},
+    {"id":469,"cardType":"Q","text":"And the Academy Award for _____ goes to _____.","numAnswers":2,"expansion": "Base"},
+    {"id":470,"cardType":"Q","text":"What's that sound?","numAnswers":1,"expansion": "Base"},
+    {"id":471,"cardType":"Q","text":"What ended my last relationship?","numAnswers":1,"expansion": "Base"},
+    {"id":472,"cardType":"Q","text":"MTV's new reality show features eight washed-up celebrities living with _____.","numAnswers":1,"expansion": "Base"},
+    {"id":473,"cardType":"Q","text":"I drink to forget _____.","numAnswers":1,"expansion": "Base"},
+    {"id":474,"cardType":"Q","text":"I'm sorry professor, but I couldn't complete my homework because of _____.","numAnswers":1,"expansion": "Base"},
+    {"id":475,"cardType":"Q","text":"What is Batman's guilty pleasure?","numAnswers":1,"expansion": "Base"},
+    {"id":476,"cardType":"Q","text":"This is the way the world ends <br> This is the way the world ends <br> Not with a bang but with _____.","numAnswers":1,"expansion": "Base"},
+    {"id":477,"cardType":"Q","text":"What's a girl's best friend?","numAnswers":1,"expansion": "Base"},
+    {"id":478,"cardType":"Q","text":"TSA guidelines now prohibit _____ on airplanes.","numAnswers":1,"expansion": "Base"},
+    {"id":479,"cardType":"Q","text":"_____.  That's how I want to die.","numAnswers":1,"expansion": "Base"},
+    {"id":480,"cardType":"Q","text":"For my next trick, I will pull _____ out of _____.","numAnswers":2,"expansion": "Base"},
+    {"id":481,"cardType":"Q","text":"In the new Disney Channel Original Movie, Hannah Montana struggles with _____ for the first time.","numAnswers":1,"expansion": "Base"},
+    {"id":482,"cardType":"Q","text":"_____ is a slippery slope that leads to _____.","numAnswers":2,"expansion": "Base"},
+    {"id":483,"cardType":"Q","text":"What does Dick Cheney prefer?","numAnswers":1,"expansion": "Base"},
+    {"id":484,"cardType":"Q","text":"Dear Abby, I'm having some trouble with _____ and would like your advice.","numAnswers":1,"expansion": "Base"},
+    {"id":485,"cardType":"Q","text":"Instead of coal, Santa now gives the bad children _____.","numAnswers":1,"expansion": "Base"},
+    {"id":486,"cardType":"Q","text":"What's the most emo?","numAnswers":1,"expansion": "Base"},
+    {"id":487,"cardType":"Q","text":"In 1,000 years when paper money is but a distant memory, _____ will be our currency.","numAnswers":1,"expansion": "Base"},
+    {"id":488,"cardType":"Q","text":"What's the next superhero/sidekick duo?","numAnswers":2,"expansion": "Base"},
+    {"id":489,"cardType":"Q","text":"In M. Night Shyamalan's new movie, Bruce Willis discovers that _____ had really been _____ all along.","numAnswers":2,"expansion": "Base"},
+    {"id":490,"cardType":"Q","text":"A romantic, candlelit dinner would be incomplete without _____.","numAnswers":1,"expansion": "Base"},
+    {"id":491,"cardType":"Q","text":"_____.  Becha can't have just one!","numAnswers":1,"expansion": "Base"},
+    {"id":492,"cardType":"Q","text":"White people like _____.","numAnswers":1,"expansion": "Base"},
+    {"id":493,"cardType":"Q","text":"_____.  High five, bro.","numAnswers":1,"expansion": "Base"},
+    {"id":494,"cardType":"Q","text":"Next from J.K. Rowling: Harry Potter and the Chamber of _____.","numAnswers":1,"expansion": "Base"},
+    {"id":495,"cardType":"Q","text":"BILLY MAYS HERE FOR _____.","numAnswers":1,"expansion": "Base"},
+    {"id":496,"cardType":"Q","text":"In a world ravaged by _____, our only solace is _____.","numAnswers":2,"expansion": "Base"},
+    {"id":497,"cardType":"Q","text":"War!  What is it good for?","numAnswers":1,"expansion": "Base"},
+    {"id":498,"cardType":"Q","text":"During sex, I like to think about _____.","numAnswers":1,"expansion": "Base"},
+    {"id":499,"cardType":"Q","text":"What are my parents hiding from me?","numAnswers":1,"expansion": "Base"},
+    {"id":500,"cardType":"Q","text":"What will always get you laid?","numAnswers":1,"expansion": "Base"},
+    {"id":501,"cardType":"Q","text":"In L.A. County Jail, word is you can trade 200 cigarettes for _____.","numAnswers":1,"expansion": "Base"},
+    {"id":502,"cardType":"Q","text":"What did I bring back from Mexico?","numAnswers":1,"expansion": "Base"},
+    {"id":503,"cardType":"Q","text":"What don't you want to find in your Chinese food?","numAnswers":1,"expansion": "Base"},
+    {"id":504,"cardType":"Q","text":"What will I bring back in time to convince people that I am a powerful wizard?","numAnswers":1,"expansion": "Base"},
+    {"id":505,"cardType":"Q","text":"How am I maintaining my relationship status?","numAnswers":1,"expansion": "Base"},
+    {"id":506,"cardType":"Q","text":"_____.  It's a trap!","numAnswers":1,"expansion": "Base"},
+    {"id":507,"cardType":"Q","text":"Coming to Broadway this season, _____: The Musical.","numAnswers":1,"expansion": "Base"},
+    {"id":508,"cardType":"Q","text":"While the United States raced the Soviet Union to the moon, the Mexican government funneled millions of pesos into research on _____.","numAnswers":1,"expansion": "Base"},
+    {"id":509,"cardType":"Q","text":"After the earthquake, Sean Penn brought _____ to the people of Haiti.","numAnswers":1,"expansion": "Base"},
+    {"id":510,"cardType":"Q","text":"Next on ESPN2, the World Series of _____.","numAnswers":1,"expansion": "Base"},
+    {"id":511,"cardType":"Q","text":"Step 1: _____.  Step 2: _____.  Step 3: Profit.","numAnswers":2,"expansion": "Base"},
+    {"id":512,"cardType":"Q","text":"Rumor has it that Vladimir Putin's favorite dish is _____ stuffed with _____.","numAnswers":2,"expansion": "Base"},
+    {"id":513,"cardType":"Q","text":"But before I kill you, Mr. Bond, I must show you _____.","numAnswers":1,"expansion": "Base"},
+    {"id":514,"cardType":"Q","text":"What gives me uncontrollable gas?","numAnswers":1,"expansion": "Base"},
+    {"id":515,"cardType":"Q","text":"What do old people smell like?","numAnswers":1,"expansion": "Base"},
+    {"id":516,"cardType":"Q","text":"The class field trip was completely ruined by _____.","numAnswers":1,"expansion": "Base"},
+    {"id":517,"cardType":"Q","text":"When Pharaoh remained unmoved, Moses called down a Plague of _____.","numAnswers":1,"expansion": "Base"},
+    {"id":518,"cardType":"Q","text":"What's my secret power?","numAnswers":1,"expansion": "Base"},
+    {"id":519,"cardType":"Q","text":"What's there a ton of in heaven?","numAnswers":1,"expansion": "Base"},
+    {"id":520,"cardType":"Q","text":"What would grandma find disturbing, yet oddly charming?","numAnswers":1,"expansion": "Base"},
+    {"id":521,"cardType":"Q","text":"I never truly understood _____ until I encountered _____.","numAnswers":2,"expansion": "Base"},
+    {"id":522,"cardType":"Q","text":"What did the U.S. airdrop to the children of Afghanistan?","numAnswers":1,"expansion": "Base"},
+    {"id":523,"cardType":"Q","text":"What helps Obama unwind?","numAnswers":1,"expansion": "Base"},
+    {"id":524,"cardType":"Q","text":"What did Vin Diesel eat for dinner?","numAnswers":1,"expansion": "Base"},
+    {"id":525,"cardType":"Q","text":"_____: good to the last drop.","numAnswers":1,"expansion": "Base"},
+    {"id":526,"cardType":"Q","text":"Why am I sticky?","numAnswers":1,"expansion": "Base"},
+    {"id":527,"cardType":"Q","text":"What gets better with age?","numAnswers":1,"expansion": "Base"},
+    {"id":528,"cardType":"Q","text":"_____: kid-tested, mother-approved.","numAnswers":1,"expansion": "Base"},
+    {"id":529,"cardType":"Q","text":"What's the crustiest?","numAnswers":1,"expansion": "Base"},
+    {"id":530,"cardType":"Q","text":"What's Teach for America using to inspire inner city students to succeed?","numAnswers":1,"expansion": "Base"},
+    {"id":531,"cardType":"Q","text":"Studies show that lab rats navigate mazes 50% faster after being exposed to _____.","numAnswers":1,"expansion": "Base"},
+    {"id":532,"cardType":"Q","text":"Life for American Indians was forever changed when the White Man introduced them to _____.","numAnswers":1,"expansion": "Base"},
+    {"id":533,"cardType":"Q","text":"Make a haiku.","numAnswers":3,"expansion": "Base"},
+];
 
 export default questions;

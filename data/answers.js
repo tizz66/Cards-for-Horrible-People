@@ -1,5 +1,4 @@
 let answers = {
-
 	1: {
 		"text": "Flying sex snakes",
 		"expansion": "Base"
