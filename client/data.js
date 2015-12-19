@@ -7,7 +7,7 @@ let data = {
 		owner: 1,
 		players: 0
 	},
-	playState: {
+	roundState: {
 		dealer: 1,
 		receivedCards: [],
 		selectedWinner: 0

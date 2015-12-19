@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './Card';
+import Card from '../Card/Card';
 import './Hand.less';
 
 let Hand = React.createClass({
@@ -9,7 +9,7 @@ let Hand = React.createClass({
 
 		_.forOwn( this.props.cards, (card, id) => {
 			hand.push( <li key={id}>
-				<Card cardType='white' cardText={card.text} />
+				<Card cardID={id} cardType='white' cardText={card.text} />
 			</li> );
 		});
 

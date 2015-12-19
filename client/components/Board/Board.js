@@ -1,5 +1,6 @@
 import React from 'react';
-import Hand from '../components/Hand';
+import Hand from '../Hand/Hand';
+import Receiver from '../Receiver/Receiver';
 import './Board.less';
 
 let Board = React.createClass({
@@ -11,7 +12,7 @@ let Board = React.createClass({
 						
 					</div>
 					<div className='col-md-6'>
-						Dropzone
+						<Receiver />
 					</div>
 				</div>
 				<Hand cards={this.props.hand} />

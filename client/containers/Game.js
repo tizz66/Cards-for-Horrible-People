@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux'; 
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+//--
 import * as GameStateActions from '../actions/GameStateActions';
 import * as HandActions from '../actions/HandActions';
 import * as RoundStateActions from '../actions/RoundStateActions';
-import Toolbar from '../components/Toolbar';
-import Loading from '../components/Loading';
-import Board from '../components/Board';
+//--
+import Toolbar from '../components/Toolbar/Toolbar';
+import Loading from '../components/Loading/Loading';
+import Board from '../components/Board/Board';
 import './Game.less';
 
 let mapStateToProps = (state) => ({
@@ -59,4 +63,4 @@ let Game = React.createClass({
 	}
 });
 
-export default connect( mapStateToProps )( Game );
+export default DragDropContext(HTML5Backend)( connect( mapStateToProps )( Game ) );
