@@ -12,6 +12,14 @@ export default function roundState( state = initialState, action ) {
 				judgeID: action.judgeID
 			} );
 
+		case types.PLAY_CARD:
+			return Object.assign( {}, state, {
+				played: {
+					cardID: action.cardID,
+					cardText: action.cardText
+				}
+			} );
+
 		default:
 			return state;
 	}

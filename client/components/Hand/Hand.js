@@ -5,11 +5,12 @@ import './Hand.less';
 let Hand = React.createClass({
 
 	render: function () {
+		const { cards, canDrag } = this.props;
 		let hand = [];
 
-		_.forOwn( this.props.cards, (card, id) => {
+		_.forOwn( cards, (card, id) => {
 			hand.push( <li key={id}>
-				<Card cardID={id} cardType='white' cardText={card.text} />
+				<Card cardID={id} cardType='white' cardText={card.text} canDrag={canDrag} />
 			</li> );
 		});
 

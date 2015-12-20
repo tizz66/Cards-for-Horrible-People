@@ -1,13 +1,19 @@
 import React from 'react';
 import { ItemTypes } from '../../constants/ItemTypes';
 import { DropTarget } from 'react-dnd';
+import Card from '../Card/Card';
+import classNames from 'classnames';
 import './Receiver.less';
 
 const receiverTarget = {
 	drop( props, monitor ) {
-		console.log('DROPPING');
-		console.log( props );
-		console.log( monitor );
+		const { dispatch, roundActions } = props;
+		let item = monitor.getItem();
+
+		roundActions.playCard({
+			cardID: item.cardID,
+			cardText: item.cardText
+		});		
 	}
 };
 
@@ -20,10 +26,17 @@ function collect (connect, monitor) {
 
 let Receiver = React.createClass({
 	render: function () {
-		const { connectDropTarget, isOver } = this.props;
+		const { connectDropTarget, isOver, roundState } = this.props;
+
+		let classes = {
+			'Receiver': true,
+			'Receiver-showingCard': roundState.played
+		};
 
 		return connectDropTarget(
-			<div className='Receiver'>{isOver ? 'OVER' : 'Receive'}</div>
+			<div className={ classNames(classes) }>
+				{roundState.played ? <Card cardID={roundState.played.cardID} cardType='white' cardText={roundState.played.cardText} /> : null}
+			</div>
 		);
 	}
 });

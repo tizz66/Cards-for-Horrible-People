@@ -1,6 +1,6 @@
 .Card {
-	width: 130px;
-	height: 178px;
+	width: 145px;
+	height: 200px;
 	padding: 13px 15px;
 	border-radius: 8px;
 	font-weight: bold;
@@ -9,14 +9,23 @@
 	background-size: 200px 200px;
 	border: 1px solid rgba(0,0,0,0.075);
 
-	&.Card_black {
+	&.Card-black {
 		background: #1a1b1c;
 		color: #fff;
 	}
 
-	&.Card_white {
+	&.Card-white {
 		background: #f8f8f8;
 		color: #000;
+	}
+
+	&.Card-dragging {
+		opacity: 1;
+		background: rgba(255,255,255,0.05);
+
+		> p {
+			display: none;
+		}
 	}
 
 	> p {

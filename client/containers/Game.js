@@ -1,4 +1,5 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -10,6 +11,7 @@ import * as RoundStateActions from '../actions/RoundStateActions';
 import Toolbar from '../components/Toolbar/Toolbar';
 import Loading from '../components/Loading/Loading';
 import Board from '../components/Board/Board';
+
 import './Game.less';
 
 let mapStateToProps = (state) => ({
@@ -35,15 +37,13 @@ let Game = React.createClass({
 
 	render: function () {
 		const { gameState, roundState, players, hand, dispatch } = this.props;
+		const roundActions = bindActionCreators(RoundStateActions, dispatch);
 
 		this.socket = io().connect('http://localhost:3002/' + gameState.gameKey + '/');
 
-		console.log('--here');
-		console.log( roundState );
-
 		return (
 			<div>
-				<Toolbar gameState={gameState} gameStateActions={GameStateActions} roundState={roundState} roundStateActions={RoundStateActions} players={players} />
+				<Toolbar gameState={gameState} gameStateActions={GameStateActions} roundState={roundState} roundActions={roundActions} players={players} />
 				<div className='Game'>
 					{ !gameState.started ? 
 						<Loading gameState={gameState} gameStateActions={GameStateActions} socket={this.socket} />
@@ -54,7 +54,7 @@ let Game = React.createClass({
 							hand={hand}
 							handActions={HandActions}
 							roundState={roundState}
-							roundStateActions={RoundStateActions}
+							roundActions={roundActions}
 							socket={this.socket} />
 					}
 				</div>

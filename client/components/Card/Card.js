@@ -1,13 +1,18 @@
 import React from 'react';
 import { ItemTypes } from '../../constants/ItemTypes';
 import { DragSource } from 'react-dnd';
+import classNames from 'classnames';
 import './Card.less';
 
 const cardSource = {
+	canDrag(props) {
+		return props.canDrag;
+	},
+
 	beginDrag(props) {
-		console.log('dragging');
 		return {
-			cardID: props.cardID
+			cardID: props.cardID,
+			cardText: props.cardText
 		};
 	}
 };
@@ -23,9 +28,14 @@ let Card = React.createClass({
 	render: function () {
 		const { connectDragSource, isDragging } = this.props;
 
+		let classes = {
+			'Card': true,
+			['Card-' + this.props.cardType]: true,
+			'Card-dragging': isDragging
+		};
+
 		return connectDragSource(
-			<div className={ 'Card Card_' + ( this.props.cardType ) }>
-				{isDragging ? 'DRAGGING' : ''}
+			<div className={classNames( classes )}>
 				<p>{this.props.cardText}</p>
 			</div>
 		);
