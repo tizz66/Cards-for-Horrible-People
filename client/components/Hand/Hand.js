@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../Card/Card';
+import DraggableCard from '../DraggableCard/DraggableCard';
 import './Hand.less';
 
 let Hand = React.createClass({
@@ -10,7 +11,7 @@ let Hand = React.createClass({
 
 		_.forOwn( cards, (card, id) => {
 			hand.push( <li key={id}>
-				<Card cardID={id} cardType='white' cardText={card.text} canDrag={canDrag} />
+				<DraggableCard cardID={id} cardType='white' cardText={card.text} canDrag={canDrag} />
 			</li> );
 		});
 
