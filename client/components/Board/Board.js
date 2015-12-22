@@ -6,8 +6,6 @@ import './Board.less';
 
 let Board = React.createClass({
 	render: function () {
-		console.log( this.props );
-
 		return (
 			<div className='Board'>
 				<div className='Board-panel'>
@@ -15,10 +13,10 @@ let Board = React.createClass({
 						
 					</div>
 					<div>
-						<Receiver roundState={this.props.roundState} roundActions={this.props.roundActions} />
+						<Receiver roundState={this.props.roundState} roundActions={this.props.roundActions} afterDrop={this.props.socketHandlers.playCard} />
 					</div>
 				</div>
-				<Hand cards={this.props.hand} canDrag={ _.isUndefined( this.props.roundState.played ) } />
+				<Hand cards={this.props.hand} canDrag={ _.isUndefined( this.props.roundState.played ) } playCard={ this.props.roundActions.playCard } />
 			</div>
 		)
 	}

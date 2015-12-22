@@ -10,10 +10,7 @@ const receiverTarget = {
 		const { dispatch, roundActions } = props;
 		let item = monitor.getItem();
 
-		roundActions.playCard({
-			cardID: item.cardID,
-			cardText: item.cardText
-		});		
+		props.afterDrop(item.cardID, item.cardText);
 	}
 };
 

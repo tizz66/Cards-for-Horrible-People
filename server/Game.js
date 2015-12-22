@@ -7,6 +7,7 @@ export default class Game {
 		this.players = {};
 		this.socket = namespace;
 		this.ownerID = '';
+		this.judgeID = '';
 		this.deck = new Deck();
 
 		this.socketEvents();
@@ -25,7 +26,14 @@ export default class Game {
 					} );
 
 					this.launchGame();
+					this.judgeID = this.ownerID;
 				}				
+			});
+
+			socket.on('play-card', (data) => {
+				this.players[ this.judgeID ].socket.emit( 'card-played', {
+					cardID: data.cardID
+				});
 			});
 		});
 	}

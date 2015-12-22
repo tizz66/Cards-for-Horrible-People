@@ -23,6 +23,20 @@ let mapStateToProps = (state) => ({
 
 let Game = React.createClass({
 
+	playCard: function (cardID, cardText) {
+		const { dispatch } = this.props;
+		const roundActions = bindActionCreators(RoundStateActions, dispatch);
+
+		roundActions.playCard({
+			cardID: cardID,
+			cardText: cardText
+		});
+
+		this.socket.emit( 'play-card', {
+			cardID: cardID
+		});
+	},
+
 	componentDidMount: function () {
 		const { gameState, hand, dispatch } = this.props;
 
@@ -33,6 +47,10 @@ let Game = React.createClass({
 		this.socket.on( 'starting-hand', (data) => {
 			dispatch( HandActions.startingHand(data) );
 		});
+
+		this.socket.on( 'card-played', (data) => {
+			console.log("Card played: " + data.cardID);
+		});
 	},
 
 	render: function () {
@@ -40,6 +58,9 @@ let Game = React.createClass({
 		const roundActions = bindActionCreators(RoundStateActions, dispatch);
 
 		this.socket = io().connect('http://localhost:3002/' + gameState.gameKey + '/');
+		let socketHandlers = {
+			playCard: this.playCard
+		};
 
 		return (
 			<div>
@@ -55,7 +76,7 @@ let Game = React.createClass({
 							handActions={HandActions}
 							roundState={roundState}
 							roundActions={roundActions}
-							socket={this.socket} />
+							socketHandlers={socketHandlers} />
 					}
 				</div>
 			</div>
