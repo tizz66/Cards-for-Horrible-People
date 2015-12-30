@@ -44,12 +44,22 @@ let Game = React.createClass({
 			dispatch( GameStateActions.startGame(data) );
 		});
 
+		this.socket.on( 'new-round', (data) => {
+			dispatch( RoundStateActions.newRound(data) );
+		});
+
 		this.socket.on( 'starting-hand', (data) => {
 			dispatch( HandActions.startingHand(data) );
 		});
 
 		this.socket.on( 'card-played', (data) => {
-			console.log("Card played: " + data.cardID);
+			dispatch( RoundStateActions.cardPlayed(data) );
+
+			if( !_.isUndefined( data.lastCard ) && data.lastCard ){
+				setTimeout( () => {
+					dispatch( RoundStateActions.allCardsPlayed() );
+				}, 2000 );
+			}
 		});
 	},
 

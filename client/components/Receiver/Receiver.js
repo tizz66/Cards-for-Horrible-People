@@ -32,7 +32,7 @@ let Receiver = React.createClass({
 
 		return connectDropTarget(
 			<div className={ classNames(classes) }>
-				{roundState.played ? <Card cardID={roundState.played.cardID} cardType='white' cardText={roundState.played.cardText} /> : null}
+				{roundState.played ? <Card card={{ id: roundState.played.cardID, type: 'white', text: roundState.played.cardText }} /> : null}
 			</div>
 		);
 	}

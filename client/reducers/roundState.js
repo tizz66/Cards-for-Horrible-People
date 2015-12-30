@@ -1,15 +1,28 @@
 import * as types from '../constants/ActionTypes';
+import * as RoundStates from '../constants/RoundStates';
+import _ from 'lodash';
 
 const initialState = {};
 
 export default function roundState( state = initialState, action ) {
 
-	console.log( action.type );
-
 	switch( action.type ){
-		case types.START_GAME:
+	
+		case types.NEW_ROUND:
+			return Object.assign( {}, {
+				judgeID: action.judgeID,
+				question: action.question,
+				status: RoundStates.FLIP_CARD
+			} );
+
+		case types.FLIP_QUESTION:
 			return Object.assign( {}, state, {
-				judgeID: action.judgeID
+				status: RoundStates.QUESTION_FLIPPED
+			} );
+
+		case types.START_ROUND:
+			return Object.assign( {}, state, {
+				status: RoundStates.RECEIVING_ANSWERS
 			} );
 
 		case types.PLAY_CARD:
@@ -18,6 +31,23 @@ export default function roundState( state = initialState, action ) {
 					cardID: action.cardID,
 					cardText: action.cardText
 				}
+			} );
+
+		case types.CARD_PLAYED:
+			return Object.assign( {}, state, {
+				received: [
+					...( state.received || [] ), {
+						id: action.cardID,
+						text: action.cardText,
+						type: 'white'
+					}
+				]
+			} );
+
+		case types.ALL_CARDS_PLAYED:
+			return Object.assign( {}, state, {
+				received: _.shuffle( state.received ),
+				status: RoundStates.ANSWERS_RECEIVED
 			} );
 
 		default:

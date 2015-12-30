@@ -1,34 +1,60 @@
 .Card {
 	width: 145px;
 	height: 200px;
-	padding: 13px 15px;
+	transform-style: preserve-3d;
+	position: relative;
 	border-radius: 8px;
-	font-weight: bold;
-	font-size: 14px;
-	line-height: 1.4;
-	background-size: 200px 200px;
-	border: 1px solid rgba(0,0,0,0.075);
+	transition: 0.3s linear transform;
 
-	&.Card-black {
+	&.Card-black > div {
 		background: #1a1b1c;
 		color: #fff;
 	}
 
-	&.Card-white {
+	&.Card-white > div {
 		background: #f8f8f8;
 		color: #000;
 	}
 
-	&.Card-dragging {
-		opacity: 1;
-		background: rgba(255,255,255,0.05);
+	> .Card-front,
+	> .Card-back {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		padding: 13px 15px;
+		border-radius: 8px;
+		font-weight: bold;
+		font-size: 14px;
+		line-height: 1.4;
+		background-size: 200px 200px;
+		border: 1px solid rgba(0,0,0,0.075);
+		backface-visibility: hidden;
+	}
 
-		> p {
-			display: none;
+	> .Card-back {
+		font-size: 28px;
+		line-height: 1;
+		font-weight: 300;
+		transform: rotateY(180deg);
+	}
+
+	&.is-flipped {
+		transform: rotateY(180deg);
+	}
+
+	&.is-dragging,
+	&.is-hidden {
+		> div {
+			opacity: 1;
+			background: rgba(255,255,255,0.05);
+
+			p {
+				display: none;
+			}
 		}
 	}
 
-	&.Card-draggable {
+	&.is-draggable {
 		cursor: move;
 	}
 

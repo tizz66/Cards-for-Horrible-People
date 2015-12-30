@@ -7,7 +7,9 @@ export default class Game {
 		this.players = {};
 		this.socket = namespace;
 		this.ownerID = '';
-		this.judgeID = '';
+		this.round = {};
+		//this.judgeID = '';
+		//this.cardsInRound = [];
 		this.deck = new Deck();
 
 		this.socketEvents();
@@ -21,20 +23,37 @@ export default class Game {
 			socket.on('start-game', () => {
 				if( socket.handshake.session.playerID == this.ownerID ){
 					this.socket.emit( 'game-started', {
-						judgeID: this.ownerID,
 						players: this.getPlayers()
 					} );
 
 					this.launchGame();
-					this.judgeID = this.ownerID;
+					this.newRound();
 				}				
 			});
 
 			socket.on('play-card', (data) => {
-				this.players[ this.judgeID ].socket.emit( 'card-played', {
-					cardID: data.cardID
+				let cardData = this.deck.getCardData( data.cardID );
+
+				this.round.cards.push( data.cardID );
+				this.players[ this.round.judgeID ].socket.emit( 'card-played', {
+					cardID: data.cardID,
+					cardText: cardData.text,
+					lastCard: ( this.round.cards.length == ( _.size( this.players ) - 1 ) )
 				});
 			});
+		});
+	}
+
+	newRound () {
+		this.round = {
+			judgeID: this.ownerID,
+			cards: [],
+			question: this.deck.drawQuestion()
+		};
+
+		this.socket.emit( 'new-round', {
+			judgeID: this.round.judgeID,
+			question: this.round.question
 		});
 	}
 

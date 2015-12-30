@@ -9,17 +9,31 @@
 		bottom: 230px;
 		display: flex;
 		align-items: center;
+		justify-content: center;
 
 		> div {
-			width: 50%;
+			width: 200px;
 
-			&:first-child {
-
+			> .Card,
+			> .Receiver {
+				margin: 0 auto;
 			}
+		}
+	}
 
-			&:last-child {
-				padding-left: 15px;
-			}
+	&-selection {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+
+		> div {
+			transform: scale(1.6);
 		}
 	}
 }

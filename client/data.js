@@ -10,7 +10,8 @@ let data = {
 	roundState: {
 		dealer: 1,
 		receivedCards: [],
-		selectedWinner: 0
+		selectedWinner: 0,
+		roundStarted: false
 	},
 	players: {
 		1: {

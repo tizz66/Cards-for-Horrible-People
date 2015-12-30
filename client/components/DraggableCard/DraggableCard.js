@@ -10,8 +10,8 @@ const cardSource = {
 
 	beginDrag(props) {
 		return {
-			cardID: props.cardID,
-			cardText: props.cardText
+			cardID: props.card.id,
+			cardText: props.card.text
 		};
 	}
 };
@@ -25,11 +25,11 @@ function collect (connect, monitor) {
 
 let DraggableCard = React.createClass({
 	render: function () {
-		const { cardID, cardText, connectDragSource, isDragging, canDrag } = this.props;
+		const { card, connectDragSource, isDragging, canDrag, hidden, flipped } = this.props;
 
 		return connectDragSource(
 			<div>
-				<Card cardID={cardID} cardType='white' cardText={cardText} canDrag={canDrag} isDragging={isDragging} />
+				<Card card={card} canDrag={canDrag} isDragging={isDragging} flipped={flipped} />
 			</div>
 		);
 	}

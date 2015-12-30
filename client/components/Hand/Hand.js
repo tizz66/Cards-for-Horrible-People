@@ -6,13 +6,15 @@ import './Hand.less';
 let Hand = React.createClass({
 
 	render: function () {
-		const { cards, canDrag } = this.props;
+		const { cards, canDrag, flipped } = this.props;
 		let hand = [];
 
-		_.forOwn( cards, (card, id) => {
-			hand.push( <li key={id}>
-				<DraggableCard cardID={id} cardType='white' cardText={card.text} canDrag={canDrag} />
-			</li> );
+		hand = ( cards || [] ).map( (card) => {
+			return (
+				<li key={card.id}>
+					<DraggableCard card={ card } canDrag={canDrag} flipped={flipped} />
+				</li>
+			)
 		});
 
 		return (
