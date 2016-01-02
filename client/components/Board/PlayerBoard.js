@@ -25,7 +25,7 @@ let PlayerBoard = React.createClass({
 		};
 
 		return (
-			<div className={ classNames( classes ) }>
+			<div>
 				<div className='Board-panel'>
 					<div>
 						{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> : null }

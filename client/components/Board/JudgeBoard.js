@@ -12,15 +12,15 @@ let JudgeBoard = React.createClass({
 		const { roundState, roundActions, gameState, socketHandlers, hand } = this.props;
 
 		let classes = {
-			'Board': true,
-			'Board-isJudging': true
+			'Board-panel': true,
+			'Board-selection': ( roundState.status <= RoundStates.QUESTION_FLIPPED )
 		};
 
 		return (
-			<div className={ classNames( classes ) }>
-				<div className='Board-panel'>
+			<div>
+				<div className={ classNames( classes ) }>
 					<div>
-						{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> : null }
+						{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } flipped={ roundState.status == RoundStates.FLIP_CARD } onClick={ roundActions.flipQuestion } /> : null }
 					</div>
 					{ roundState.status >= RoundStates.CHOOSING_ANSWER ? 
 						<div>
@@ -29,7 +29,10 @@ let JudgeBoard = React.createClass({
 						: null
 					}
 				</div>
-				<Hand cards={roundState.received} canDrag={ roundState.status == RoundStates.CHOOSING_ANSWER } flipped={ !( roundState.status >= RoundStates.ANSWERS_RECEIVED ) } />
+				{ roundState.status >= RoundStates.RECEIVING_ANSWERS ?
+					<Hand cards={roundState.received} canDrag={ roundState.status == RoundStates.CHOOSING_ANSWER } flipped={ !( roundState.status >= RoundStates.ANSWERS_RECEIVED ) } />
+					: null
+				}				
 			</div>
 		)
 	}

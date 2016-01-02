@@ -1,6 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
 import * as RoundStates from '../../constants/RoundStates';
-import DrawQuestionBoard from './DrawQuestionBoard';
 import JudgeBoard from './JudgeBoard';
 import PlayerBoard from './PlayerBoard';
 import './Board.less';
@@ -9,13 +9,18 @@ let Board = React.createClass({
 	render: function () {
 		const { roundState, gameState } = this.props;
 
-		if( roundState.judgeID === gameState.playerID && roundState.status <= RoundStates.QUESTION_FLIPPED ){
-			return <DrawQuestionBoard {...this.props} />
-		} else if( roundState.judgeID === gameState.playerID ){
-			return <JudgeBoard {...this.props} />
-		} else {
-			return <PlayerBoard {...this.props} />
-		}
+		let classes = {
+			'Board': true,
+			'Board-isJudging': ( roundState.judgeID === gameState.playerID )
+		};
+
+		return ( 
+			<div className={ classNames( classes ) }>
+				{ roundState.judgeID === gameState.playerID ?
+					<JudgeBoard {...this.props} /> :
+					<PlayerBoard {...this.props} /> }
+			</div>
+		)
 	}
 });
 
