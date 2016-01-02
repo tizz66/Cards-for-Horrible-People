@@ -12,7 +12,8 @@ let Card = React.createClass({
 			'is-dragging': this.props.isDragging,
 			'is-draggable': this.props.canDrag,
 			'is-hidden': this.props.card.hidden,
-			'is-flipped': this.props.flipped
+			'is-flipped': this.props.flipped,
+			'is-sent': this.props.sent
 		};
 
 		return (

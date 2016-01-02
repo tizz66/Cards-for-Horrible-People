@@ -2,26 +2,12 @@ import React from 'react';
 import { ItemTypes } from '../../constants/ItemTypes';
 import { DropTarget } from 'react-dnd';
 import Card from '../Card/Card';
+import { collect, receiverTarget } from './dropTarget.js';
 import classNames from 'classnames';
 import './Receiver.less';
 
-const receiverTarget = {
-	drop( props, monitor ) {
-		const { dispatch, roundActions } = props;
-		let item = monitor.getItem();
+let PlayerReceiver = React.createClass({
 
-		props.afterDrop(item.cardID, item.cardText);
-	}
-};
-
-function collect (connect, monitor) {
-	return {
-		connectDropTarget: connect.dropTarget(),
-		isOver: monitor.isOver()
-	};
-}
-
-let Receiver = React.createClass({
 	render: function () {
 		const { connectDropTarget, isOver, roundState } = this.props;
 
@@ -38,4 +24,4 @@ let Receiver = React.createClass({
 	}
 });
 
-export default DropTarget( ItemTypes.CARD, receiverTarget, collect )( Receiver );
+export default DropTarget( ItemTypes.CARD, receiverTarget, collect )( PlayerReceiver );

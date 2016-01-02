@@ -45,5 +45,19 @@ export function cardPlayed(data) {
 export function allCardsPlayed() {
 	return {
 		type: types.ALL_CARDS_PLAYED
-	}
+	};
+}
+
+export function choosingAnswer() {
+	return {
+		type: types.READY_TO_CHOOSE
+	};
+}
+
+export function chooseWinner(data) {
+	return {
+		type: types.CHOOSE_WINNER,
+		cardID: data.cardID,
+		cardText: data.cardText
+	};
 }

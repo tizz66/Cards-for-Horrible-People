@@ -1,4 +1,6 @@
-export const FLIP_CARD = "FLIP_CARD";
-export const QUESTION_FLIPPED = "QUESTION_FLIPPED";
-export const RECEIVING_ANSWERS = "RECEIVING_ANSWERS";
-export const ANSWERS_RECEIVED = "ANSWERS_RECEIVED";
+export const FLIP_CARD = 1;
+export const QUESTION_FLIPPED = 2;
+export const RECEIVING_ANSWERS = 3;
+export const ANSWERS_RECEIVED = 4;
+export const CHOOSING_ANSWER = 5;
+export const WINNER_CHOSEN = 6;

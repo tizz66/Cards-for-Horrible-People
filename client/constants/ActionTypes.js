@@ -17,3 +17,5 @@ export const START_ROUND = 'START_ROUND';
 export const PLAY_CARD = 'PLAY_CARD';
 export const CARD_PLAYED = 'CARD_PLAYED';
 export const ALL_CARDS_PLAYED = 'ALL_CARDS_PLAYED';
+export const READY_TO_CHOOSE = 'READY_TO_CHOOSE';
+export const CHOOSE_WINNER = 'CHOOSE_WINNER';

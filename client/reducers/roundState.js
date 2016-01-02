@@ -50,6 +50,20 @@ export default function roundState( state = initialState, action ) {
 				status: RoundStates.ANSWERS_RECEIVED
 			} );
 
+		case types.READY_TO_CHOOSE:
+			return Object.assign( {}, state, {
+				status: RoundStates.CHOOSING_ANSWER
+			} );
+
+		case types.CHOOSE_WINNER:
+			return Object.assign( {}, state, {
+				status: RoundStates.WINNER_CHOSEN,
+				winner: {
+					cardID: action.cardID,
+					cardText: action.cardText
+				}
+			})
+
 		default:
 			return state;
 	}

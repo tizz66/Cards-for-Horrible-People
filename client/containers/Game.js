@@ -11,7 +11,6 @@ import * as RoundStateActions from '../actions/RoundStateActions';
 import Toolbar from '../components/Toolbar/Toolbar';
 import Loading from '../components/Loading/Loading';
 import Board from '../components/Board/Board';
-
 import './Game.less';
 
 let mapStateToProps = (state) => ({
@@ -33,6 +32,20 @@ let Game = React.createClass({
 		});
 
 		this.socket.emit( 'play-card', {
+			cardID: cardID
+		});		
+	},
+
+	chooseWinner: function (cardID, cardText) {
+		const { dispatch } = this.props;
+		const roundActions = bindActionCreators(RoundStateActions, dispatch);
+
+		roundActions.chooseWinner({
+			cardID: cardID,
+			cardText: cardText
+		});
+
+		this.socket.emit( 'choose-winner', {
 			cardID: cardID
 		});
 	},
@@ -59,7 +72,15 @@ let Game = React.createClass({
 				setTimeout( () => {
 					dispatch( RoundStateActions.allCardsPlayed() );
 				}, 2000 );
+				setTimeout( () => {
+					dispatch( RoundStateActions.choosingAnswer() );
+				}, 4000 );
 			}
+		});
+
+		this.socket.on( 'winner-chosen', (data) => {
+			console.log("WINNER CHOSEN");
+			console.log( data );
 		});
 	},
 
@@ -69,7 +90,8 @@ let Game = React.createClass({
 
 		this.socket = io().connect('http://localhost:3002/' + gameState.gameKey + '/');
 		let socketHandlers = {
-			playCard: this.playCard
+			playCard: this.playCard,
+			chooseWinner: this.chooseWinner
 		};
 
 		return (

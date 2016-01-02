@@ -9,6 +9,13 @@
 	height: 230px;
 	padding: 15px;
 	overflow: auto;
+	opacity: 1;
+	transition: 0.3s all ease-in-out;
+
+	&.Hand-hidden {
+		bottom: -230px;
+		opacity: 0;
+	}
 
 	> ul {
 		.reset;

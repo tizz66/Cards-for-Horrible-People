@@ -4,7 +4,8 @@
 	transform-style: preserve-3d;
 	position: relative;
 	border-radius: 8px;
-	transition: 0.3s linear transform;
+	opacity: 1;
+	transition: 0.6s ease-in-out all, 0.3s linear transform;
 
 	&.Card-black > div {
 		background: #1a1b1c;
@@ -36,6 +37,11 @@
 		line-height: 1;
 		font-weight: 300;
 		transform: rotateY(180deg);
+	}
+
+	&.is-sent {
+		margin-top: -150px;
+		opacity: 0;
 	}
 
 	&.is-flipped {

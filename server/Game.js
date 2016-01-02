@@ -33,12 +33,44 @@ export default class Game {
 
 			socket.on('play-card', (data) => {
 				let cardData = this.deck.getCardData( data.cardID );
+				let played = {
+					player: socket.handshake.session.playerID,
+					card: cardData
+				};
 
-				this.round.cards.push( data.cardID );
+				this.round.played.push( played );
 				this.players[ this.round.judgeID ].socket.emit( 'card-played', {
 					cardID: data.cardID,
 					cardText: cardData.text,
-					lastCard: ( this.round.cards.length == ( _.size( this.players ) - 1 ) )
+					lastCard: ( this.round.played.length == ( _.size( this.players ) - 1 ) )
+				});
+			});
+
+			socket.on('choose-winner', (data) => {
+				let cardData = this.deck.getCardData( data.cardID );
+
+				if( socket.handshake.session.playerID !== this.round.judgeID ){
+					return;
+				}
+
+				// Who has the winning card?
+				let winner;
+				for( let i = 0; i < this.round.played.length; i++ ){
+					if( this.round.played[ i ].card.id === data.cardID ){
+						winner = this.round.played[ i ].player;
+						break;
+					}
+				}
+
+				// Add to the winner's score
+				this.players[ winner ]['score'] += 1;
+				this.players[ winner ]['cardsWon'].push( data.cardID );
+
+				// Tell everyone
+				this.socket.emit( 'winner-chosen', {
+					winner: winner,
+					card: cardData,
+					scores: this.getScores()
 				});
 			});
 		});
@@ -47,7 +79,7 @@ export default class Game {
 	newRound () {
 		this.round = {
 			judgeID: this.ownerID,
-			cards: [],
+			played: [],
 			question: this.deck.drawQuestion()
 		};
 
@@ -74,14 +106,25 @@ export default class Game {
 		return players;
 	}
 
+	getScores () {
+		let scores = {};
+
+		_.forOwn( this.players, (player, playerID) => {
+			scores[ playerID ] = _.pick( player, 'score' );
+		} );
+
+		return scores;
+	}
+
 	addPlayer (nickname, owner) {
 		let playerID = new Buffer( nickname ).toString('base64');
 
 		this.players[ playerID ] = {
 			nickname: nickname,
 			cards: [],
-			score: 0
-		}
+			score: 0,
+			cardsWon: []
+		};
 
 		if( owner ){
 			this.ownerID = playerID;

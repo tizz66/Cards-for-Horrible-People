@@ -3,7 +3,8 @@ import _ from 'lodash';
 import classNames from 'classnames';
 import Hand from '../Hand/Hand';
 import Card from '../Card/Card';
-import Receiver from '../Receiver/Receiver';
+import PlayerReceiver from '../Receiver/PlayerReceiver';
+import JudgeReceiver from '../Receiver/JudgeReceiver';
 import * as RoundStates from '../../constants/RoundStates';
 import './Board.less';
 
@@ -29,7 +30,7 @@ let Board = React.createClass({
 						{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> : null }
 					</div>
 					<div>
-						<Receiver roundState={roundState} roundActions={roundActions} afterDrop={socketHandlers.playCard} />
+						<PlayerReceiver roundState={ roundState } roundActions={ roundActions } afterDrop={ socketHandlers.playCard } />
 					</div>
 				</div>
 				<Hand cards={hand} canDrag={ _.isUndefined( roundState.played ) } playCard={ roundActions.playCard } />
@@ -45,8 +46,14 @@ let Board = React.createClass({
 					<div>
 						{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> : null }
 					</div>
+					{ roundState.status >= RoundStates.CHOOSING_ANSWER ? 
+						<div>
+							<JudgeReceiver roundState={roundState} roundActions={roundActions} afterDrop={socketHandlers.chooseWinner} />
+						</div>
+						: null
+					}
 				</div>
-				<Hand cards={roundState.received} flipped={ !( roundState.status == RoundStates.ANSWERS_RECEIVED ) } />
+				<Hand cards={roundState.received} canDrag={ roundState.status == RoundStates.CHOOSING_ANSWER } flipped={ !( roundState.status >= RoundStates.ANSWERS_RECEIVED ) } />
 			</div>
 		);
 	},
