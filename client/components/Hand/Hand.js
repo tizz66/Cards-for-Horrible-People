@@ -6,12 +6,6 @@ import './Hand.less';
 
 let Hand = React.createClass({
 
-	getInitialState: function () {
-		return {
-			showing: this.props.roundState || true
-		}
-	},
-
 	render: function () {
 		const { cards, canDrag, flipped } = this.props;
 
