@@ -20,19 +20,28 @@ let JudgeBoard = React.createClass({
 			<div>
 				<div className={ classNames( classes ) }>
 					<div>
-						{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } flipped={ roundState.status == RoundStates.FLIP_CARD } onClick={ roundActions.flipQuestion } /> : null }
+						{ !_.isUndefined( roundState.question ) &&
+								<Card
+									card={ Object.assign( roundState.question, { type: 'black' } ) }
+									flipped={ roundState.status == RoundStates.FLIP_CARD }
+									onClick={ roundActions.flipQuestion } />
+						}
 					</div>
-					{ roundState.status >= RoundStates.CHOOSING_ANSWER ? 
+					{ roundState.status >= RoundStates.CHOOSING_ANSWER &&
 						<div>
-							<JudgeReceiver roundState={roundState} roundActions={roundActions} afterDrop={socketHandlers.chooseWinner} />
+							<JudgeReceiver
+								roundState={roundState}
+								roundActions={roundActions}
+								afterDrop={socketHandlers.chooseWinner} />
 						</div>
-						: null
 					}
 				</div>
-				{ roundState.status >= RoundStates.RECEIVING_ANSWERS ?
-					<Hand cards={roundState.received} canDrag={ roundState.status == RoundStates.CHOOSING_ANSWER } flipped={ !( roundState.status >= RoundStates.ANSWERS_RECEIVED ) } />
-					: null
-				}				
+				{ roundState.status >= RoundStates.RECEIVING_ANSWERS &&
+					<Hand
+						cards={roundState.received}
+						canDrag={ roundState.status == RoundStates.CHOOSING_ANSWER }
+						flipped={ !( roundState.status >= RoundStates.ANSWERS_RECEIVED ) } />
+				}
 			</div>
 		)
 	}
