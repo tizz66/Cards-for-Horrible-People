@@ -7,7 +7,7 @@ const initialState = {};
 export default function roundState( state = initialState, action ) {
 
 	switch( action.type ){
-	
+
 		case types.NEW_ROUND:
 			return Object.assign( {}, {
 				judgeID: action.judgeID,
@@ -22,7 +22,8 @@ export default function roundState( state = initialState, action ) {
 
 		case types.START_ROUND:
 			return Object.assign( {}, state, {
-				status: RoundStates.RECEIVING_ANSWERS
+				status: RoundStates.RECEIVING_ANSWERS,
+				received: []
 			} );
 
 		case types.PLAY_CARD:

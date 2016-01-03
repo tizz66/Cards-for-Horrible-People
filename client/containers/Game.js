@@ -1,6 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 //--
@@ -33,7 +33,7 @@ let Game = React.createClass({
 
 		this.socket.emit( 'play-card', {
 			cardID: cardID
-		});		
+		});
 	},
 
 	chooseWinner: function (cardID, cardText) {
@@ -78,6 +78,10 @@ let Game = React.createClass({
 			}
 		});
 
+		this.socket.on( 'replacement-card', (data) => {
+			dispatch( HandActions.replaceCard(data) );
+		});
+
 		this.socket.on( 'winner-chosen', (data) => {
 			console.log("WINNER CHOSEN");
 			console.log( data );
@@ -98,10 +102,10 @@ let Game = React.createClass({
 			<div>
 				<Toolbar gameState={gameState} gameStateActions={GameStateActions} roundState={roundState} roundActions={roundActions} players={players} />
 				<div className='Game'>
-					{ !gameState.started ? 
+					{ !gameState.started ?
 						<Loading gameState={gameState} gameStateActions={GameStateActions} socket={this.socket} />
 						:
-						<Board 
+						<Board
 							gameState={gameState}
 							gameStateActions={GameStateActions}
 							hand={hand}

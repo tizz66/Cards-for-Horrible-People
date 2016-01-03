@@ -12,7 +12,7 @@ let Hand = React.createClass({
 		let hand = ( cards || [] ).map( (card) => {
 			return (
 				<li key={card.id}>
-					<DraggableCard card={ card } canDrag={canDrag} flipped={flipped} />
+					<DraggableCard card={ card } canDrag={ canDrag && !card.new } flipped={ flipped || card.new } />
 				</li>
 			)
 		});

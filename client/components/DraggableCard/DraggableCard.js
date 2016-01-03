@@ -25,11 +25,11 @@ function collect (connect, monitor) {
 
 let DraggableCard = React.createClass({
 	render: function () {
-		const { card, connectDragSource, isDragging, canDrag, hidden, flipped } = this.props;
+		const { connectDragSource, ...others } = this.props;
 
 		return connectDragSource(
 			<div>
-				<Card card={card} canDrag={canDrag} isDragging={isDragging} flipped={flipped} />
+				<Card {...others} />
 			</div>
 		);
 	}

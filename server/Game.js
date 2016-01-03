@@ -28,12 +28,13 @@ export default class Game {
 
 					this.launchGame();
 					this.newRound();
-				}				
+				}
 			});
 
 			socket.on('play-card', (data) => {
-				let cardData = this.deck.getCardData( data.cardID );
-				let played = {
+				const playerID = socket.handshake.session.playerID;
+				const cardData = this.deck.getCardData( data.cardID );
+				const played = {
 					player: socket.handshake.session.playerID,
 					card: cardData
 				};
@@ -44,6 +45,19 @@ export default class Game {
 					cardText: cardData.text,
 					lastCard: ( this.round.played.length == ( _.size( this.players ) - 1 ) )
 				});
+
+				console.log( "Player " + playerID + " played card ID " + data.cardID );
+
+				// Get a new card
+				const newCard = this.deck.drawAnswers(1);
+
+				// Update player's hand with the new card
+				this.players[ playerID ].cards = this.players[ playerID ].cards.map( (card) => {
+					return ( card.id === data.cardID ) ? newCard : card;
+				});
+
+				// Send the player the new card
+				socket.emit( 'replacement-card', newCard.shift() );
 			});
 
 			socket.on('choose-winner', (data) => {

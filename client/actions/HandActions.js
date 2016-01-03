@@ -6,3 +6,10 @@ export function startingHand(hand) {
     	hand: hand
     };
 }
+
+export function replaceCard(card) {
+	return {
+		type: types.REPLACE_CARD,
+		card: card
+	};
+}
