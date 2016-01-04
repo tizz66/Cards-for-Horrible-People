@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import * as RoundStates from '../../constants/RoundStates';
 import JudgeBoard from './JudgeBoard';
 import PlayerBoard from './PlayerBoard';
+import WinnerBoard from './WinnerBoard';
 import './Board.less';
 
 let Board = React.createClass({
@@ -14,11 +15,13 @@ let Board = React.createClass({
 			'Board-isJudging': ( roundState.judgeID === gameState.playerID )
 		};
 
-		return ( 
+		return (
 			<div className={ classNames( classes ) }>
-				{ roundState.judgeID === gameState.playerID ?
-					<JudgeBoard {...this.props} /> :
-					<PlayerBoard {...this.props} /> }
+				{ roundState.status >= RoundStates.WINNER_DECLARED ?
+					<WinnerBoard {...this.props } /> :
+						roundState.judgeID === gameState.playerID ?
+							<JudgeBoard {...this.props} /> :
+							<PlayerBoard {...this.props} /> }
 			</div>
 		)
 	}

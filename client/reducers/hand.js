@@ -22,6 +22,12 @@ export default function gameState( state = initialState, action ) {
 				return ( item.played ) ? Object.assign( action.card, { new: true } ) : Object.assign( {}, item );
 			});
 
+		case types.MARK_CARD_SEEN:
+			console.log( action );
+			return state.map( (item) => {
+				return ( item.id === action.cardID ) ? _.omit( item, 'new' ) : Object.assign( {}, item );
+			});
+
 		case types.NEW_ROUND:
 			return state.map( (item) => {
 				return _.omit( item, 'new' );

@@ -57,6 +57,7 @@ export default class Game {
 				});
 
 				// Send the player the new card
+				// drawAnswers returns an array, so we need to shift it to get the card standalone
 				socket.emit( 'replacement-card', newCard.shift() );
 			});
 
@@ -82,7 +83,7 @@ export default class Game {
 
 				// Tell everyone
 				this.socket.emit( 'winner-chosen', {
-					winner: winner,
+					winnerID: winner,
 					card: cardData,
 					scores: this.getScores()
 				});

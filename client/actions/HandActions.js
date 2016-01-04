@@ -13,3 +13,10 @@ export function replaceCard(card) {
 		card: card
 	};
 }
+
+export function markCardSeen(cardID) {
+	return {
+		type: types.MARK_CARD_SEEN,
+		cardID: cardID
+	};
+}

@@ -4,3 +4,4 @@ export const RECEIVING_ANSWERS = 3;
 export const ANSWERS_RECEIVED = 4;
 export const CHOOSING_ANSWER = 5;
 export const WINNER_CHOSEN = 6;
+export const WINNER_DECLARED = 7;

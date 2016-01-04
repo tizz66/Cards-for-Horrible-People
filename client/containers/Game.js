@@ -69,28 +69,24 @@ let Game = React.createClass({
 			dispatch( RoundStateActions.cardPlayed(data) );
 
 			if( !_.isUndefined( data.lastCard ) && data.lastCard ){
-				setTimeout( () => {
-					dispatch( RoundStateActions.allCardsPlayed() );
-				}, 2000 );
-				setTimeout( () => {
-					dispatch( RoundStateActions.choosingAnswer() );
-				}, 4000 );
+				setTimeout( () => dispatch( RoundStateActions.allCardsPlayed() ), 2000 );
+				setTimeout( () => dispatch( RoundStateActions.choosingAnswer() ), 4000 );
 			}
 		});
 
 		this.socket.on( 'replacement-card', (data) => {
-			dispatch( HandActions.replaceCard(data) );
+			setTimeout( () => dispatch( HandActions.replaceCard(data), 1500 ) );
 		});
 
 		this.socket.on( 'winner-chosen', (data) => {
-			console.log("WINNER CHOSEN");
-			console.log( data );
+			dispatch( RoundStateActions.declareWinner(data) );
 		});
 	},
 
 	render: function () {
 		const { gameState, roundState, players, hand, dispatch } = this.props;
 		const roundActions = bindActionCreators(RoundStateActions, dispatch);
+		const handActions = bindActionCreators(HandActions, dispatch);
 
 		this.socket = io().connect('http://localhost:3002/' + gameState.gameKey + '/');
 		let socketHandlers = {
@@ -109,9 +105,10 @@ let Game = React.createClass({
 							gameState={gameState}
 							gameStateActions={GameStateActions}
 							hand={hand}
-							handActions={HandActions}
+							handActions={handActions}
 							roundState={roundState}
 							roundActions={roundActions}
+							players={players}
 							socketHandlers={socketHandlers} />
 					}
 				</div>

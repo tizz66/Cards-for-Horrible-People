@@ -7,12 +7,16 @@ import './Hand.less';
 let Hand = React.createClass({
 
 	render: function () {
-		const { cards, canDrag, flipped } = this.props;
+		const { cards, canDrag, allFlipped, handActions } = this.props;
 
 		let hand = ( cards || [] ).map( (card) => {
 			return (
 				<li key={card.id}>
-					<DraggableCard card={ card } canDrag={ canDrag && !card.new } flipped={ flipped || card.new } />
+					<DraggableCard
+						card={ card }
+						canDrag={ canDrag && !card.new }
+						flipped={ allFlipped || card.new }
+						onClick={ card.new ? () => { handActions.markCardSeen( card.id ) } : null } />
 				</li>
 			)
 		});

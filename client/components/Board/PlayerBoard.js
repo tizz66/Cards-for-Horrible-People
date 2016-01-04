@@ -9,9 +9,10 @@ import * as RoundStates from '../../constants/RoundStates';
 let PlayerBoard = React.createClass({
 
 	render: function () {
-		const { roundState, roundActions, gameState, socketHandlers, hand } = this.props;
+		const { roundState, roundActions, gameState, socketHandlers, hand, handActions } = this.props;
 
 		// If a card has been played, then mark it as hidden
+		// @todo fix this, shouldn't be here
 		if( roundState.played ){
 			hand.map( (card) => {
 				if( card.id == roundState.played.cardID ){
@@ -20,7 +21,7 @@ let PlayerBoard = React.createClass({
 			} );
 		}
 
-		let classes = {
+		const classes = {
 			'Board': true
 		};
 
@@ -34,7 +35,7 @@ let PlayerBoard = React.createClass({
 						<PlayerReceiver roundState={ roundState } roundActions={ roundActions } afterDrop={ socketHandlers.playCard } />
 					</div>
 				</div>
-				<Hand cards={hand} canDrag={ _.isUndefined( roundState.played ) } playCard={ roundActions.playCard } />
+				<Hand cards={hand} canDrag={ _.isUndefined( roundState.played ) } playCard={ roundActions.playCard } handActions={ handActions } />
 			</div>
 		)
 	}

@@ -61,3 +61,12 @@ export function chooseWinner(data) {
 		cardText: data.cardText
 	};
 }
+
+export function declareWinner(data) {
+	return {
+		type: types.DECLARE_WINNER,
+		winnerID: data.winnerID,
+		card: data.card,
+		scores: data.scores
+	};
+}

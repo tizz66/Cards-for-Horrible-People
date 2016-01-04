@@ -10,11 +10,19 @@ let JudgeBoard = React.createClass({
 
 	render: function () {
 		const { roundState, roundActions, gameState, socketHandlers, hand } = this.props;
-
-		let classes = {
+		const classes = {
 			'Board-panel': true,
 			'Board-selection': ( roundState.status <= RoundStates.QUESTION_FLIPPED )
 		};
+
+		// @todo fix this, shouldn't be here
+		if( roundState.winner ){
+			roundState.received.map( (card) => {
+				if( card.id == roundState.winner.cardID ){
+					card.hidden = true;
+				}
+			} );
+		}
 
 		return (
 			<div>
@@ -40,7 +48,7 @@ let JudgeBoard = React.createClass({
 					<Hand
 						cards={roundState.received}
 						canDrag={ roundState.status == RoundStates.CHOOSING_ANSWER }
-						flipped={ !( roundState.status >= RoundStates.ANSWERS_RECEIVED ) } />
+						allFlipped={ !( roundState.status >= RoundStates.ANSWERS_RECEIVED ) } />
 				}
 			</div>
 		)

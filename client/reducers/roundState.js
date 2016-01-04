@@ -63,7 +63,14 @@ export default function roundState( state = initialState, action ) {
 					cardID: action.cardID,
 					cardText: action.cardText
 				}
-			})
+			} );
+
+		case types.DECLARE_WINNER:
+			return Object.assign( {}, state, {
+				status: RoundStates.WINNER_DECLARED,
+				winnerID: action.winnerID,
+				winner: action.card
+			} );
 
 		default:
 			return state;

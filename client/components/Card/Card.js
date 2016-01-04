@@ -6,7 +6,7 @@ import './Card.less';
 let Card = React.createClass({
 	render: function () {
 
-		let classes = {
+		const classes = {
 			'Card': true,
 			['Card-' + this.props.card.type]: true,
 			'is-dragging': this.props.isDragging,

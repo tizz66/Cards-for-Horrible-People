@@ -30,4 +30,54 @@
 			transform: scale(1.6) translateY(50px);
 		}
 	}
+
+	&-winner {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 40px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		> .Board-winningCard {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+
+			> div {
+				width: 175px;
+
+				&:first-child {
+					transform: rotateZ(-15deg);
+					margin-right: -60px;
+				}
+				&:last-child {
+					transform: rotateZ(15deg);
+				}
+			}
+		}
+
+		> .Board-winningUser {
+			width: 300px;
+			line-height: 40px;
+			background: #000;
+			text-align: center;
+			border-radius: 30px;
+			margin-top: 75px;
+			color: #fff;
+			font-size: 16px;
+
+			&.is-user {
+				background: #2E7D32;
+			}
+			
+			> p {
+				.reset;
+			}
+		}
+	}
 }
