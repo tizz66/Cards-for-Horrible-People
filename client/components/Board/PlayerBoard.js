@@ -8,6 +8,10 @@ import * as RoundStates from '../../constants/RoundStates';
 
 let PlayerBoard = React.createClass({
 
+	componentDidMount: function () {
+		
+	},
+
 	render: function () {
 		const { roundState, roundActions, gameState, socketHandlers, hand, handActions } = this.props;
 
