@@ -17,7 +17,7 @@ let Card = React.createClass({
 		};
 
 		return (
-			<Motion defaultStyle={{ y: ( this.props.flipped ? 180 : 0 ) }} style={{ y: spring(0) }}>
+			<Motion defaultStyle={{ y: ( this.props.flipped ? 180 : 0 ) }} style={{ y: ( this.props.flipped ? 180 : 0 ) }}>
 				{ style =>
 					<div className={ classNames( classes ) } onClick={ this.props.onClick || null } style={{
 						transform: `rotateY(${style.y}deg)`
