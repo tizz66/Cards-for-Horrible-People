@@ -17,10 +17,11 @@ let Hand = React.createClass({
 		const { cards } = this.props;
 		let configs = {};
 
-		cards.forEach( (card) => {
-			configs[ card.id ] = {
+		cards.forEach( (card, idx) => {
+			configs[ `${idx}_${card.id}` ] = {
 				opacity: spring(0),
-				y: spring(100)
+				y: spring(100),
+				card: card
 			};
 		});
 
@@ -31,10 +32,11 @@ let Hand = React.createClass({
 		const { cards } = this.props;
 		let configs = {};
 
-		cards.forEach( (card) => {
-			configs[ card.id ] = {
+		cards.forEach( (card, idx) => {
+			configs[ `${idx}_${card.id}` ] = {
 				opacity: spring(1),
-				y: spring(0)
+				y: spring(0),
+				card: card
 			};
 		});
 
@@ -44,14 +46,16 @@ let Hand = React.createClass({
 	willLeave: function (card, styleThatJustLeft) {
 		return {
 			opacity: spring(1),
-			y: spring(0)
+			y: spring(0),
+			card: card
 		};
 	},
 
 	willEnter: function (card) {
 		return {
 			opacity: spring(0),
-			y: spring(100)
+			y: spring(100),
+			card: card
 		};
 	},
 
@@ -72,9 +76,9 @@ let Hand = React.createClass({
 					willEnter={ this.willEnter } >
 					{ configs =>
 						<ul>
-							{cards.map( (card) => {
-								const config = configs[ card.id ];
-								const { opacity, y } = config;
+							{ Object.keys( configs ).map( tmpID => {
+								const config = configs[ tmpID ];
+								const { card, opacity, y } = config;
 
 								return (
 									<li key={ card.id } style={{
