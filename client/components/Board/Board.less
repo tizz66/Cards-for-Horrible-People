@@ -13,22 +13,22 @@
 
 		> div {
 			width: 200px;
-			transform: scale(1) translateY(0);
-			transition: 0.3s all ease-in-out;
 
 			> .Card,
 			> .Receiver {
 				margin: 0 auto;
 			}
 		}
+
+		&.is-choosing {
+			> div:first-child {
+				margin-right: -200px;
+			}
+		}
 	}
 
 	&-selection {
 		flex-direction: column;
-
-		> div {
-			transform: scale(1.6) translateY(50px);
-		}
 	}
 
 	&-winner {
@@ -74,7 +74,7 @@
 			&.is-user {
 				background: #2E7D32;
 			}
-			
+
 			> p {
 				.reset;
 			}

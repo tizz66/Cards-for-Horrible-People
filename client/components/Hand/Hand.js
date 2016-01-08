@@ -9,7 +9,11 @@ let Hand = React.createClass({
 
 	getDefaultProps: function () {
 		return {
-			cards: []
+			cards: [],
+			style: {
+				opacity: 1,
+				y: 0
+			}
 		};
 	},
 
@@ -61,14 +65,12 @@ let Hand = React.createClass({
 
 	render: function () {
 		const { cards, canDrag, allFlipped, handActions } = this.props;
-
-		let classes = {
-			'Hand': true,
-			'Hand-hidden': this.props.hidden
+		const classes = {
+			'Hand': true
 		};
 
 		return (
-			<div className={ classNames( classes ) }>
+			<div className={ classNames( classes ) } style={{ opacity: this.props.style.opacity, transform: `translateY(${this.props.style.y}px)` }}>
 				<TransitionMotion
 					defaultStyles={ this.getDefaultValue() }
 					styles={ this.getEndValue() }
