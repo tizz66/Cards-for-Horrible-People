@@ -9,6 +9,7 @@ export const NEW_GAME_SUCCESS = 'NEW_GAME_SUCCESS';
 export const NEW_GAME_FAIL = 'NEW_GAME_FAIL';
 export const START_GAME = 'START_GAME';
 export const STARTING_HAND = 'STARTING_HAND';
+export const PLAYER_JOINED = 'PLAYER_JOINED';
 
 // Round actions
 export const NEW_ROUND = 'NEW_ROUND';

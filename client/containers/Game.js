@@ -53,6 +53,10 @@ let Game = React.createClass({
 	componentDidMount: function () {
 		const { gameState, hand, dispatch } = this.props;
 
+		this.socket.on( 'player-joined', (data) => {
+			dispatch( GameStateActions.playerJoined(data) );
+		});
+
 		this.socket.on( 'game-started', (data) => {
 			dispatch( GameStateActions.startGame(data) );
 		});
@@ -99,7 +103,11 @@ let Game = React.createClass({
 				<Toolbar gameState={gameState} gameStateActions={GameStateActions} roundState={roundState} roundActions={roundActions} players={players} />
 				<div className='Game'>
 					{ !gameState.started ?
-						<Loading gameState={gameState} gameStateActions={GameStateActions} socket={this.socket} />
+						<Loading
+							gameState={gameState}
+							gameStateActions={GameStateActions}
+							socket={this.socket}
+							players={players} />
 						:
 						<Board
 							gameState={gameState}

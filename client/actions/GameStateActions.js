@@ -21,3 +21,10 @@ export function startGame(data) {
         players: data.players
     };
 }
+
+export function playerJoined(data) {
+    return {
+        type: types.PLAYER_JOINED,
+        player: data
+    };
+}

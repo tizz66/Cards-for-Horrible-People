@@ -1,6 +1,14 @@
 import _ from 'lodash';
 import Deck from './Deck';
 
+const avatarColors = [
+	'C62828', 'AD1457', '6A1B9A', '4527A0',
+	'283593', '1565C0', '0277BD', '00838F',
+	'00695C', '2E7D32', '558B2F', '9E9D24',
+	'F9A825', 'FF8F00', 'EF6C00', 'D84315',
+	'4E342E'
+];
+
 export default class Game {
 	constructor (options, namespace) {
 		this.gameKey = options.key;
@@ -8,8 +16,6 @@ export default class Game {
 		this.socket = namespace;
 		this.ownerID = '';
 		this.round = {};
-		//this.judgeID = '';
-		//this.cardsInRound = [];
 		this.deck = new Deck();
 
 		this.socketEvents();
@@ -111,12 +117,19 @@ export default class Game {
 		});
 	}
 
-	getPlayers () {
+	getPlayers (ids) {
 		let players = {};
+		let params = ['nickname', 'score', 'color', 'avatarText'];
 
-		_.forOwn( this.players, (player, playerID) => {
-			players[ playerID ] = _.pick( player, 'nickname', 'score' );
-		} );
+		if( _.isString( ids ) ){
+			return _.pick( this.players[ ids ], ...params );
+		} else {
+			_.forOwn( this.players, (player, playerID) => {
+				if( ( _.isArray( ids ) && _.indexOf( ids, playerID ) !== -1 ) || _.isUndefined( ids ) ){
+					players[ playerID ] = _.pick( player, ...params );
+				}
+			} );
+		}
 
 		return players;
 	}
@@ -138,7 +151,9 @@ export default class Game {
 			nickname: nickname,
 			cards: [],
 			score: 0,
-			cardsWon: []
+			cardsWon: [],
+			color: _.sample( avatarColors ),
+			avatarText: nickname.charAt(0).toUpperCase()
 		};
 
 		if( owner ){
@@ -146,6 +161,8 @@ export default class Game {
 		}
 
 		console.log("Added player " + playerID + " to " + this.gameKey);
+
+		this.socket.emit( 'player-joined', this.getPlayers( playerID ) );
 
 		return playerID;
 	}
