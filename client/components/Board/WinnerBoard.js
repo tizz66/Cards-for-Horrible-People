@@ -15,7 +15,7 @@ let WinnerBoard = React.createClass({
 		};
 
 		return (
-			<div>
+			<div className='Board is-judging' onClick={ roundActions.showScores }>
 				<Motion defaultStyle={{ cardScale: 0, bubbleScale: 0 }} style={{ cardScale: spring(1), bubbleScale: spring(1, [ 136, 42 ]) }}>
 					{
 						style =>

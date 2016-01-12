@@ -1,6 +1,7 @@
 .Player {
 	color: #fff;
 	text-align: left;
+	display: flex;
 
 	&-avatar {
 		display: block;
@@ -9,14 +10,29 @@
 		line-height: 40px;
 		border-radius: 40px;
 		font-size: 19px;
+		font-weight: 300;
 		color: rgba(255,255,255,0.8);
-		float: left;
 		text-align: center;
 		margin-right: 10px;
 	}
 
+	&-score {
+		width: 40px;
+		text-align: center;
+		line-height: 40px;
+		font-size: 32px;
+		font-weight: 300;
+	}
+
+	&-info {
+		flex: 1;
+		display: flex;
+		align-items: center;
+	}
+
 	h2 {
 		font-size: 18px;
+		font-weight: 300;
 		margin: 0;
 	}
 

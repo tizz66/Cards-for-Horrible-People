@@ -80,4 +80,48 @@
 			}
 		}
 	}
+
+	&-scores {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 40px;
+
+		> div {
+			width: 300px;
+			box-shadow: 0px 0px 25px rgba(0,0,0,0.1);
+		}
+
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		li {
+			background: #fff;
+			padding: 15px;
+			border-bottom: 1px solid rgba(0,0,0,0.075);
+
+			&:first-child {
+				border-radius: 6px 6px 0 0;
+			}
+
+			&:last-child {
+				border-radius: 0 0 6px 6px;
+			}
+
+			.Player {
+				color: #000;
+			}
+
+			&.is-player {
+				background: #f5f5f5;
+			}
+		}
+	}
 }

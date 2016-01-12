@@ -94,14 +94,37 @@ export default class Game {
 					scores: this.getScores()
 				});
 			});
+
+			socket.on('complete-round', () => {
+				this.round.completed.push( socket.handshake.session.playerID );
+				console.log( socket.handshake.session.playerID + " is ready for the next round" );
+
+				if( this.round.completed.length == _.size( this.players ) ){
+					this.newRound();
+				}
+			});
 		});
 	}
 
 	newRound () {
+		let judgeID = this.ownerID;
+
+		if( !_.isUndefined( this.round.judgeID ) ){
+			let playerIDs = Object.keys( this.players );
+			let judgePos = playerIDs.indexOf( this.round.judgeID );
+
+			if( judgePos === ( _.size( this.players ) - 1 ) ){
+				judgeID = playerIDs[0]
+			} else {
+				judgeID = playerIDs[ judgePos + 1 ];
+			}
+		}
+
 		this.round = {
-			judgeID: this.ownerID,
+			judgeID: judgeID,
 			played: [],
-			question: this.deck.drawQuestion()
+			question: this.deck.drawQuestion(),
+			completed: []
 		};
 
 		this.socket.emit( 'new-round', {
@@ -138,7 +161,7 @@ export default class Game {
 		let scores = {};
 
 		_.forOwn( this.players, (player, playerID) => {
-			scores[ playerID ] = _.pick( player, 'score' );
+			scores[ playerID ] = player.score;
 		} );
 
 		return scores;

@@ -5,3 +5,4 @@ export const ANSWERS_RECEIVED = 4;
 export const CHOOSING_ANSWER = 5;
 export const WINNER_CHOSEN = 6;
 export const WINNER_DECLARED = 7;
+export const SHOWING_SCORES = 8;

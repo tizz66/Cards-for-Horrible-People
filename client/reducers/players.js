@@ -10,8 +10,22 @@ export default function players( state = initialState, action ) {
 				...state,
 				[ action.player.nickname ]: action.player
 			});
+
 		case types.START_GAME:
 			return Object.assign( {}, action.players );
+
+		case types.DECLARE_WINNER:
+			let players = {};
+
+			_.forEach( action.scores, (score, playerID) => {
+				players[ playerID ] = {
+					...state[ playerID ],
+					score
+				}
+			});
+
+			return players;
+
 		default:
 			return state;
 	}

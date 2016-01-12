@@ -70,3 +70,15 @@ export function declareWinner(data) {
 		scores: data.scores
 	};
 }
+
+export function showScores(data) {
+	return {
+		type: types.SHOW_SCORES
+	}
+}
+
+export function endRound(data) {
+	return {
+		type: types.END_ROUND
+	}
+}

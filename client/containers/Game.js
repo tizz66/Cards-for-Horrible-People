@@ -50,6 +50,11 @@ let Game = React.createClass({
 		});
 	},
 
+	completeRound: function () {
+		console.log( "Complete round" );
+		this.socket.emit( 'complete-round' );
+	},
+
 	componentDidMount: function () {
 		const { gameState, hand, dispatch } = this.props;
 
@@ -95,7 +100,8 @@ let Game = React.createClass({
 		this.socket = io().connect('http://localhost:3002/' + gameState.gameKey + '/');
 		let socketHandlers = {
 			playCard: this.playCard,
-			chooseWinner: this.chooseWinner
+			chooseWinner: this.chooseWinner,
+			completeRound: this.completeRound
 		};
 
 		return (

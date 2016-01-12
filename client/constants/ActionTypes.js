@@ -23,3 +23,5 @@ export const CHOOSE_WINNER = 'CHOOSE_WINNER';
 export const REPLACE_CARD = 'REPLACE_CARD';
 export const MARK_CARD_SEEN = 'MARK_CARD_SEEN';
 export const DECLARE_WINNER = 'DECLARE_WINNER';
+export const SHOW_SCORES = 'SHOW_SCORES';
+export const END_ROUND = 'END_ROUND';

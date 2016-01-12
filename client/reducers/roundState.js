@@ -72,6 +72,11 @@ export default function roundState( state = initialState, action ) {
 				winner: action.card
 			} );
 
+		case types.SHOW_SCORES:
+			return Object.assign( {}, state, {
+				status: RoundStates.SHOWING_SCORES
+			} );
+
 		default:
 			return state;
 	}

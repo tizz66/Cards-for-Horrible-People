@@ -37,7 +37,7 @@ let JudgeBoard = React.createClass({
 
 	render: function () {
 		const { roundState, roundActions, gameState, socketHandlers, hand } = this.props;
-		const classes = {
+		const panelClasses = {
 			'Board-panel': true,
 			'Board-selection': ( roundState.status <= RoundStates.QUESTION_FLIPPED ),
 			'is-choosing': ( this.props.roundState.status >= RoundStates.CHOOSING_ANSWER )
@@ -53,10 +53,10 @@ let JudgeBoard = React.createClass({
 		}
 
 		return (
-			<div>
+			<div className='Board is-judging'>
 				<Motion defaultStyle={ this.getPanelDefault() } style={ this.getPanelStyle() }>
 					{ style =>
-						<div className={ classNames( classes ) }>
+						<div className={ classNames( panelClasses ) }>
 							{ !_.isUndefined( roundState.question ) &&
 								<Motion defaultStyle={ this.getQuestionStyle() } style={ this.getQuestionStyle() }>
 									{ cardStyle =>

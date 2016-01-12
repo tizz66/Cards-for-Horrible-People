@@ -30,7 +30,7 @@ let PlayerBoard = React.createClass({
 		};
 
 		return (
-			<div>
+			<div className='Board'>
 				<div className='Board-panel'>
 					<div>
 						{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> : null }
