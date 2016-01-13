@@ -9,15 +9,9 @@ export function newRound(data) {
 }
 
 export function flipQuestion() {
-	return dispatch => {
-		setTimeout( () => {
-			dispatch( startRound() );
-		}, 2000 );
-
-		dispatch({
-			type: types.FLIP_QUESTION
-		});
-	};
+	return {
+		type: types.FLIP_QUESTION
+	}
 }
 
 export function startRound() {

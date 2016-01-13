@@ -1,8 +1,9 @@
 export const FLIP_CARD = 1;
-export const QUESTION_FLIPPED = 2;
-export const RECEIVING_ANSWERS = 3;
-export const ANSWERS_RECEIVED = 4;
-export const CHOOSING_ANSWER = 5;
-export const WINNER_CHOSEN = 6;
-export const WINNER_DECLARED = 7;
-export const SHOWING_SCORES = 8;
+export const ROUND_PENDING = 2;
+export const QUESTION_FLIPPED = 3;
+export const RECEIVING_ANSWERS = 4;
+export const ANSWERS_RECEIVED = 5;
+export const CHOOSING_ANSWER = 6;
+export const WINNER_CHOSEN = 7;
+export const WINNER_DECLARED = 8;
+export const SHOWING_SCORES = 9;

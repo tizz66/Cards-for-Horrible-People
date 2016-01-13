@@ -7,6 +7,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import * as GameStateActions from '../actions/GameStateActions';
 import * as HandActions from '../actions/HandActions';
 import * as RoundStateActions from '../actions/RoundStateActions';
+import * as RoundStates from '../constants/RoundStates';
 //--
 import Toolbar from '../components/Toolbar/Toolbar';
 import Loading from '../components/Loading/Loading';
@@ -21,6 +22,17 @@ let mapStateToProps = (state) => ({
 });
 
 let Game = React.createClass({
+
+	flipQuestion: function () {
+		const { roundState, dispatch } = this.props;
+		const roundActions = bindActionCreators(RoundStateActions, dispatch);
+
+		// Only flip the question if the round is pending
+		if( roundState.status <= RoundStates.ROUND_PENDING ){
+			roundActions.flipQuestion();
+			this.socket.emit( 'start-round' );
+		}
+	},
 
 	playCard: function (cardID, cardText) {
 		const { dispatch } = this.props;
@@ -51,7 +63,6 @@ let Game = React.createClass({
 	},
 
 	completeRound: function () {
-		console.log( "Complete round" );
 		this.socket.emit( 'complete-round' );
 	},
 
@@ -68,6 +79,10 @@ let Game = React.createClass({
 
 		this.socket.on( 'new-round', (data) => {
 			dispatch( RoundStateActions.newRound(data) );
+		});
+
+		this.socket.on( 'round-started', () => {
+			dispatch( RoundStateActions.startRound() );
 		});
 
 		this.socket.on( 'starting-hand', (data) => {
@@ -101,7 +116,8 @@ let Game = React.createClass({
 		let socketHandlers = {
 			playCard: this.playCard,
 			chooseWinner: this.chooseWinner,
-			completeRound: this.completeRound
+			completeRound: this.completeRound,
+			flipQuestion: this.flipQuestion
 		};
 
 		return (

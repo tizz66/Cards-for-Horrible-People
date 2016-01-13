@@ -64,7 +64,7 @@ let JudgeBoard = React.createClass({
 											<Card
 												card={ Object.assign( roundState.question, { type: 'black' } ) }
 												flipped={ roundState.status == RoundStates.FLIP_CARD }
-												onClick={ roundActions.flipQuestion } />
+												onClick={ socketHandlers.flipQuestion } />
 										</div>
 									}
 								</Motion>

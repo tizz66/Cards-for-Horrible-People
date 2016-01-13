@@ -37,6 +37,10 @@ export default class Game {
 				}
 			});
 
+			socket.on('start-round', () => {
+				this.socket.emit('round-started');
+			});
+
 			socket.on('play-card', (data) => {
 				const playerID = socket.handshake.session.playerID;
 				const cardData = this.deck.getCardData( data.cardID );

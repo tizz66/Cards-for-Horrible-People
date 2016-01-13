@@ -8,10 +8,6 @@ import * as RoundStates from '../../constants/RoundStates';
 
 let PlayerBoard = React.createClass({
 
-	componentDidMount: function () {
-
-	},
-
 	render: function () {
 		const { roundState, roundActions, gameState, socketHandlers, hand, handActions } = this.props;
 
@@ -32,14 +28,22 @@ let PlayerBoard = React.createClass({
 		return (
 			<div className='Board'>
 				<div className='Board-panel'>
-					<div>
-						{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> : null }
-					</div>
-					<div>
-						<PlayerReceiver roundState={ roundState } roundActions={ roundActions } afterDrop={ socketHandlers.playCard } />
-					</div>
+					{ roundState.status <= RoundStates.ROUND_PENDING ?
+						<p>Waiting...</p>
+						:
+						<div>
+							<div>
+								{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> : null }
+							</div>
+							<div>
+								<PlayerReceiver roundState={ roundState } roundActions={ roundActions } afterDrop={ socketHandlers.playCard } />
+							</div>
+						</div>
+					}
 				</div>
-				<Hand cards={hand} canDrag={ _.isUndefined( roundState.played ) } playCard={ roundActions.playCard } handActions={ handActions } />
+				{ roundState.status >= RoundStates.QUESTION_FLIPPED &&
+					<Hand cards={hand} canDrag={ _.isUndefined( roundState.played ) } playCard={ roundActions.playCard } handActions={ handActions } />
+				}
 			</div>
 		)
 	}
