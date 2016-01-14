@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Hand from '../Hand/Hand';
 import Card from '../Card/Card';
 import PlayerReceiver from '../Receiver/PlayerReceiver';
+import Countdown from '../Countdown/Countdown';
 import * as RoundStates from '../../constants/RoundStates';
 
 let PlayerBoard = React.createClass({
@@ -27,23 +28,32 @@ let PlayerBoard = React.createClass({
 
 		return (
 			<div className='Board'>
-				<div className='Board-panel'>
-					{ roundState.status <= RoundStates.ROUND_PENDING ?
-						<p>Waiting...</p>
-						:
-						<div>
+				<div>
+					<div className='Board-panel'>
+						{ roundState.status <= RoundStates.ROUND_PENDING ?
+							<p>Waiting...</p>
+							:
 							<div>
-								{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> : null }
+								<div>
+									{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> : null }
+								</div>
+								<div>
+									<Countdown from={60} onEnd={ () => alert("Time's up!") } active={ true }>
+										{ count =>
+											<div>
+												<p style={{ color: '#fff' }}>{count}</p>
+												<PlayerReceiver roundState={ roundState } roundActions={ roundActions } afterDrop={ socketHandlers.playCard } />
+											</div>
+										}
+									</Countdown>
+								</div>
 							</div>
-							<div>
-								<PlayerReceiver roundState={ roundState } roundActions={ roundActions } afterDrop={ socketHandlers.playCard } />
-							</div>
-						</div>
+						}
+					</div>
+					{ roundState.status >= RoundStates.QUESTION_FLIPPED &&
+						<Hand cards={hand} canDrag={ _.isUndefined( roundState.played ) } playCard={ roundActions.playCard } handActions={ handActions } />
 					}
 				</div>
-				{ roundState.status >= RoundStates.QUESTION_FLIPPED &&
-					<Hand cards={hand} canDrag={ _.isUndefined( roundState.played ) } playCard={ roundActions.playCard } handActions={ handActions } />
-				}
 			</div>
 		)
 	}
