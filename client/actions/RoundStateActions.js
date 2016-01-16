@@ -5,19 +5,19 @@ export function newRound(data) {
 		type: types.NEW_ROUND,
 		judgeID: data.judgeID,
 		question: data.question
-	}
+	};
 }
 
 export function flipQuestion() {
 	return {
 		type: types.FLIP_QUESTION
-	}
+	};
 }
 
 export function startRound() {
 	return {
 		type: types.START_ROUND
-	}
+	};
 }
 
 export function playCard(data) {
@@ -68,11 +68,11 @@ export function declareWinner(data) {
 export function showScores(data) {
 	return {
 		type: types.SHOW_SCORES
-	}
+	};
 }
 
 export function endRound(data) {
 	return {
 		type: types.END_ROUND
-	}
+	};
 }

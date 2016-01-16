@@ -6,7 +6,7 @@ export default function errors( state = initialState, action ) {
 
 	switch( action.type ){
 		case types.JOIN_GAME_FAIL:
-			return Object.assign( {}, { 
+			return Object.assign( {}, {
 				joinError: action.error.error
 			} );
 

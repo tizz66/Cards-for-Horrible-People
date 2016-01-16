@@ -1,11 +1,11 @@
-import React from 'react';  
+import React from 'react';
 
-export function renderDevTools(store) {  
+export function renderDevTools(store) {
   if (__DEV__) {
-    let { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
+    const { DevTools, DebugPanel, LogMonitor } = require('redux-devtools/lib/react');
     return (
-		<DebugPanel top right bottom>
-			<DevTools store={store} monitor={LogMonitor} />
+		<DebugPanel top={ true } right={ true } bottom={ true }>
+			<DevTools store={ store } monitor={ LogMonitor } />
 		</DebugPanel>
     );
   }

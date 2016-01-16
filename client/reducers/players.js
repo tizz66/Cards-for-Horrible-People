@@ -15,13 +15,13 @@ export default function players( state = initialState, action ) {
 			return Object.assign( {}, action.players );
 
 		case types.DECLARE_WINNER:
-			let players = {};
+			const players = {};
 
 			_.forEach( action.scores, (score, playerID) => {
 				players[ playerID ] = {
 					...state[ playerID ],
 					score
-				}
+				};
 			});
 
 			return players;

@@ -1,16 +1,14 @@
 import React from 'react';
 import './Player.less';
 
-let Player = React.createClass({
+const Player = React.createClass({
 
 	render: function () {
 		const { player, subText, showScores } = this.props;
 
 		return (
 			<div className='Player'>
-				<span className='Player-avatar' style={{
-					background: `#${player.color}`
-				}}>
+				<span className='Player-avatar' style={ {background: `#${player.color}`} }>
 					{ player.avatarText }
 				</span>
 				<div className='Player-info'>

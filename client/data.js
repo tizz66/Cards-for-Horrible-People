@@ -1,4 +1,4 @@
-let data = {
+const data = {
 
 	gameState: {
 		loading: false,
@@ -37,4 +37,4 @@ let data = {
 			text: "black text"
 		}
 	]
-}
+};

@@ -3,17 +3,17 @@ import { TransitionMotion, spring, presets } from 'react-motion';
 import Player from '../Player/Player';
 import './Loading.less';
 
-let Loading = React.createClass({
+const Loading = React.createClass({
 
 	getDefaultProps: function () {
 		return {
 			players: {}
-		}
+		};
 	},
 
 	getDefaultValue: function () {
 		const { players } = this.props;
-		let configs = {};
+		const configs = {};
 
 		_.forEach( players, (player, playerID) => {
 			configs[ playerID ] = {
@@ -27,7 +27,7 @@ let Loading = React.createClass({
 
 	getEndValue: function () {
 		const { players } = this.props;
-		let configs = {};
+		const configs = {};
 
 		_.forEach( players, (player, playerID) => {
 			configs[ playerID ] = {
@@ -68,7 +68,8 @@ let Loading = React.createClass({
 					defaultStyles={ this.getDefaultValue() }
 					styles={ this.getEndValue() }
 					willEnter={ this.willEnter }
-					willLeave={ this.willLeave }>
+					willLeave={ this.willLeave }
+				>
 						{ configs =>
 							<ul className='Loading-users'>
 								{ Object.keys( configs ).map( playerID => {
@@ -76,11 +77,11 @@ let Loading = React.createClass({
 									const { opacity, y } = config;
 
 									return (
-										<li key={playerID} style={{ opacity: opacity, transform: `translateY(${y}px)` }}>
-											<Player player={ players[ playerID ] } subText="Joined the game" />
+										<li key={ playerID } style={ {opacity: opacity, transform: `translateY(${y}px)`} }>
+											<Player player={ players[ playerID ] } subText='Joined the game' />
 										</li>
-									)
-								})}
+									);
+								}) }
 							</ul>
 						}
 				</TransitionMotion>

@@ -1,0 +1,39 @@
+{
+    "parser": "babel-eslint",
+
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+
+    "globals": {
+        "React": true
+    },
+
+    "ecmaFeatures": {
+        "jsx": true,
+        "modules": true,
+        "blockBindings": true
+    },
+
+    "plugins": [
+        "react"
+    ],
+
+    "rules": {
+        "react/jsx-boolean-value": [ 1, "always" ],
+        "react/jsx-closing-bracket-location": [ 1, { selfClosing: 'after-props' } ],
+        "react/jsx-curly-spacing": [ 1, "always" ],
+        "react/jsx-pascal-case": 1,
+        "jsx-quotes": [ 1, "prefer-single" ],
+        "react/no-direct-mutation-state": 1,
+        "react/no-multi-comp": 1,
+        "react/no-string-refs": 1,
+        "react/require-extension": [ 1, { "extensions": [".js", ".jsx"] } ],
+        "react/wrap-multilines": 1,
+        "no-var": 1,
+        "prefer-const": 1,
+        semi: [ 2, "always" ]
+    }
+}

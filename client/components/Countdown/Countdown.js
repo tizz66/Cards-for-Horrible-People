@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-let Countdown = React.createClass({
+const Countdown = React.createClass({
 	propTypes: {
 		from: React.PropTypes.number.isRequired,
 		children: React.PropTypes.func.isRequired,
@@ -11,7 +11,7 @@ let Countdown = React.createClass({
 	getInitialState: function () {
 		return {
 			count: this.props.from
-		}
+		};
 	},
 
 	getDefaultProps: function () {

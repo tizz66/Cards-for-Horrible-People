@@ -5,7 +5,7 @@ import DraggableCard from '../DraggableCard/DraggableCard';
 import classNames from 'classnames';
 import './Hand.less';
 
-let Hand = React.createClass({
+const Hand = React.createClass({
 
 	getDefaultProps: function () {
 		return {
@@ -19,7 +19,7 @@ let Hand = React.createClass({
 
 	getDefaultValue: function () {
 		const { cards } = this.props;
-		let configs = {};
+		const configs = {};
 
 		cards.forEach( (card, idx) => {
 			configs[ `${idx}_${card.id}` ] = {
@@ -34,7 +34,7 @@ let Hand = React.createClass({
 
 	getEndValue: function () {
 		const { cards } = this.props;
-		let configs = {};
+		const configs = {};
 
 		cards.forEach( (card, idx) => {
 			configs[ `${idx}_${card.id}` ] = {
@@ -70,12 +70,13 @@ let Hand = React.createClass({
 		};
 
 		return (
-			<div className={ classNames( classes ) } style={{ opacity: this.props.style.opacity, transform: `translateY(${this.props.style.y}px)` }}>
+			<div className={ classNames( classes ) } style={ {opacity: this.props.style.opacity, transform: `translateY(${this.props.style.y}px)`} }>
 				<TransitionMotion
 					defaultStyles={ this.getDefaultValue() }
 					styles={ this.getEndValue() }
 					willLeave={ this.willLeave }
-					willEnter={ this.willEnter } >
+					willEnter={ this.willEnter }
+				>
 					{ configs =>
 						<ul>
 							{ Object.keys( configs ).map( tmpID => {
@@ -83,18 +84,19 @@ let Hand = React.createClass({
 								const { card, opacity, y } = config;
 
 								return (
-									<li key={ card.id } style={{
+									<li key={ card.id } style={ {
 											opacity,
 										 	transform: `translateY(${y}%)`
-										}}>
+										} }
+									>
 										<DraggableCard
 											card={ card }
 											canDrag={ canDrag && !card.new }
 											flipped={ allFlipped || card.new }
-											onClick={ card.new ? () => { handActions.markCardSeen( card.id ) } : null } />
+											onClick={ card.new ? () => { handActions.markCardSeen( card.id ); } : null } />
 									</li>
 								);
-							})}
+							}) }
 						</ul>
 					}
 				</TransitionMotion>

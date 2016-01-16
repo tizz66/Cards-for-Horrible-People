@@ -8,7 +8,7 @@ import WinnerBoard from './WinnerBoard';
 import ScoreBoard from './ScoreBoard';
 import './Board.less';
 
-let Board = React.createClass({
+const Board = React.createClass({
 
 	getBoardToDisplay: function () {
 		const { roundState, gameState } = this.props;
@@ -31,7 +31,7 @@ let Board = React.createClass({
 			<div>
 				{ this.getBoardToDisplay() }
 			</div>
-		)
+		);
 	}
 });
 

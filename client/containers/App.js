@@ -10,21 +10,21 @@ import Launch from './Launch';
 
 const store = configureStore();
 
-var App = React.createClass({
+const App = React.createClass({
 	render: function () {
 		return (
 			<div>
-				<Provider store={store}>
+				<Provider store={ store }>
 					<Router>
-						<Redirect from="/" to="/launch" />
-						<Route path="/launch" component={Launch} />
-						<Route path="/game" component={Game} />
+						<Redirect from='/' to='/launch' />
+						<Route path='/launch' component={ Launch } />
+						<Route path='/game' component={ Game } />
 					</Router>
 				</Provider>
 
-				{renderDevTools(store)}
+				{ renderDevTools(store) }
 			</div>
-		)
+		);
 	}
 });
 

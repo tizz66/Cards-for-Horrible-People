@@ -1,7 +1,7 @@
 export const receiverTarget = {
 	drop( props, monitor ) {
 		const { dispatch, roundActions } = props;
-		let item = monitor.getItem();
+		const item = monitor.getItem();
 
 		props.afterDrop(item.cardID, item.cardText);
 	}

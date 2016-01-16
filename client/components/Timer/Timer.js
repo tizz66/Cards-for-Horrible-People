@@ -1,14 +1,14 @@
 import React from 'react';
 import './Timer.less';
 
-let Timer = React.createClass({
+const Timer = React.createClass({
 
 	getStyle: function () {
 		return {
 			strokeDasharray: 440,
 			transition: 'all 1s linear',
 			strokeDashoffset: 440 - ( this.props.count * ( 440 / this.props.start ) )
-		}
+		};
 	},
 
 	render: function () {
@@ -21,7 +21,8 @@ let Timer = React.createClass({
 					width='160'
 					height='160'
 					xmlns='http://www.w3.org/2000/svg'
-					style={{ transform: 'rotate(-90deg)' }}>
+					style={ {transform: 'rotate(-90deg)'} }
+				>
 						<g>
 							<circle
 								r='69.85699'

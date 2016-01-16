@@ -4,7 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 import './Card.less';
 
-let Card = React.createClass({
+const Card = React.createClass({
 	render: function () {
 
 		const classes = {
@@ -17,16 +17,14 @@ let Card = React.createClass({
 		};
 
 		return (
-			<Motion defaultStyle={{ y: ( this.props.flipped ? 180 : 0 ) }} style={{ y: ( this.props.flipped ? 180 : 0 ) }}>
+			<Motion defaultStyle={ {y: ( this.props.flipped ? 180 : 0 )} } style={ {y: ( this.props.flipped ? 180 : 0 )} }>
 				{ style =>
-					<div className={ classNames( classes ) } onClick={ this.props.onClick || null } style={{
-						transform: `rotateY(${style.y}deg)`
-					}}>
+					<div className={ classNames( classes ) } onClick={ this.props.onClick || null } style={ {transform: `rotateY(${style.y}deg)`} }>
 						<div className='Card-back'>
 							<p>Cards for horrible people</p>
 						</div>
 						<div className='Card-front'>
-							<p>{this.props.card.text} {this.props.card.hidden ? 'HIDDEN' : null}</p>
+							<p>{ this.props.card.text } { this.props.card.hidden ? 'HIDDEN' : null }</p>
 						</div>
 					</div>
 				}

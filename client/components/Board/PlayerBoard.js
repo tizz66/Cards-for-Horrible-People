@@ -8,7 +8,7 @@ import Countdown from '../Countdown/Countdown';
 import Timer from '../Timer/Timer';
 import * as RoundStates from '../../constants/RoundStates';
 
-let PlayerBoard = React.createClass({
+const PlayerBoard = React.createClass({
 
 	render: function () {
 		const { roundState, roundActions, gameState, socketHandlers, hand, handActions } = this.props;
@@ -40,10 +40,10 @@ let PlayerBoard = React.createClass({
 								{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> : null }
 							</div>
 							<div>
-								<Countdown from={60} onEnd={ () => alert("Time's up!") } active={ true }>
+								<Countdown from={ 60 } onEnd={ () => alert("Time's up!") } active={ true }>
 									{ count =>
 										<div>
-											<Timer count={ count } start={60} />
+											<Timer count={ count } start={ 60 } />
 											<PlayerReceiver roundState={ roundState } roundActions={ roundActions } afterDrop={ socketHandlers.playCard } />
 										</div>
 									}
@@ -52,11 +52,11 @@ let PlayerBoard = React.createClass({
 						</div>
 					}
 					{ roundState.status >= RoundStates.QUESTION_FLIPPED &&
-						<Hand cards={hand} canDrag={ _.isUndefined( roundState.played ) } playCard={ roundActions.playCard } handActions={ handActions } />
+						<Hand cards={ hand } canDrag={ _.isUndefined( roundState.played ) } playCard={ roundActions.playCard } handActions={ handActions } />
 					}
 				</div>
 			</div>
-		)
+		);
 	}
 });
 

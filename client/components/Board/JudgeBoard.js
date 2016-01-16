@@ -7,7 +7,7 @@ import Card from '../Card/Card';
 import JudgeReceiver from '../Receiver/JudgeReceiver';
 import * as RoundStates from '../../constants/RoundStates';
 
-let JudgeBoard = React.createClass({
+const JudgeBoard = React.createClass({
 
 	getPanelDefault: function () {
 		return {
@@ -60,7 +60,7 @@ let JudgeBoard = React.createClass({
 							{ !_.isUndefined( roundState.question ) &&
 								<Motion defaultStyle={ this.getQuestionStyle() } style={ this.getQuestionStyle() }>
 									{ cardStyle =>
-										<div style={{ transform: `scale(${cardStyle.scale}) translateY(${cardStyle.y}px)`}}>
+										<div style={ {transform: `scale(${cardStyle.scale}) translateY(${cardStyle.y}px)`} }>
 											<Card
 												card={ Object.assign( roundState.question, { type: 'black' } ) }
 												flipped={ roundState.status == RoundStates.FLIP_CARD }
@@ -70,18 +70,18 @@ let JudgeBoard = React.createClass({
 								</Motion>
 							}
 							{ roundState.status >= RoundStates.CHOOSING_ANSWER &&
-								<div style={{ marginLeft: `${style.margin}px` }}>
+								<div style={ {marginLeft: `${style.margin}px`} }>
 									<JudgeReceiver
-										roundState={roundState}
-										roundActions={roundActions}
-										afterDrop={socketHandlers.chooseWinner} />
+										roundState={ roundState }
+										roundActions={ roundActions }
+										afterDrop={ socketHandlers.chooseWinner } />
 								</div>
 							}
 						</div>
 					}
 				</Motion>
 				{ roundState.status >= RoundStates.RECEIVING_ANSWERS &&
-					<Motion defaultStyle={{ y: 270, opacity: 0 }} style={{ y: spring(0), opacity: spring(1) }}>
+					<Motion defaultStyle={ {y: 270, opacity: 0} } style={ {y: spring(0), opacity: spring(1)} }>
 						{ style =>
 							<Hand
 								cards={ roundState.received }
@@ -92,7 +92,7 @@ let JudgeBoard = React.createClass({
 					</Motion>
 				}
 			</div>
-		)
+		);
 	}
 });
 

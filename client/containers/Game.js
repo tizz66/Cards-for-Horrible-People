@@ -14,14 +14,14 @@ import Loading from '../components/Loading/Loading';
 import Board from '../components/Board/Board';
 import './Game.less';
 
-let mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
 	gameState: state.gameState,
 	roundState: state.roundState,
 	hand: state.hand,
 	players: state.players
 });
 
-let Game = React.createClass({
+const Game = React.createClass({
 
 	flipQuestion: function () {
 		const { roundState, dispatch } = this.props;
@@ -113,7 +113,7 @@ let Game = React.createClass({
 		const handActions = bindActionCreators(HandActions, dispatch);
 
 		this.socket = io().connect('http://localhost:3002/' + gameState.gameKey + '/');
-		let socketHandlers = {
+		const socketHandlers = {
 			playCard: this.playCard,
 			chooseWinner: this.chooseWinner,
 			completeRound: this.completeRound,
@@ -122,28 +122,33 @@ let Game = React.createClass({
 
 		return (
 			<div>
-				<Toolbar gameState={gameState} gameStateActions={GameStateActions} roundState={roundState} roundActions={roundActions} players={players} />
+				<Toolbar
+					gameState={ gameState }
+					gameStateActions={ GameStateActions }
+					roundState={ roundState }
+					roundActions={ roundActions }
+					players={ players }	/>
 				<div className='Game'>
 					{ !gameState.started ?
 						<Loading
-							gameState={gameState}
-							gameStateActions={GameStateActions}
-							socket={this.socket}
-							players={players} />
+							gameState={ gameState }
+							gameStateActions={ GameStateActions }
+							socket={ this.socket }
+							players={ players } />
 						:
 						<Board
-							gameState={gameState}
-							gameStateActions={GameStateActions}
-							hand={hand}
-							handActions={handActions}
-							roundState={roundState}
-							roundActions={roundActions}
-							players={players}
-							socketHandlers={socketHandlers} />
+							gameState={ gameState }
+							gameStateActions={ GameStateActions }
+							hand={ hand }
+							handActions={ handActions }
+							roundState={ roundState }
+							roundActions={ roundActions }
+							players={ players }
+							socketHandlers={ socketHandlers } />
 					}
 				</div>
 			</div>
-		)
+		);
 	}
 });
 

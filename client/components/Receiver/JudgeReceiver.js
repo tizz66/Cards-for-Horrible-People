@@ -6,20 +6,18 @@ import { collect, receiverTarget } from './dropTarget.js';
 import classNames from 'classnames';
 import './Receiver.less';
 
-
-
-let JudgeReceiver = React.createClass({
+const JudgeReceiver = React.createClass({
 	render: function () {
 		const { connectDropTarget, isOver, roundState } = this.props;
 
-		let classes = {
+		const classes = {
 			'Receiver': true,
 			'Receiver-showingCard': roundState.winner
 		};
 
 		return connectDropTarget(
 			<div className={ classNames(classes) }>
-				{roundState.winner ? <Card card={{ id: roundState.winner.cardID, type: 'white', text: roundState.winner.cardText }} /> : null}
+				{ roundState.winner ? <Card card={ {id: roundState.winner.cardID, type: 'white', text: roundState.winner.cardText} } /> : null }
 			</div>
 		);
 	}
