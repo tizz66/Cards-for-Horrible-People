@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import * as GameStateActions from '../actions/GameStateActions';
+import LoadingThrobber from '../components/Loading/LoadingThrobber';
 import './Launch.less';
 
 const mapStateToProps = (state) => ({
@@ -54,7 +55,7 @@ const Launch = React.createClass({
 
 		return (
 			<div>
-				<h1>Cards for Offensive People.</h1>
+				<h1>Cards for Horrible People</h1>
 				<div className='Launch'>
 					<div className={ 'Launch-panel' + ( gameState.loading ? ' Launch-panel-isLoading' : '' ) }>
 						<h2><span>Join</span> an existing game</h2>

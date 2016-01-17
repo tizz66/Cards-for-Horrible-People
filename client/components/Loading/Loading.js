@@ -61,6 +61,7 @@ const Loading = React.createClass({
 
 	render: function () {
 		const { gameState, players } = this.props;
+		const disabled = _.size( players ) < 3 ? true : false;
 
 		return (
 			<div className='Loading'>
@@ -85,12 +86,12 @@ const Loading = React.createClass({
 							</ul>
 						}
 				</TransitionMotion>
-				<span className='Loading-throbber'></span>
+				<LoadingThrobber message="Waiting for other players" />
 				<h3>Game Key</h3>
 				<span className='Loading-gameKey'>{ gameState.gameKey }</span>
 				<br /><br />
 				{ gameState.owner == gameState.playerID &&
-					<a href='#' className='btn btn-primary' onClick={ this.startGame }>Start game</a>
+					<button className='btn btn-primary' disabled={ disabled } onClick={ this.startGame }>Start game</button>
 				}
 			</div>
 		);
