@@ -4,16 +4,47 @@
 	text-align: center;
 
 	h3 {
-		text-transform: uppercase;
-		font-size: 14px;
-		opacity: 0.5;
-		color: #fff;
+		font-size: 22px;
+	    font-weight: 300;
+	    margin-bottom: 20px;
+	    color: #fff;
 	}
 
 	&-gameKey {
-		font-family: 'monaco', monospace;
-		font-size: 40px;
-		color: #fff;
+		width: 280px;
+		display: flex;
+		justify-content: space-between;
+		margin: 0 auto;
+
+		> span {
+			display: block;
+			background: #fff;
+			color: #000;
+			width: 40px;
+			height: 52px;
+			line-height: 50px;
+			border-radius: 4px;
+			font-size: 28px;
+			font-weight: 300;
+		}
+	}
+
+	&-submit {
+		width: 280px;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		margin-left: -140px;
+	}
+
+	&-help {
+		color: #999;
+		width: 280px;
+		margin: 30px auto 0;
+	}
+
+	.LoadingThrobber {
+		margin: 0 auto;
 	}
 
 	&-users {

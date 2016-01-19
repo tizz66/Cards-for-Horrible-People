@@ -122,12 +122,14 @@ const Game = React.createClass({
 
 		return (
 			<div>
-				<Toolbar
-					gameState={ gameState }
-					gameStateActions={ GameStateActions }
-					roundState={ roundState }
-					roundActions={ roundActions }
-					players={ players }	/>
+				{ gameState.started &&
+					<Toolbar
+						gameState={ gameState }
+						gameStateActions={ GameStateActions }
+						roundState={ roundState }
+						roundActions={ roundActions }
+						players={ players }	/>
+				}
 				<div className='Game'>
 					{ !gameState.started ?
 						<Loading

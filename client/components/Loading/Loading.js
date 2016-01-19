@@ -1,6 +1,7 @@
 import React from 'react';
 import { TransitionMotion, spring, presets } from 'react-motion';
 import Player from '../Player/Player';
+import LoadingThrobber from './LoadingThrobber';
 import './Loading.less';
 
 const Loading = React.createClass({
@@ -86,12 +87,19 @@ const Loading = React.createClass({
 							</ul>
 						}
 				</TransitionMotion>
-				<LoadingThrobber message="Waiting for other players" />
-				<h3>Game Key</h3>
-				<span className='Loading-gameKey'>{ gameState.gameKey }</span>
-				<br /><br />
+				<h3>Your gamekey</h3>
+				<span className='Loading-gameKey'>
+					{ gameState.gameKey.split('').map( (char) => {
+						return <span>{ char }</span>;
+					}) }
+				</span>
+
+				<p className='Loading-help'>
+					Share this gamekey with friends to invite them to your game.
+				</p>
+
 				{ gameState.owner == gameState.playerID &&
-					<button className='btn btn-primary' disabled={ disabled } onClick={ this.startGame }>Start game</button>
+					<button className='App-button Loading-submit' disabled={ disabled } onClick={ this.startGame }>Start game</button>
 				}
 			</div>
 		);

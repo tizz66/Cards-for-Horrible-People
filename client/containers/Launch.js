@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import * as GameStateActions from '../actions/GameStateActions';
-import LoadingThrobber from '../components/Loading/LoadingThrobber';
 import './Launch.less';
 
 const mapStateToProps = (state) => ({
@@ -50,12 +49,19 @@ const Launch = React.createClass({
 		});
 	},
 
+	getButtonText: function () {
+		const { gameState } = this.props;
+		const playerCount = _.size( gameState.players );
+
+		return ( playerCount > 1 ) ? `Start game with ${playerCount} players` : 'Start game';
+	},
+
 	render: function () {
 		const { gameState, dispatch } = this.props;
 
 		return (
 			<div>
-				<h1>Cards for Horrible People</h1>
+				<h1>Cards for Offensive People.</h1>
 				<div className='Launch'>
 					<div className={ 'Launch-panel' + ( gameState.loading ? ' Launch-panel-isLoading' : '' ) }>
 						<h2><span>Join</span> an existing game</h2>
@@ -75,7 +81,7 @@ const Launch = React.createClass({
 						<div className='form-group'>
 							<input type='text' placeholder='Your nickname' className='form-control input-lg' ref={ (ref) => { this._nick1 = ref; } } />
 						</div>
-						<button className='btn btn-dark btn-block' onClick={ this.newGame }>Start Game</button>
+						<button className='btn btn-dark btn-block' onClick={ this.newGame }>{ this.getButtonText() }</button>
 					</div>
 				</div>
 			</div>
