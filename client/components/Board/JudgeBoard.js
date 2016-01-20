@@ -2,40 +2,44 @@ import React from 'react';
 import { Motion, spring } from 'react-motion';
 import _ from 'lodash';
 import classNames from 'classnames';
-import Hand from '../Hand/Hand';
-import Card from '../Card/Card';
-import JudgeReceiver from '../Receiver/JudgeReceiver';
+import { Hand } from '../Hand/Hand';
+import { Card } from '../Card/Card';
+import { JudgeReceiver } from '../Receiver/JudgeReceiver';
 import * as RoundStates from '../../constants/RoundStates';
 
-const JudgeBoard = React.createClass({
+export class JudgeBoard extends React.Component {
 
-	getPanelDefault: function () {
+	constructor (props) {
+		super(props);
+	}
+
+	getPanelDefault () {
 		return {
 			margin: this.props.roundState.status >= RoundStates.CHOOSING_ANSWER ? 200 : 0
 		};
-	},
+	}
 
-	getPanelStyle: function () {
+	getPanelStyle () {
 		return {
 			margin: spring( this.props.roundState.status >= RoundStates.CHOOSING_ANSWER ? 200 : 0 )
 		};
-	},
+	}
 
-	getQuestionDefault: function () {
+	getQuestionDefault () {
 		return {
 			scale: 1.6,
 			y: 50
 		};
-	},
+	}
 
-	getQuestionStyle: function () {
+	getQuestionStyle () {
 		return {
 			scale: ( this.props.roundState.status <= RoundStates.QUESTION_FLIPPED ) ? spring(1.6) : spring(1),
 			y: ( this.props.roundState.status <= RoundStates.QUESTION_FLIPPED ) ? spring(50) : spring(0)
 		};
-	},
+	}
 
-	render: function () {
+	render () {
 		const { roundState, roundActions, gameState, socketHandlers, hand } = this.props;
 		const panelClasses = {
 			'Board-panel': true,
@@ -94,6 +98,4 @@ const JudgeBoard = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default JudgeBoard;
+}

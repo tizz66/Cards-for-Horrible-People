@@ -1,9 +1,13 @@
 import React from 'react';
 import './Loading.less';
 
-const LoadingThrobber = React.createClass({
+export class LoadingThrobber extends React.Component {
 
-	render: function () {
+	constructor (props) {
+		super(props);
+	}
+
+	render () {
 		return (
 			<div className='LoadingThrobber'>
 				<span></span>
@@ -17,6 +21,4 @@ const LoadingThrobber = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default LoadingThrobber;
+}

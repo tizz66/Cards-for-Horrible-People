@@ -8,7 +8,7 @@ import session from 'express-session';
 import iosession from 'socket.io-express-session';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import * as config from './webpack.config'; 
+import * as config from './webpack.config';
 //import gameRoutes from './server/routes';
 import gameManager from './server/routes';
 

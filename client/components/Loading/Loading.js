@@ -1,18 +1,20 @@
 import React from 'react';
 import { TransitionMotion, spring, presets } from 'react-motion';
-import Player from '../Player/Player';
-import LoadingThrobber from './LoadingThrobber';
+import { Player } from '../Player/Player';
+import { LoadingThrobber } from './LoadingThrobber';
 import './Loading.less';
 
-const Loading = React.createClass({
+export class Loading extends React.Component {
 
-	getDefaultProps: function () {
-		return {
-			players: {}
-		};
-	},
+	constructor (props) {
+		super(props);
+	}
 
-	getDefaultValue: function () {
+	static defaultProps = {
+		players: {}
+	};
+
+	getDefaultValue () {
 		const { players } = this.props;
 		const configs = {};
 
@@ -24,9 +26,9 @@ const Loading = React.createClass({
 		});
 
 		return configs;
-	},
+	}
 
-	getEndValue: function () {
+	getEndValue () {
 		const { players } = this.props;
 		const configs = {};
 
@@ -38,29 +40,29 @@ const Loading = React.createClass({
 		});
 
 		return configs;
-	},
+	}
 
-	willLeave: function (player, styleThatJustLeft) {
+	willLeave (player, styleThatJustLeft) {
 		return {
 			opacity: spring(0),
 			y: spring(-100),
 		};
-	},
+	}
 
-	willEnter: function (player) {
+	willEnter (player) {
 		return {
 			opacity: spring(1),
 			y: spring(0)
 		};
-	},
+	}
 
-	startGame: function (e) {
+	startGame = (e) => {
 		e.preventDefault();
 
 		this.props.socket.emit('start-game');
-	},
+	};
 
-	render: function () {
+	render () {
 		const { gameState, players } = this.props;
 		const disabled = _.size( players ) < 3 ? true : false;
 
@@ -104,6 +106,4 @@ const Loading = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default Loading;
+}

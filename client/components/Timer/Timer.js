@@ -1,17 +1,21 @@
 import React from 'react';
 import './Timer.less';
 
-const Timer = React.createClass({
+export class Timer extends React.Component {
 
-	getStyle: function () {
+	constructor (props) {
+		super(props);
+	}
+	
+	getStyle () {
 		return {
 			strokeDasharray: 440,
 			transition: 'all 1s linear',
 			strokeDashoffset: 440 - ( this.props.count * ( 440 / this.props.start ) )
 		};
-	},
+	}
 
-	render: function () {
+	render () {
 		const { count } = this.props;
 
 		return (
@@ -37,6 +41,4 @@ const Timer = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default Timer;
+}

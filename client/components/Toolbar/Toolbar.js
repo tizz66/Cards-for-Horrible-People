@@ -3,9 +3,13 @@ import _ from 'lodash';
 import * as RoundStates from '../../constants/RoundStates';
 import './Toolbar.less';
 
-const Toolbar = React.createClass({
+export class Toolbar extends React.Component {
 
-	getToolbarText: function () {
+	constructor (props) {
+		super(props);
+	}
+	
+	getToolbarText () {
 		const { gameState, roundState, players, hand } = this.props;
 
 		if( _.isUndefined( roundState.judgeID ) ){
@@ -30,9 +34,9 @@ const Toolbar = React.createClass({
 		} else {
 			return players[ roundState.judgeID ].nickname + " is judging this round";
 		}
-	},
+	}
 
-	render: function () {
+	render () {
 		const { gameState, roundState, players, hand } = this.props;
 		const text = this.getToolbarText();
 
@@ -42,6 +46,4 @@ const Toolbar = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default Toolbar;
+}

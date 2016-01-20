@@ -9,15 +9,17 @@ const mapStateToProps = (state) => ({
 	errors: state.errors
 });
 
-const Launch = React.createClass({
+@connect( mapStateToProps )
+export class Launch extends React.Component {
 
-	getInitialState: function () {
-		return {
+	constructor (props) {
+		super(props);
+		this.state = {
 			joinError: false
 		};
-	},
+	}
 
-	joinGame: function (e) {
+	joinGame = (e) => {
 		const { history, dispatch } = this.props;
 
 		e.preventDefault();
@@ -32,9 +34,9 @@ const Launch = React.createClass({
 				history.pushState(null, '/game');
 			}
 		});
-	},
+	};
 
-	newGame: function (e) {
+	newGame = (e) => {
 		const { history, dispatch } = this.props;
 
 		e.preventDefault();
@@ -47,16 +49,16 @@ const Launch = React.createClass({
 				history.pushState(null, '/game');
 			}
 		});
-	},
+	};
 
-	getButtonText: function () {
+	getButtonText () {
 		const { gameState } = this.props;
 		const playerCount = _.size( gameState.players );
 
 		return ( playerCount > 1 ) ? `Start game with ${playerCount} players` : 'Start game';
-	},
+	}
 
-	render: function () {
+	render () {
 		const { gameState, dispatch } = this.props;
 
 		return (
@@ -87,6 +89,4 @@ const Launch = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default connect( mapStateToProps )( Launch );
+}

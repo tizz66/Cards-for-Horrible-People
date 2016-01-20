@@ -1,16 +1,20 @@
 import React from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
-import Hand from '../Hand/Hand';
-import Card from '../Card/Card';
-import PlayerReceiver from '../Receiver/PlayerReceiver';
-import Countdown from '../Countdown/Countdown';
-import Timer from '../Timer/Timer';
+import { Hand } from '../Hand/Hand';
+import { Card } from '../Card/Card';
+import { PlayerReceiver } from '../Receiver/PlayerReceiver';
+import { Countdown } from '../Countdown/Countdown';
+import { Timer } from '../Timer/Timer';
 import * as RoundStates from '../../constants/RoundStates';
 
-const PlayerBoard = React.createClass({
+export class PlayerBoard extends React.Component {
 
-	render: function () {
+	constructor (props) {
+		super(props);
+	}
+
+	render () {
 		const { roundState, roundActions, gameState, socketHandlers, hand, handActions } = this.props;
 
 		// If a card has been played, then mark it as hidden
@@ -58,6 +62,4 @@ const PlayerBoard = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default PlayerBoard;
+}

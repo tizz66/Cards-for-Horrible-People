@@ -2,15 +2,19 @@ import React from 'react';
 import classNames from 'classnames';
 import _ from 'lodash';
 import * as RoundStates from '../../constants/RoundStates';
-import JudgeBoard from './JudgeBoard';
-import PlayerBoard from './PlayerBoard';
-import WinnerBoard from './WinnerBoard';
-import ScoreBoard from './ScoreBoard';
+import { JudgeBoard } from './JudgeBoard';
+import { PlayerBoard } from './PlayerBoard';
+import { WinnerBoard } from './WinnerBoard';
+import { ScoreBoard } from './ScoreBoard';
 import './Board.less';
 
-const Board = React.createClass({
+export class Board extends React.Component {
 
-	getBoardToDisplay: function () {
+	constructor (props) {
+		super(props);
+	}
+
+	getBoardToDisplay () {
 		const { roundState, gameState } = this.props;
 
 		if( roundState.status >= RoundStates.SHOWING_SCORES ){
@@ -22,9 +26,9 @@ const Board = React.createClass({
 		} else if( !_.isUndefined( roundState.judgeID ) ){
 			return ( <PlayerBoard {...this.props} /> );
 		}
-	},
+	}
 
-	render: function () {
+	render () {
 		const { roundState, gameState } = this.props;
 
 		return (
@@ -33,6 +37,4 @@ const Board = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default Board;
+}

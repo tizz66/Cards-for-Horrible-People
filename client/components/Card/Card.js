@@ -4,9 +4,13 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 import './Card.less';
 
-const Card = React.createClass({
-	render: function () {
+export class Card extends React.Component {
 
+	constructor (props) {
+		super(props);
+	}
+	
+	render () {
 		const classes = {
 			'Card': true,
 			['Card-' + this.props.card.type]: true,
@@ -31,6 +35,4 @@ const Card = React.createClass({
 			</Motion>
 		);
 	}
-});
-
-export default Card;
+}

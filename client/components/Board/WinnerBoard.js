@@ -2,12 +2,16 @@ import React from 'react';
 import { Motion, spring } from 'react-motion';
 import _ from 'lodash';
 import classNames from 'classnames';
-import Card from '../Card/Card';
+import { Card } from '../Card/Card';
 import * as RoundStates from '../../constants/RoundStates';
 
-const WinnerBoard = React.createClass({
+export class WinnerBoard extends React.Component {
 
-	render: function () {
+	constructor (props) {
+		super(props);
+	}
+
+	render () {
 		const { roundState, roundActions, gameState, socketHandlers, hand, handActions, players } = this.props;
 		const infoClasses = {
 			'Board-winningUser': true,
@@ -40,6 +44,4 @@ const WinnerBoard = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default WinnerBoard;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ItemTypes } from '../../constants/ItemTypes';
 import { DragSource } from 'react-dnd';
-import Card from '../Card/Card';
+import { Card } from '../Card/Card';
 
 const cardSource = {
 	canDrag(props) {
@@ -16,15 +16,16 @@ const cardSource = {
 	}
 };
 
-function collect (connect, monitor) {
-	return {
-		connectDragSource: connect.dragSource(),
-    	isDragging: monitor.isDragging()
-	};
-}
+@DragSource( ItemTypes.CARD, cardSource, (connect, monitor) => ({
+	connectDragSource: connect.dragSource(),
+	isDragging: monitor.isDragging()
+}) )
+export class DraggableCard extends React.Component {
+	constructor (props) {
+		super(props);
+	}
 
-const DraggableCard = React.createClass({
-	render: function () {
+	render () {
 		const { connectDragSource, ...others } = this.props;
 
 		return connectDragSource(
@@ -33,6 +34,4 @@ const DraggableCard = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default DragSource( ItemTypes.CARD, cardSource, collect )(DraggableCard);
+}

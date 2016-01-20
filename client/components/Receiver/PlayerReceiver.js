@@ -1,14 +1,19 @@
 import React from 'react';
 import { ItemTypes } from '../../constants/ItemTypes';
 import { DropTarget } from 'react-dnd';
-import Card from '../Card/Card';
+import { Card } from '../Card/Card';
 import { collect, receiverTarget } from './dropTarget.js';
 import classNames from 'classnames';
 import './Receiver.less';
 
-const PlayerReceiver = React.createClass({
+@DropTarget( ItemTypes.CARD, receiverTarget, collect )
+export class PlayerReceiver extends React.Component {
 
-	render: function () {
+	constructor (props) {
+		super(props);
+	}
+
+	render () {
 		const { connectDropTarget, isOver, roundState } = this.props;
 		const classes = {
 			'Receiver': true,
@@ -21,6 +26,4 @@ const PlayerReceiver = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default DropTarget( ItemTypes.CARD, receiverTarget, collect )( PlayerReceiver );
+}

@@ -8,8 +8,8 @@ var devFlagPlugin = new webpack.DefinePlugin({
 module.exports = {
 	devtool: 'eval',
 	entry: [
-      'webpack-hot-middleware/client',
-      './client/index'
+        'webpack-hot-middleware/client',
+        './client/index'
     ],
     output: {
         path: path.join(__dirname, 'dist'),
@@ -23,10 +23,20 @@ module.exports = {
     ],
 	module: {
 		loaders: [
-			{
+            {
 			  test: /\.js$/,
-			  loaders: ['react-hot', 'babel'],
+			  loader: 'react-hot',
 			  include: path.join(__dirname, 'client')
+			},
+            {
+			  test: /\.js$/,
+			  loader: 'babel-loader',
+              exclude: /node_modules/,
+              query: {
+                cacheDirectory: true,
+                plugins: ['transform-decorators-legacy'],
+                presets: ['es2015', 'react', 'stage-0']
+              }
 			},
 			{
 				test: /\.less$/,

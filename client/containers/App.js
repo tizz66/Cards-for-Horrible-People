@@ -5,13 +5,18 @@ import { renderDevTools } from '../utils/devTools';
 import configureStore from '../store/configureStore';
 import * as reducers from '../reducers';
 //--
-import Game from './Game';
-import Launch from './Launch';
+import { Game } from './Game';
+import { Launch } from './Launch';
 
 const store = configureStore();
 
-const App = React.createClass({
-	render: function () {
+export class App extends React.Component {
+
+	constructor (props) {
+		super(props);
+	}
+
+	render () {
 		return (
 			<div>
 				<Provider store={ store }>
@@ -26,6 +31,4 @@ const App = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default App;
+}

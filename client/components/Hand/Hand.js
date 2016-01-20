@@ -1,13 +1,17 @@
 import React from 'react';
 import { TransitionMotion, spring } from 'react-motion';
-import Card from '../Card/Card';
-import DraggableCard from '../DraggableCard/DraggableCard';
+import { Card } from '../Card/Card';
+import { DraggableCard } from '../DraggableCard/DraggableCard';
 import classNames from 'classnames';
 import './Hand.less';
 
-const Hand = React.createClass({
+export class Hand extends React.Component {
 
-	getDefaultProps: function () {
+	constructor (props) {
+		super(props);
+	}
+
+	getDefaultProps () {
 		return {
 			cards: [],
 			style: {
@@ -15,9 +19,9 @@ const Hand = React.createClass({
 				y: 0
 			}
 		};
-	},
+	}
 
-	getDefaultValue: function () {
+	getDefaultValue () {
 		const { cards } = this.props;
 		const configs = {};
 
@@ -30,9 +34,9 @@ const Hand = React.createClass({
 		});
 
 		return configs;
-	},
+	}
 
-	getEndValue: function () {
+	getEndValue () {
 		const { cards } = this.props;
 		const configs = {};
 
@@ -45,25 +49,25 @@ const Hand = React.createClass({
 		});
 
 		return configs;
-	},
+	}
 
-	willLeave: function (card, styleThatJustLeft) {
+	willLeave (card, styleThatJustLeft) {
 		return {
 			opacity: spring(1),
 			y: spring(0),
 			card: card
 		};
-	},
+	}
 
-	willEnter: function (card) {
+	willEnter (card) {
 		return {
 			opacity: spring(0),
 			y: spring(100),
 			card: card
 		};
-	},
+	}
 
-	render: function () {
+	render () {
 		const { cards, canDrag, allFlipped, handActions } = this.props;
 		const classes = {
 			'Hand': true
@@ -103,6 +107,4 @@ const Hand = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default Hand;
+}

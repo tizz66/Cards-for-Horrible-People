@@ -9,9 +9,9 @@ import * as HandActions from '../actions/HandActions';
 import * as RoundStateActions from '../actions/RoundStateActions';
 import * as RoundStates from '../constants/RoundStates';
 //--
-import Toolbar from '../components/Toolbar/Toolbar';
-import Loading from '../components/Loading/Loading';
-import Board from '../components/Board/Board';
+import { Toolbar } from '../components/Toolbar/Toolbar';
+import { Loading } from '../components/Loading/Loading';
+import { Board } from '../components/Board/Board';
 import './Game.less';
 
 const mapStateToProps = (state) => ({
@@ -21,9 +21,11 @@ const mapStateToProps = (state) => ({
 	players: state.players
 });
 
-const Game = React.createClass({
+@DragDropContext( HTML5Backend )
+@connect( mapStateToProps )
+export class Game extends React.Component {
 
-	flipQuestion: function () {
+	flipQuestion () {
 		const { roundState, dispatch } = this.props;
 		const roundActions = bindActionCreators(RoundStateActions, dispatch);
 
@@ -32,9 +34,9 @@ const Game = React.createClass({
 			roundActions.flipQuestion();
 			this.socket.emit( 'start-round' );
 		}
-	},
+	}
 
-	playCard: function (cardID, cardText) {
+	playCard (cardID, cardText) {
 		const { dispatch } = this.props;
 		const roundActions = bindActionCreators(RoundStateActions, dispatch);
 
@@ -46,9 +48,9 @@ const Game = React.createClass({
 		this.socket.emit( 'play-card', {
 			cardID: cardID
 		});
-	},
+	}
 
-	chooseWinner: function (cardID, cardText) {
+	chooseWinner (cardID, cardText) {
 		const { dispatch } = this.props;
 		const roundActions = bindActionCreators(RoundStateActions, dispatch);
 
@@ -60,13 +62,13 @@ const Game = React.createClass({
 		this.socket.emit( 'choose-winner', {
 			cardID: cardID
 		});
-	},
+	}
 
-	completeRound: function () {
+	completeRound () {
 		this.socket.emit( 'complete-round' );
-	},
+	}
 
-	componentDidMount: function () {
+	componentDidMount () {
 		const { gameState, hand, dispatch } = this.props;
 
 		this.socket.on( 'player-joined', (data) => {
@@ -105,9 +107,9 @@ const Game = React.createClass({
 		this.socket.on( 'winner-chosen', (data) => {
 			dispatch( RoundStateActions.declareWinner(data) );
 		});
-	},
+	}
 
-	render: function () {
+	render () {
 		const { gameState, roundState, players, hand, dispatch } = this.props;
 		const roundActions = bindActionCreators(RoundStateActions, dispatch);
 		const handActions = bindActionCreators(HandActions, dispatch);
@@ -152,6 +154,4 @@ const Game = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default DragDropContext(HTML5Backend)( connect( mapStateToProps )( Game ) );
+}

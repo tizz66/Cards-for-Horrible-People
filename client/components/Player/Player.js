@@ -1,9 +1,13 @@
 import React from 'react';
 import './Player.less';
 
-const Player = React.createClass({
+export class Player extends React.Component {
 
-	render: function () {
+	constructor (props) {
+		super(props);
+	}
+	
+	render () {
 		const { player, subText, showScores } = this.props;
 
 		return (
@@ -25,6 +29,4 @@ const Player = React.createClass({
 			</div>
 		);
 	}
-});
-
-export default Player;
+}
