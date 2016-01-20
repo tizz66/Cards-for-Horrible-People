@@ -62,12 +62,44 @@ export class Loading extends React.Component {
 		this.props.socket.emit('start-game');
 	};
 
+	getButtonText () {
+		const { gameState, players } = this.props;
+		const playerCount = _.size( players );
+
+		return ( playerCount > 1 ) ? `Start game with ${playerCount} players` : 'Waiting for players...';
+	}
+
 	render () {
 		const { gameState, players } = this.props;
-		const disabled = _.size( players ) < 3 ? true : false;
+		const disabled = _.size( players ) < 2 ? true : false;
 
 		return (
 			<div className='Loading'>
+				<div className='Loading-panels'>
+					<div>
+						<h3>Your gamekey</h3>
+						<span className='Loading-gameKey'>
+							{ gameState.gameKey.split('').map( (char) => {
+								return <span>{ char }</span>;
+							}) }
+						</span>
+
+						<div className='Loading-help'>
+							Share this gamekey with friends to invite them to your game.
+						</div>
+					</div>
+
+					<div>
+						<span className='Loading-throbber'></span>
+					</div>
+
+					{ gameState.owner == gameState.playerID &&
+						<div>
+							<button className='App-button Loading-submit' disabled={ disabled } onClick={ this.startGame }>{ this.getButtonText() }</button>
+						</div>
+					}
+				</div>
+
 				<TransitionMotion
 					defaultStyles={ this.getDefaultValue() }
 					styles={ this.getEndValue() }
@@ -80,29 +112,17 @@ export class Loading extends React.Component {
 									const config = configs[ playerID ];
 									const { opacity, y } = config;
 
-									return (
-										<li key={ playerID } style={ {opacity: opacity, transform: `translateY(${y}px)`} }>
-											<Player player={ players[ playerID ] } subText='Joined the game' />
-										</li>
-									);
+									if( playerID !== gameState.playerID ){
+										return (
+											<li key={ playerID } style={ {opacity: opacity, transform: `translateY(${y}px)`} }>
+												<Player player={ players[ playerID ] } subText='Joined the game' />
+											</li>
+										);
+									}
 								}) }
 							</ul>
 						}
 				</TransitionMotion>
-				<h3>Your gamekey</h3>
-				<span className='Loading-gameKey'>
-					{ gameState.gameKey.split('').map( (char) => {
-						return <span>{ char }</span>;
-					}) }
-				</span>
-
-				<p className='Loading-help'>
-					Share this gamekey with friends to invite them to your game.
-				</p>
-
-				{ gameState.owner == gameState.playerID &&
-					<button className='App-button Loading-submit' disabled={ disabled } onClick={ this.startGame }>Start game</button>
-				}
 			</div>
 		);
 	}

@@ -49,7 +49,7 @@ function gameManager (router, io) {
 	router.post('/new', function (req, res) {
 		let gameKey = randomstring.generate({ length: 6, readable: true }).toUpperCase();
 		let game = new Game({ key: gameKey }, io);
-		
+
 		games[ gameKey ] = game;
 
 		let playerID = game.addPlayer( req.body.nickname, true );
@@ -59,9 +59,10 @@ function gameManager (router, io) {
 
 		res.json({
 			gameKey: gameKey,
-			playerID: playerID
+			playerID: playerID,
+			players: game.getPlayers()
 		});
 	});
-} 
+}
 
 export default gameManager;

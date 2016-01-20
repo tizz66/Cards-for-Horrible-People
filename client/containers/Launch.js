@@ -51,13 +51,6 @@ export class Launch extends React.Component {
 		});
 	};
 
-	getButtonText () {
-		const { gameState } = this.props;
-		const playerCount = _.size( gameState.players );
-
-		return ( playerCount > 1 ) ? `Start game with ${playerCount} players` : 'Start game';
-	}
-
 	render () {
 		const { gameState, dispatch } = this.props;
 
@@ -83,7 +76,7 @@ export class Launch extends React.Component {
 						<div className='form-group'>
 							<input type='text' placeholder='Your nickname' className='form-control input-lg' ref={ (ref) => { this._nick1 = ref; } } />
 						</div>
-						<button className='btn btn-dark btn-block' onClick={ this.newGame }>{ this.getButtonText() }</button>
+						<button className='btn btn-dark btn-block' onClick={ this.newGame }>Start Game</button>
 					</div>
 				</div>
 			</div>

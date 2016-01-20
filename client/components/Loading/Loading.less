@@ -2,12 +2,32 @@
 
 .Loading {
 	text-align: center;
+	width: 100vw;
+	height: 100vh;
 
 	h3 {
 		font-size: 22px;
 	    font-weight: 300;
-	    margin-bottom: 20px;
+	    margin: 0 0 20px;
 	    color: #fff;
+	}
+
+	&-panels {
+		width: 100vw;
+		height: 100vh;
+		padding: 30px 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	&-throbber {
+		display: block;
+		width: 90px;
+		height: 90px;
+		background: url( '../../images/ring.svg' );
+		background-repeat: no-repeat;
+		margin: 0 auto;
 	}
 
 	&-gameKey {
@@ -31,10 +51,6 @@
 
 	&-submit {
 		width: 280px;
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		margin-left: -140px;
 	}
 
 	&-help {
