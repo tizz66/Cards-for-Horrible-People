@@ -41,7 +41,7 @@ export class PlayerBoard extends React.Component {
 						:
 						<div className='Board-panel'>
 							<div>
-								{ !_.isUndefined( roundState.question ) ? <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> : null }
+								{ !_.isUndefined( roundState.question ) && <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> }
 							</div>
 							<div>
 								<Countdown from={ 60 } onEnd={ () => alert("Time's up!") } active={ true }>

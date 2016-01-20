@@ -116,10 +116,10 @@ export class Game extends React.Component {
 
 		this.socket = io().connect('http://localhost:3002/' + gameState.gameKey + '/');
 		const socketHandlers = {
-			playCard: this.playCard,
-			chooseWinner: this.chooseWinner,
-			completeRound: this.completeRound,
-			flipQuestion: this.flipQuestion
+			playCard: this.playCard.bind( this ),
+			chooseWinner: this.chooseWinner.bind( this ),
+			completeRound: this.completeRound.bind( this ),
+			flipQuestion: this.flipQuestion.bind( this )
 		};
 
 		return (

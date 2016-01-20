@@ -1,36 +1,35 @@
 import React from 'react';
 import _ from 'lodash';
 
-const Countdown = React.createClass({
-	propTypes: {
+export class Countdown extends React.Component {
+	static propTypes = {
 		from: React.PropTypes.number.isRequired,
 		children: React.PropTypes.func.isRequired,
 		onEnd: React.PropTypes.func
-	},
+	};
 
-	getInitialState: function () {
-		return {
-			count: this.props.from
+	static defaultProps = {
+		active: true
+	};
+
+	constructor (props) {
+		super(props);
+		this.state = {
+			count: props.from
 		};
-	},
+	}
 
-	getDefaultProps: function () {
-		return {
-			active: true
-		};
-	},
+	start () {
+		this.interval = setInterval( this.tick.bind( this ), 1000 );
+	}
 
-	start: function () {
-		this.interval = setInterval( this.tick, 1000 );
-	},
-
-	stop: function () {
+	stop () {
 		if( this.interval ){
 			clearInterval( this.interval );
 		}
-	},
+	}
 
-	tick: function () {
+	tick () {
 		this.setState({
 			count: this.state.count - 1
 		});
@@ -42,19 +41,17 @@ const Countdown = React.createClass({
 				this.props.onEnd();
 			}
 		}
-	},
+	}
 
-	componentDidMount: function () {
+	componentDidMount () {
 		this.start();
-	},
+	}
 
-	componentWillUnmount: function () {
+	componentWillUnmount () {
 		this.stop();
-	},
+	}
 
-	render: function () {
+	render () {
 		return this.props.children( this.state.count );
 	}
-});
-
-export default Countdown;
+}

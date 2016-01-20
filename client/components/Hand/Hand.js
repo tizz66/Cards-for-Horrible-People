@@ -11,15 +11,13 @@ export class Hand extends React.Component {
 		super(props);
 	}
 
-	getDefaultProps () {
-		return {
-			cards: [],
-			style: {
-				opacity: 1,
-				y: 0
-			}
-		};
-	}
+	static defaultProps = {
+		cards: [],
+		style: {
+			opacity: 1,
+			y: 0
+		}
+	};
 
 	getDefaultValue () {
 		const { cards } = this.props;
