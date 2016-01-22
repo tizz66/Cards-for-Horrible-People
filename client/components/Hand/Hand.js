@@ -2,6 +2,7 @@ import React from 'react';
 import { TransitionMotion, spring } from 'react-motion';
 import { Card } from '../Card/Card';
 import { DraggableCard } from '../DraggableCard/DraggableCard';
+import { LoadingThrobber } from '../Loading/LoadingThrobber';
 import classNames from 'classnames';
 import './Hand.less';
 
@@ -16,7 +17,8 @@ export class Hand extends React.Component {
 		style: {
 			opacity: 1,
 			y: 0
-		}
+		},
+		throbber: false
 	};
 
 	getDefaultValue () {
@@ -66,13 +68,16 @@ export class Hand extends React.Component {
 	}
 
 	render () {
-		const { cards, canDrag, allFlipped, handActions } = this.props;
+		const { cards, canDrag, allFlipped, handActions, throbber } = this.props;
 		const classes = {
 			'Hand': true
 		};
 
 		return (
 			<div className={ classNames( classes ) } style={ {opacity: this.props.style.opacity, transform: `translateY(${this.props.style.y}px)`} }>
+				{ !cards.length && throbber &&
+					<LoadingThrobber message={ throbber } />
+				}
 				<TransitionMotion
 					defaultStyles={ this.getDefaultValue() }
 					styles={ this.getEndValue() }

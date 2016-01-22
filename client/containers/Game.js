@@ -50,6 +50,15 @@ export class Game extends React.Component {
 		});
 	}
 
+	outOfTime () {
+		// Pick a random card from the hand
+		const { hand } = this.props;
+		const toPlay = _.sample( hand );
+
+		console.log( "Playing card:", toPlay );
+		this.playCard( toPlay.id, toPlay.text );
+	}
+
 	chooseWinner (cardID, cardText) {
 		const { dispatch } = this.props;
 		const roundActions = bindActionCreators(RoundStateActions, dispatch);
@@ -119,7 +128,8 @@ export class Game extends React.Component {
 			playCard: this.playCard.bind( this ),
 			chooseWinner: this.chooseWinner.bind( this ),
 			completeRound: this.completeRound.bind( this ),
-			flipQuestion: this.flipQuestion.bind( this )
+			flipQuestion: this.flipQuestion.bind( this ),
+			outOfTime: this.outOfTime.bind( this )
 		};
 
 		return (

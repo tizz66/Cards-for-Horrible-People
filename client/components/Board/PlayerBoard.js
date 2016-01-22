@@ -6,6 +6,7 @@ import { Card } from '../Card/Card';
 import { PlayerReceiver } from '../Receiver/PlayerReceiver';
 import { Countdown } from '../Countdown/Countdown';
 import { Timer } from '../Timer/Timer';
+import { LoadingThrobber } from '../Loading/LoadingThrobber';
 import * as RoundStates from '../../constants/RoundStates';
 
 export class PlayerBoard extends React.Component {
@@ -36,7 +37,7 @@ export class PlayerBoard extends React.Component {
 				<div>
 					{ roundState.status <= RoundStates.ROUND_PENDING ?
 						<div className='Board-panel'>
-							<p>Waiting...</p>
+							<LoadingThrobber message='Waiting for question to be dealt...' />
 						</div>
 						:
 						<div className='Board-panel'>
@@ -44,10 +45,10 @@ export class PlayerBoard extends React.Component {
 								{ !_.isUndefined( roundState.question ) && <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> }
 							</div>
 							<div>
-								<Countdown from={ 60 } onEnd={ () => alert("Time's up!") } active={ true }>
+								<Countdown from={ 30 } onEnd={ socketHandlers.outOfTime } active={ true }>
 									{ count =>
 										<div>
-											<Timer count={ count } start={ 60 } />
+											<Timer count={ count } start={ 30 } />
 											<PlayerReceiver roundState={ roundState } roundActions={ roundActions } afterDrop={ socketHandlers.playCard } />
 										</div>
 									}
