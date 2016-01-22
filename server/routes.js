@@ -17,6 +17,13 @@ function gameManager (router, io) {
 
 		let game = games[ req.body.gameKey ];
 
+		// If we're running with the debug flag then we'll brute-force the
+		// game key and username to save our sanity a little
+		if( process.env.DEBUGSERVER ){
+			game = games[ _.first( Object.keys( games ) ) ];
+			req.body.nickname = "TESTUSER";
+		}
+
 		if( _.isUndefined( game ) ){
 			res.status(500).json({
 				error: "GAME_NOT_FOUND"
@@ -31,7 +38,7 @@ function gameManager (router, io) {
 			return;
 		}
 
-		let playerID = game.addPlayer( req.body.nickname );
+		const playerID = game.addPlayer( req.body.nickname );
 
 		req.session.gameKey = req.body.gameKey;
 		req.session.playerID = playerID;
