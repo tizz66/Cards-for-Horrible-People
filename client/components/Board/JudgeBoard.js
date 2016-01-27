@@ -92,7 +92,7 @@ export class JudgeBoard extends React.Component {
 								canDrag={ roundState.status == RoundStates.CHOOSING_ANSWER }
 								allFlipped={ !( roundState.status >= RoundStates.ANSWERS_RECEIVED ) }
 								style={ style }
-								throbber="Waiting for cards..." />
+								throbber='Waiting for cards...' />
 						}
 					</Motion>
 				}
