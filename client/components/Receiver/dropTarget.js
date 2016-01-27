@@ -3,7 +3,9 @@ export const receiverTarget = {
 		const { dispatch, roundActions } = props;
 		const item = monitor.getItem();
 
-		props.afterDrop(item.cardID, item.cardText);
+		// Delay until the next loop to allow the drop to process before we
+		// change the state of the app based on it
+		setTimeout( () => props.afterDrop(item.cardID, item.cardText), 50 );
 	}
 };
 

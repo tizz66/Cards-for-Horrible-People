@@ -2,24 +2,9 @@ import React from 'react';
 import { ItemTypes } from '../../constants/ItemTypes';
 import { DropTarget } from 'react-dnd';
 import { Card } from '../Card/Card';
+import { collect, receiverTarget } from './dropTarget.js';
 import classNames from 'classnames';
 import './Receiver.less';
-
-const receiverTarget = {
-	drop( props, monitor ) {
-		const { dispatch, roundActions } = props;
-		const item = monitor.getItem();
-
-		props.afterDrop(item.cardID, item.cardText);
-	}
-};
-
-function collect (connect, monitor) {
-	return {
-		connectDropTarget: connect.dropTarget(),
-		isOver: monitor.isOver()
-	};
-}
 
 @DropTarget( ItemTypes.CARD, receiverTarget, collect )
 export class PlayerReceiver extends React.Component {
