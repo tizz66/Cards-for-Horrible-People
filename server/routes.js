@@ -57,6 +57,12 @@ function gameManager (router, io) {
 		let gameKey = randomstring.generate({ length: 6, readable: true }).toUpperCase();
 		let game = new Game({ key: gameKey }, io);
 
+		// If we're running with the debug flag then we'll reset the
+		// games object so we only have one in play
+		if( process.env.DEBUGSERVER ){
+			games = {};
+		}
+
 		games[ gameKey ] = game;
 
 		let playerID = game.addPlayer( req.body.nickname, true );
