@@ -51,11 +51,10 @@ export class Game extends React.Component {
 	}
 
 	outOfTime () {
-		// Pick a random card from the hand
+		// Pick a random card from the hand and play it
 		const { hand } = this.props;
 		const toPlay = _.sample( hand );
 
-		console.log( "Playing card:", toPlay );
 		this.playCard( toPlay.id, toPlay.text );
 	}
 

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import * as RoundStates from '../../constants/RoundStates';
 import { Player } from '../Player/Player';
 
-export class WinnerBoard extends React.Component {
+export class ScoreBoard extends React.Component {
 
 	constructor (props) {
 		super(props);

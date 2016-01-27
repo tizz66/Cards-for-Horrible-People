@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
+import { Motion, spring } from 'react-motion';
 import { Hand } from '../Hand/Hand';
 import { Card } from '../Card/Card';
 import { PlayerReceiver } from '../Receiver/PlayerReceiver';
@@ -11,8 +12,54 @@ import * as RoundStates from '../../constants/RoundStates';
 
 export class PlayerBoard extends React.Component {
 
+	animateOut = null;
+
 	constructor (props) {
 		super(props);
+		this.state = {
+			donePlayed: false,
+			showPlayedLoader: false
+		};
+	}
+
+	getDefaultValue () {
+		return {
+			scale: 1,
+			y: 0,
+			opacity: 1
+		};
+	}
+
+	getPanelStyle () {
+		return {
+			scale: spring( this.state.donePlayed ? 0 : 1 ),
+			y: spring( this.state.donePlayed ? -200 : 0 ),
+			opacity: spring( this.state.donePlayed ? 0 : 1 )
+		};
+	}
+
+	getTimerStyle () {
+		const { roundState } = this.props;
+
+		return {
+			opacity: spring( roundState.played ? 0 : 1 )
+		};
+	}
+
+	componentWillReceiveProps (nextProps) {
+		const { roundState: newRoundState  } = nextProps;
+		const { roundState } = this.props;
+
+		// If we've played a card, set state with a timeout so that we can animate the cards out
+		if( !_.isUndefined( newRoundState.played ) && _.isUndefined( roundState.played ) ){
+			this.animateOut = setTimeout( () => this.setState({ donePlayed: true }), 2000 );
+			this.showPlayedLoader = setTimeout( () => this.setState({ showPlayedLoader: true }), 3000 );
+		}
+	}
+
+	componentWillUnmount () {
+		clearTimeout( this.animateOut );
+		clearTimeout( this.showPlayedLoader );
 	}
 
 	render () {
@@ -28,10 +75,6 @@ export class PlayerBoard extends React.Component {
 			} );
 		}
 
-		const classes = {
-			'Board': true
-		};
-
 		return (
 			<div className='Board'>
 				<div>
@@ -40,21 +83,35 @@ export class PlayerBoard extends React.Component {
 							<LoadingThrobber message='Waiting for question to be dealt...' />
 						</div>
 						:
-						<div className='Board-panel'>
-							<div>
-								{ !_.isUndefined( roundState.question ) && <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> }
+						( this.state.showPlayedLoader ?
+							<div className='Board-panel'>
+								<LoadingThrobber message='The round is being judged...' />
 							</div>
-							<div>
-								<Countdown from={ 30 } onEnd={ socketHandlers.outOfTime } active={ true }>
-									{ count =>
-										<div>
-											<Timer count={ count } start={ 30 } />
-											<PlayerReceiver roundState={ roundState } roundActions={ roundActions } afterDrop={ socketHandlers.playCard } />
-										</div>
-									}
-								</Countdown>
-							</div>
-						</div>
+							:
+							<Countdown from={ 30 } onEnd={ socketHandlers.outOfTime } active={ _.isUndefined( roundState.played ) }>
+								{ count =>
+									<div>
+										<Motion defaultStyle={ this.getDefaultValue() } style={ this.getTimerStyle() }>
+											{ (styles) =>
+												<Timer count={ count } start={ 30 } style={ { opacity: styles.opacity } } />
+											}
+										</Motion>
+										<Motion defaultStyle={ this.getDefaultValue() } style={ this.getPanelStyle() }>
+											{ (styles) =>
+												<div className='Board-panel' style={ { opacity: styles.opacity, transform: `scale(${styles.scale}) translateY(${styles.y}px)`} }>
+													<div>
+														{ !_.isUndefined( roundState.question ) && <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> }
+													</div>
+													<div>
+														<PlayerReceiver roundState={ roundState } roundActions={ roundActions } afterDrop={ socketHandlers.playCard } />
+													</div>
+												</div>
+											}
+										</Motion>
+									</div>
+								}
+							</Countdown>
+						)
 					}
 					{ roundState.status >= RoundStates.QUESTION_FLIPPED &&
 						<Hand cards={ hand } canDrag={ _.isUndefined( roundState.played ) } playCard={ roundActions.playCard } handActions={ handActions } />

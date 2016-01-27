@@ -6,7 +6,7 @@ export class Timer extends React.Component {
 	constructor (props) {
 		super(props);
 	}
-	
+
 	getStyle () {
 		return {
 			strokeDasharray: 440,
@@ -16,10 +16,10 @@ export class Timer extends React.Component {
 	}
 
 	render () {
-		const { count } = this.props;
+		const { count, style } = this.props;
 
 		return (
-			<div className='Timer'>
+			<div className='Timer' style={ style }>
 				<div className='Timer-count'>{ count }</div>
 				<svg
 					width='160'
