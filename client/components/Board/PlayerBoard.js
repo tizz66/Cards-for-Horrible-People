@@ -84,9 +84,13 @@ export class PlayerBoard extends React.Component {
 						</div>
 						:
 						( this.state.showPlayedLoader ?
-							<div className='Board-panel'>
-								<LoadingThrobber message='The round is being judged...' />
-							</div>
+							<Motion defaultStyle={ {opacity: 0} } style={ {opacity: spring(1)} }>
+								{ (styles) =>
+									<div className='Board-panel' style={ {opacity: styles.opacity} }>
+										<LoadingThrobber message='The round is being judged...' />
+									</div>
+								}
+							</Motion>
 							:
 							<Countdown from={ 30 } onEnd={ socketHandlers.outOfTime } active={ _.isUndefined( roundState.played ) }>
 								{ count =>
