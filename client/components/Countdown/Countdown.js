@@ -43,6 +43,12 @@ export class Countdown extends React.Component {
 		}
 	}
 
+	componentWillReceiveProps (nextProps) {
+		if( !nextProps.active ){
+			this.stop();
+		}
+	}
+
 	componentDidMount () {
 		this.start();
 	}
