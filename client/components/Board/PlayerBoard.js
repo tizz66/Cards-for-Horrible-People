@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Motion, spring } from 'react-motion';
 import { Hand } from '../Hand/Hand';
 import { Card } from '../Card/Card';
+import { DraggableCardPreview } from '../DraggableCard/DraggableCardPreview';
 import { PlayerReceiver } from '../Receiver/PlayerReceiver';
 import { Countdown } from '../Countdown/Countdown';
 import { Timer } from '../Timer/Timer';
@@ -121,6 +122,7 @@ export class PlayerBoard extends React.Component {
 						<Hand cards={ hand } canDrag={ _.isUndefined( roundState.played ) } playCard={ roundActions.playCard } handActions={ handActions } />
 					}
 				</div>
+				<DraggableCardPreview />
 			</div>
 		);
 	}

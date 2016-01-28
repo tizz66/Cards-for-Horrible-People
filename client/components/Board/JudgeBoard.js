@@ -4,6 +4,7 @@ import _ from 'lodash';
 import classNames from 'classnames';
 import { Hand } from '../Hand/Hand';
 import { Card } from '../Card/Card';
+import { DraggableCardPreview } from '../DraggableCard/DraggableCardPreview';
 import { JudgeReceiver } from '../Receiver/JudgeReceiver';
 import * as RoundStates from '../../constants/RoundStates';
 
@@ -96,6 +97,7 @@ export class JudgeBoard extends React.Component {
 						}
 					</Motion>
 				}
+				<DraggableCardPreview />
 			</div>
 		);
 	}

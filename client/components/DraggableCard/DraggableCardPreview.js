@@ -26,10 +26,16 @@ export class DraggableCardPreview extends React.Component {
 			};
 		}
 
-		const mouseOffset = { x: initialClientOffset.x - initialSourceClientOffset.x, y: initialClientOffset.y - initialSourceClientOffset.y };
+		console.log( currentOffset );
+		console.log( initialClientOffset );
+		console.log( initialSourceClientOffset );
+
 		const { x, y } = currentOffset;
-		const transform = `translate(${x-mouseOffset.x}px, ${y-mouseOffset.y}px)`;
+		const transform = `translate(${x}px, ${y}px)`;
 		return {
+			position: 'absolute',
+			top: 0,
+			left: 0,
 			transform: transform,
 			opacity: 0.6
 		};

@@ -56,7 +56,7 @@ export class Launch extends React.Component {
 
 		return (
 			<div>
-				<h1>Cards for Offensive People.</h1>
+				<h1>Cards for Horrible People.</h1>
 				<div className='Launch'>
 					<div className={ 'Launch-panel' + ( gameState.loading ? ' Launch-panel-isLoading' : '' ) }>
 						<h2><span>Join</span> an existing game</h2>
