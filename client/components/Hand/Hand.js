@@ -2,6 +2,7 @@ import React from 'react';
 import { TransitionMotion, spring } from 'react-motion';
 import { Card } from '../Card/Card';
 import { DraggableCard } from '../DraggableCard/DraggableCard';
+import { DraggableCardPreview } from '../DraggableCard/DraggableCardPreview';
 import { LoadingThrobber } from '../Loading/LoadingThrobber';
 import classNames from 'classnames';
 import './Hand.less';
@@ -104,6 +105,9 @@ export class Hand extends React.Component {
 									</li>
 								);
 							}) }
+							<li key='__preview'>
+								<DraggableCardPreview />
+							</li>
 						</ul>
 					}
 				</TransitionMotion>

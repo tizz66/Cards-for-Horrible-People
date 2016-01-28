@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import { default as TouchBackend } from 'react-dnd-touch-backend';
 //--
 import * as GameStateActions from '../actions/GameStateActions';
 import * as HandActions from '../actions/HandActions';
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => ({
 	players: state.players
 });
 
-@DragDropContext( HTML5Backend )
+@DragDropContext( TouchBackend({ enableMouseEvents: true }) )
 @connect( mapStateToProps )
 export class Game extends React.Component {
 

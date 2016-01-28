@@ -11,13 +11,15 @@ const cardSource = {
 	beginDrag(props) {
 		return {
 			cardID: props.card.id,
-			cardText: props.card.text
+			cardText: props.card.text,
+			card: props.card
 		};
 	}
 };
 
 @DragSource( ItemTypes.CARD, cardSource, (connect, monitor) => ({
 	connectDragSource: connect.dragSource(),
+	connectDragPreview: connect.dragPreview(),
 	isDragging: monitor.isDragging()
 }) )
 export class DraggableCard extends React.Component {
@@ -26,12 +28,14 @@ export class DraggableCard extends React.Component {
 	}
 
 	render () {
-		const { connectDragSource, ...others } = this.props;
+		const { connectDragSource, connectDragPreview, ...others } = this.props;
 
-		return connectDragSource(
-			<div>
-				<Card {...others} />
-			</div>
+		return connectDragPreview(
+			connectDragSource(
+				<div>
+					<Card {...others} />
+				</div>
+			)
 		);
 	}
 }
