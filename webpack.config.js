@@ -21,6 +21,9 @@ module.exports = {
 	    new webpack.NoErrorsPlugin(),
 	    devFlagPlugin
     ],
+    devServer: {
+        hot: true,
+    },
 	module: {
 		loaders: [
             {
