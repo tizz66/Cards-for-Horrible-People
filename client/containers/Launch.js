@@ -132,7 +132,7 @@ export class Launch extends React.Component {
 										</div>
 										{ !_.isUndefined( this.props.errors.joinError ) ? this.props.errors.joinError : '' }
 									</div>
-									<button className='btn btn-dark btn-block' onClick={ this.joinGame }>Join Game</button>
+									<button className='btn btn-dark' onClick={ this.joinGame }>Join Game</button>
 								</div>
 							</div>
 						}
@@ -149,7 +149,7 @@ export class Launch extends React.Component {
 									<div className='form-group'>
 										<input type='text' placeholder='Your nickname' className='form-control input-lg' ref={ (ref) => { this._nick1 = ref; } } />
 									</div>
-									<button className='btn btn-dark btn-block' onClick={ this.newGame }>Start Game</button>
+									<button className='btn btn-dark' onClick={ this.newGame }>Start Game</button>
 								</div>
 							</div>
 						}
