@@ -34,7 +34,7 @@ app.use( '/game', gameRouter );
 
 
 // Start listening
-let server = app.listen( port, 'localhost', function (err) {
+let server = app.listen( port, null, function (err) {
 	if (err) {
 		console.log(err);
 		return;
