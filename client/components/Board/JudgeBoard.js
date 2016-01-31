@@ -65,7 +65,7 @@ export class JudgeBoard extends React.Component {
 							{ !_.isUndefined( roundState.question ) &&
 								<Motion defaultStyle={ this.getQuestionStyle() } style={ this.getQuestionStyle() }>
 									{ cardStyle =>
-										<div style={ {transform: `scale(${cardStyle.scale}) translateY(${cardStyle.y}px)`} }>
+										<div className='Board-cardWrap' style={ {transform: `scale(${cardStyle.scale}) translateY(${cardStyle.y}px)`} }>
 											<Card
 												card={ Object.assign( roundState.question, { type: 'black' } ) }
 												flipped={ roundState.status == RoundStates.FLIP_CARD }
@@ -75,7 +75,7 @@ export class JudgeBoard extends React.Component {
 								</Motion>
 							}
 							{ roundState.status >= RoundStates.CHOOSING_ANSWER &&
-								<div style={ {marginLeft: `${style.margin}px`} }>
+								<div className='Board-cardWrap' style={ {marginLeft: `${style.margin}px`} }>
 									<JudgeReceiver
 										roundState={ roundState }
 										roundActions={ roundActions }

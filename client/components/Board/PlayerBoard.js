@@ -104,10 +104,10 @@ export class PlayerBoard extends React.Component {
 										<Motion defaultStyle={ this.getDefaultValue() } style={ this.getPanelStyle() }>
 											{ (styles) =>
 												<div className='Board-panel' style={ { opacity: styles.opacity, transform: `scale(${styles.scale}) translateY(${styles.y}px)`} }>
-													<div>
+													<div className='Board-cardWrap'>
 														{ !_.isUndefined( roundState.question ) && <Card card={ Object.assign( roundState.question, { type: 'black' } ) } /> }
 													</div>
-													<div>
+													<div className='Board-cardWrap'>
 														<PlayerReceiver roundState={ roundState } roundActions={ roundActions } afterDrop={ socketHandlers.playCard } />
 													</div>
 												</div>
