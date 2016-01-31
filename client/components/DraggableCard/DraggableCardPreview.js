@@ -26,10 +26,6 @@ export class DraggableCardPreview extends React.Component {
 			};
 		}
 
-		console.log( currentOffset );
-		console.log( initialClientOffset );
-		console.log( initialSourceClientOffset );
-
 		const { x, y } = currentOffset;
 		const transform = `translate(${x}px, ${y}px)`;
 		return {
