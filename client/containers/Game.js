@@ -122,7 +122,7 @@ export class Game extends React.Component {
 		const roundActions = bindActionCreators(RoundStateActions, dispatch);
 		const handActions = bindActionCreators(HandActions, dispatch);
 
-		this.socket = io().connect('http://localhost:3002/' + gameState.gameKey + '/');
+		this.socket = io().connect('/' + gameState.gameKey + '/');
 		const socketHandlers = {
 			playCard: this.playCard.bind( this ),
 			chooseWinner: this.chooseWinner.bind( this ),
