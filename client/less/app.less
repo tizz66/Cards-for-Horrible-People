@@ -8,16 +8,44 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: 'Helvetica', sans-serif;
-	background: #222222;
-	background: -moz-linear-gradient(top,  #222222 0%, #373737 100%);
-	background: -webkit-linear-gradient(top,  #222222 0%,#373737 100%);
-	background: linear-gradient(to bottom,  #222222 0%,#373737 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#373737',GradientType=0 );
+	.gradient( #222222, #373737 );
 	-webkit-font-smoothing: antialiased;
 
 	&.is-indev {
 		padding-right: 300px;
 	}
+}
+
+a {
+	text-decoration: none;
+}
+
+button {
+	font-size: 16px;
+	color: #111;
+	padding: @form-input-radius;
+	border: 0;
+	border-radius: 3px;
+	line-height: 2;
+}
+
+input[type="text"] {
+	font-size: 16px;
+	color: #111;
+	display: block;
+	width: 100%;
+	padding: @form-input-radius;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	line-height: 1.42857143;
+}
+
+ul, ol, p {
+	.reset;
+}
+
+ul, ol {
+	list-style-type: none;
 }
 
 .App-button {
@@ -31,18 +59,5 @@ body {
 
 	&[disabled] {
 		opacity: 0.3;
-	}
-}
-
-.btn-dark {
-	background: #333;
-	border-color: #333;
-	color: #fff;
-
-	&:hover,
-	&:focus {
-		color: #fff;
-		background: #000;
-		border-color: #000;
 	}
 }

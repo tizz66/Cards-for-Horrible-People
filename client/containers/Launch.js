@@ -123,16 +123,20 @@ export class Launch extends React.Component {
 								</div>
 								<div className='Card-back'>
 									<a href='#' className='Launch-cardClose' onClick={ this.closeForm }>&times;</a>
-									<div className='row'>
-										<div className='col-md-5 form-group'>
-											<input type='text' placeholder='Game code' className='form-control input-lg' ref={ (ref) => { this._gameKey = ref; } } />
-										</div>
-										<div className='col-md-7 form-group'>
-											<input type='text' placeholder='Your nickname' className='form-control input-lg' ref={ (ref) => { this._nick0 = ref; } } />
-										</div>
+									<ul className='Launch-form'>
+										<li>
+											<label>Game Code</label>
+											<input type='text' placeholder='e.g. ABC123' ref={ (ref) => { this._gameKey = ref; } } />
+										</li>
+										<li>
+											<label>Your Nickname</label>
+											<input type='text' ref={ (ref) => { this._nick0 = ref; } } />
+										</li>
 										{ !_.isUndefined( this.props.errors.joinError ) ? this.props.errors.joinError : '' }
+									</ul>
+									<div className='Launch-formSubmit'>
+										<button type='submit' onClick={ this.joinGame }>Join Game</button>
 									</div>
-									<button className='btn btn-dark' onClick={ this.joinGame }>Join Game</button>
 								</div>
 							</div>
 						}
@@ -146,10 +150,15 @@ export class Launch extends React.Component {
 								</div>
 								<div className='Card-back'>
 									<a href='#' className='Launch-cardClose' onClick={ this.closeForm }>&times;</a>
-									<div className='form-group'>
-										<input type='text' placeholder='Your nickname' className='form-control input-lg' ref={ (ref) => { this._nick1 = ref; } } />
+									<ul className='Launch-form'>
+										<li>
+											<label>Your Nickname</label>
+											<input type='text' className='form-control input-lg' ref={ (ref) => { this._nick1 = ref; } } />
+										</li>
+									</ul>
+									<div className='Launch-formSubmit'>
+										<button type='submit' onClick={ this.newGame }>Start Game</button>
 									</div>
-									<button className='btn btn-dark' onClick={ this.newGame }>Start Game</button>
 								</div>
 							</div>
 						}

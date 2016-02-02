@@ -142,7 +142,7 @@ export class Game extends React.Component {
 						players={ players }	/>
 				}
 				<div className='Game'>
-					{ !gameState.started ?
+					{ !gameState.started || _.isUndefined( roundState.judgeID ) ?
 						<Loading
 							gameState={ gameState }
 							gameStateActions={ GameStateActions }

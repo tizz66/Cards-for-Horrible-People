@@ -1,6 +1,35 @@
+@import './_vars.less';
+
+/* CARDS */
+.cardStyles( @width ){
+	width: @width;
+	height: @width * @card-ratio;
+
+	@padding: @width * @card-padding-ratio;
+
+	> .Card-front,
+	> .Card-back {
+		width: 100%;
+		height: 100%;
+		border-radius: @width * @card-border-radius;
+		padding: @padding;
+		box-shadow: -( @padding / 2 ) ( @padding / 2 ) 0 rgba(0,0,0,0.2);
+	}
+}
+
+/* UTILITIES */
+// Generic reset
 .reset {
 	margin: 0;
 	padding: 0;
+}
+
+// Gradients
+.gradient( @startColor, @endColor ) {
+	background-color: @startColor;
+	background: -webkit-linear-gradient(top, @startColor, @endColor);
+	background: -moz-linear-gradient(top, @startColor, @endColor);
+	background: linear-gradient(top, @startColor, @endColor);
 }
 
 // CSS keyframes
@@ -17,6 +46,7 @@
 	animation: @arguments;
 }
 
+// Sets @randNum in context; a random number between @min and @max
 .makeRandom(@min: 0, @max: @min+1, @int: 0) {
   .checkInt() {
     @getNum: `Math.random() * (@{max} - @{min} + @{int})`;
@@ -24,4 +54,23 @@
   }
   .checkInt();
   @randNum: @base + @min;
+}
+
+// Absolute positioning
+.position( @top: false, @right: false, @bottom: @top, @left: @right, @position: 'absolute' ) {
+	position: @position;
+
+	// Only include a side when we have a value
+	& when not ( @top = false ) {
+		top: @top;
+	}
+	& when not ( @bottom = false ) {
+		bottom: @bottom;
+	}
+	& when not ( @right = false ) {
+		right: @right;
+	}
+	& when not( @left = false ) {
+		left: @left;
+	}
 }

@@ -1,9 +1,7 @@
+@import '../less/_mixins.less';
+
 .Game {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 40px;
+	.position(0, 0, 40px, 0);
 
 	body.is-indev & {
 		right: 300px;

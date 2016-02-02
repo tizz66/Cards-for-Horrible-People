@@ -14,7 +14,7 @@ export class Board extends React.Component {
 		super(props);
 	}
 
-	getBoardToDisplay () {
+	render () {
 		const { roundState, gameState } = this.props;
 
 		if( roundState.status >= RoundStates.SHOWING_SCORES ){
@@ -26,15 +26,5 @@ export class Board extends React.Component {
 		} else if( !_.isUndefined( roundState.judgeID ) ){
 			return ( <PlayerBoard {...this.props} /> );
 		}
-	}
-
-	render () {
-		const { roundState, gameState } = this.props;
-
-		return (
-			<div>
-				{ this.getBoardToDisplay() }
-			</div>
-		);
 	}
 }

@@ -9,15 +9,14 @@ export class Card extends React.Component {
 	constructor (props) {
 		super(props);
 	}
-	
+
 	render () {
 		const classes = {
 			'Card': true,
 			['Card-' + this.props.card.type]: true,
 			'is-dragging': this.props.isDragging,
 			'is-draggable': this.props.canDrag,
-			'is-hidden': this.props.card.hidden,
-			//'is-sent': this.props.sent
+			'is-hidden': this.props.card.hidden
 		};
 
 		return (
@@ -28,7 +27,7 @@ export class Card extends React.Component {
 							<p>Cards for horrible people</p>
 						</div>
 						<div className='Card-front'>
-							<p>{ this.props.card.text } { this.props.card.hidden ? 'HIDDEN' : null }</p>
+							<p>{ this.props.card.text }</p>
 						</div>
 					</div>
 				}

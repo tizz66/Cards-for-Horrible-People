@@ -2,11 +2,7 @@
 
 .Board {
 	&-panel {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 230px;
+		.position(0, 0, 230px, 0);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -38,11 +34,7 @@
 	}
 
 	&-winner {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 40px;
+		.position(0, 0, 40px, 0);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -91,11 +83,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 40px;
+		.position(0, 0, 40px, 0);
 
 		> div {
 			width: 300px;
