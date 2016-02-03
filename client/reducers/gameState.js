@@ -50,7 +50,9 @@ export default function gameState( state = initialState, action ) {
 			return Object.assign( {}, state, {
 				loading: false,
 				loaded: true,
-				started: true
+				started: true,
+				winCount: action.winCount,
+				timeLimits: action.timeLimits
 			} );
 
 		default:

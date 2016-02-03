@@ -5,7 +5,8 @@ export class Countdown extends React.Component {
 	static propTypes = {
 		from: React.PropTypes.number.isRequired,
 		children: React.PropTypes.func.isRequired,
-		onEnd: React.PropTypes.func
+		onEnd: React.PropTypes.func,
+		active: React.PropTypes.bool
 	};
 
 	static defaultProps = {
@@ -50,7 +51,9 @@ export class Countdown extends React.Component {
 	}
 
 	componentDidMount () {
-		this.start();
+		if( this.props.active ){
+			this.start();
+		}
 	}
 
 	componentWillUnmount () {

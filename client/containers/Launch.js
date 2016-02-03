@@ -19,7 +19,9 @@ export class Launch extends React.Component {
 		this.state = {
 			joinError: false,
 			join: false,
-			new: false
+			new: false,
+			winCount: 5,
+			timeLimits: 1
 		};
 	}
 
@@ -45,9 +47,13 @@ export class Launch extends React.Component {
 
 		e.preventDefault();
 		const nickname = this._nick1.value;
+		const timeLimits = this.state.timeLimits;
+		const winCount = this.state.winCount;
 
 		dispatch( GameStateActions.newGame({
-			nickname
+			nickname,
+			timeLimits,
+			winCount
 		})).then( () => {
 			if( this.props.gameState.loaded ){
 				history.pushState(null, '/game');
@@ -106,6 +112,22 @@ export class Launch extends React.Component {
 		};
 	}
 
+	changeWinCount = (e) => {
+		this.setState({
+			winCount: parseInt( e.currentTarget.value )
+		});
+
+		console.log( this.state );
+	};
+
+	changeTimeLimit = (e) => {
+		this.setState({
+			timeLimits: parseInt( e.currentTarget.value )
+		});
+
+		console.log( this.state );
+	};
+
 	render () {
 		const { gameState, dispatch } = this.props;
 
@@ -153,7 +175,39 @@ export class Launch extends React.Component {
 									<ul className='Launch-form'>
 										<li>
 											<label>Your Nickname</label>
-											<input type='text' className='form-control input-lg' ref={ (ref) => { this._nick1 = ref; } } />
+											<input type='text' ref={ (ref) => { this._nick1 = ref; } } />
+										</li>
+										<li>
+											<label>Rounds to win</label>
+											<ol className='Launch-radioSelector'>
+												{ [3, 5, 7, 9].map( (num) => {
+													return (<li>
+														<input
+															type='radio'
+															name='winCount'
+															value={ num }
+															checked={ this.state.winCount === num }
+															onChange={ this.changeWinCount } />
+														<span>{ num }</span>
+													</li>);
+												}) }
+											</ol>
+										</li>
+										<li>
+											<label>Time-limited rounds?</label>
+											<ol className='Launch-radioSelector'>
+												{ [1,0].map( (num) => {
+													return (<li>
+														<input
+															type='radio'
+															name='timeLimits'
+															value={ num }
+															checked={ this.state.timeLimits === num }
+															onChange={ this.changeTimeLimit } />
+														<span>{ num === 1 ? 'Yep' : 'Nope' }</span>
+													</li>);
+												}) }
+											</ol>
 										</li>
 									</ul>
 									<div className='Launch-formSubmit'>

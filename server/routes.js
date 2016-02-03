@@ -54,8 +54,8 @@ function gameManager (router, io) {
 	// Create a new game (ajax endpoint)
 	//-------------------------------------------
 	router.post('/new', function (req, res) {
-		let gameKey = randomstring.generate({ length: 6, readable: true }).toUpperCase();
-		let game = new Game({ key: gameKey }, io);
+		const gameKey = randomstring.generate({ length: 6, readable: true }).toUpperCase();
+		const game = new Game({ key: gameKey, timeLimits: req.body.timeLimits, winCount: req.body.winCount }, io);
 
 		// If we're running with the debug flag then we'll reset the
 		// games object so we only have one in play
@@ -65,7 +65,7 @@ function gameManager (router, io) {
 
 		games[ gameKey ] = game;
 
-		let playerID = game.addPlayer( req.body.nickname, true );
+		const playerID = game.addPlayer( req.body.nickname, true );
 
 		req.session.gameKey = gameKey;
 		req.session.playerID = playerID;

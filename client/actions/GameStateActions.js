@@ -18,7 +18,9 @@ export function newGame(data) {
 export function startGame(data) {
     return {
         type: types.START_GAME,
-        players: data.players
+        players: data.players,
+        timeLimits: data.timeLimits,
+        winCount: data.winCount
     };
 }
 

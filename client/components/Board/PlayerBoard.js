@@ -93,14 +93,16 @@ export class PlayerBoard extends React.Component {
 								}
 							</Motion>
 							:
-							<Countdown from={ 30 } onEnd={ socketHandlers.outOfTime } active={ _.isUndefined( roundState.played ) }>
+							<Countdown from={ 30 } onEnd={ socketHandlers.outOfTime } active={ _.isUndefined( roundState.played ) && gameState.timeLimits }>
 								{ count =>
 									<div>
-										<Motion defaultStyle={ this.getDefaultValue() } style={ this.getTimerStyle() }>
-											{ (styles) =>
-												<Timer count={ count } start={ 30 } style={ { opacity: styles.opacity } } />
-											}
-										</Motion>
+										{ gameState.timeLimits &&
+											<Motion defaultStyle={ this.getDefaultValue() } style={ this.getTimerStyle() }>
+												{ (styles) =>
+													<Timer count={ count } start={ 30 } style={ { opacity: styles.opacity } } />
+												}
+											</Motion>
+										}
 										<Motion defaultStyle={ this.getDefaultValue() } style={ this.getPanelStyle() }>
 											{ (styles) =>
 												<div className='Board-panel' style={ { opacity: styles.opacity, transform: `scale(${styles.scale}) translateY(${styles.y}px)`} }>

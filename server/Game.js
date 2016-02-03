@@ -12,6 +12,8 @@ const avatarColors = [
 export default class Game {
 	constructor (options, namespace) {
 		this.gameKey = options.key;
+		this.winCount = parseInt( options.winCount, 10 );
+		this.timeLimits = Boolean( options.timeLimits );
 		this.players = {};
 		this.socket = namespace;
 		this.ownerID = '';
@@ -29,7 +31,9 @@ export default class Game {
 			socket.on('start-game', () => {
 				if( socket.handshake.session.playerID == this.ownerID ){
 					this.socket.emit( 'game-started', {
-						players: this.getPlayers()
+						players: this.getPlayers(),
+						timeLimits: this.timeLimits,
+						winCount: this.winCount
 					} );
 
 					this.launchGame();
@@ -72,7 +76,7 @@ export default class Game {
 			});
 
 			socket.on('choose-winner', (data) => {
-				let cardData = this.deck.getCardData( data.cardID );
+				const cardData = this.deck.getCardData( data.cardID );
 
 				if( socket.handshake.session.playerID !== this.round.judgeID ){
 					return;
@@ -114,11 +118,11 @@ export default class Game {
 		let judgeID = this.ownerID;
 
 		if( !_.isUndefined( this.round.judgeID ) ){
-			let playerIDs = Object.keys( this.players );
-			let judgePos = playerIDs.indexOf( this.round.judgeID );
+			const playerIDs = Object.keys( this.players );
+			const judgePos = playerIDs.indexOf( this.round.judgeID );
 
 			if( judgePos === ( _.size( this.players ) - 1 ) ){
-				judgeID = playerIDs[0]
+				judgeID = playerIDs[0];
 			} else {
 				judgeID = playerIDs[ judgePos + 1 ];
 			}
@@ -145,8 +149,8 @@ export default class Game {
 	}
 
 	getPlayers (ids) {
-		let players = {};
-		let params = ['nickname', 'score', 'color', 'avatarText'];
+		const players = {};
+		const params = ['nickname', 'score', 'color', 'avatarText'];
 
 		if( _.isString( ids ) ){
 			return _.pick( this.players[ ids ], ...params );
@@ -162,7 +166,7 @@ export default class Game {
 	}
 
 	getScores () {
-		let scores = {};
+		const scores = {};
 
 		_.forOwn( this.players, (player, playerID) => {
 			scores[ playerID ] = player.score;
@@ -172,7 +176,7 @@ export default class Game {
 	}
 
 	addPlayer (nickname, owner) {
-		let playerID = new Buffer( nickname ).toString('base64');
+		const playerID = new Buffer( nickname ).toString('base64');
 
 		this.players[ playerID ] = {
 			nickname: nickname,
@@ -195,7 +199,7 @@ export default class Game {
 	}
 
 	playerExists (nickname) {
-		let playerID = new Buffer( nickname ).toString('base64');
+		const playerID = new Buffer( nickname ).toString('base64');
 		return !_.isUndefined( this.players[ playerID ] );
 	}
 }
