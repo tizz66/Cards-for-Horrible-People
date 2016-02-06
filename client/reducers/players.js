@@ -9,7 +9,7 @@ export default function players( state = initialState, action ) {
 		case types.PLAYER_JOINED:
 			return Object.assign( {}, {
 				...state,
-				[ action.player.nickname ]: action.player
+				[ action.player.id ]: action.player
 			});
 
 		case types.NEW_GAME_SUCCESS:

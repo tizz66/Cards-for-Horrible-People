@@ -150,7 +150,7 @@ export default class Game {
 
 	getPlayers (ids) {
 		const players = {};
-		const params = ['nickname', 'score', 'color', 'avatarText'];
+		const params = ['id', 'nickname', 'score', 'color', 'avatarText'];
 
 		if( _.isString( ids ) ){
 			return _.pick( this.players[ ids ], ...params );
@@ -179,6 +179,7 @@ export default class Game {
 		const playerID = new Buffer( nickname ).toString('base64');
 
 		this.players[ playerID ] = {
+			id: playerID,
 			nickname: nickname,
 			cards: [],
 			score: 0,
