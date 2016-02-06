@@ -130,7 +130,14 @@ export class Launch extends React.Component {
 
 	render () {
 		const { gameState, dispatch } = this.props;
-
+		
+		const fieldErrorClasses = {
+			gameKey: !_.isUndefined( this.props.errors.joinError ) && this.props.errors.joinError.field === 'gameKey',
+			nickname: !_.isUndefined( this.props.errors.joinError ) && this.props.errors.joinError.field === 'nickname',
+		};
+		
+		console.log( fieldErrorClasses );
+		
 		return (
 			<div className='Launch'>
 				<h1>Cards for Horrible People</h1>
@@ -148,14 +155,16 @@ export class Launch extends React.Component {
 									<ul className='Launch-form'>
 										<li>
 											<label>Game Code</label>
-											<input type='text' placeholder='e.g. ABC123' ref={ (ref) => { this._gameKey = ref; } } />
+											<input type='text' placeholder='e.g. ABC123' className={ fieldErrorClasses.gameKey ? 'is-error' : null } ref={ (ref) => { this._gameKey = ref; } } />
 										</li>
 										<li>
 											<label>Your Nickname</label>
-											<input type='text' ref={ (ref) => { this._nick0 = ref; } } />
+											<input type='text' className={ fieldErrorClasses.nickname ? 'is-error' : null } ref={ (ref) => { this._nick0 = ref; } } />
 										</li>
-										{ !_.isUndefined( this.props.errors.joinError ) ? this.props.errors.joinError : '' }
 									</ul>
+									{ !_.isUndefined( this.props.errors.joinError ) &&
+										 <div className='Launch-error'>{ this.props.errors.joinError.error }</div>
+									}
 									<div className='Launch-formSubmit'>
 										<button type='submit' onClick={ this.joinGame }>Join Game</button>
 									</div>

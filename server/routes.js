@@ -26,14 +26,16 @@ function gameManager (router, io) {
 
 		if( _.isUndefined( game ) ){
 			res.status(500).json({
-				error: "GAME_NOT_FOUND"
+				error: "Oops, that gamekey is not valid.",
+				field: 'gameKey'
 			});
 			return;
 		}
 
 		if( game.playerExists( req.body.nickname ) ){
 			res.status(500).json({
-				error: "NAME_EXISTS"
+				error: "That nickname already exists in the game!",
+				field: 'nickname'
 			});
 			return;
 		}
