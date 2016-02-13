@@ -78,7 +78,13 @@ export class Game extends React.Component {
 
 	componentDidMount () {
 		const { gameState, hand, dispatch } = this.props;
-
+		
+		// Error handling
+		this.socket.on( 'disconnect', () => {
+			//dispatch( GameStateActions.)
+		});
+		
+		// Game events
 		this.socket.on( 'player-joined', (data) => {
 			dispatch( GameStateActions.playerJoined(data) );
 		});
@@ -122,7 +128,8 @@ export class Game extends React.Component {
 		const roundActions = bindActionCreators(RoundStateActions, dispatch);
 		const handActions = bindActionCreators(HandActions, dispatch);
 
-		this.socket = io().connect('/' + gameState.gameKey + '/');
+		this.socket = io.connect( `//localhost:3002/${gameState.gameKey}` );
+		
 		const socketHandlers = {
 			playCard: this.playCard.bind( this ),
 			chooseWinner: this.chooseWinner.bind( this ),

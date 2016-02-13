@@ -5,7 +5,7 @@ import Server from 'socket.io';
 import path from 'path';
 import http from 'http';
 import session from 'express-session';
-import iosession from 'socket.io-express-session';
+import iosession from 'express-socket.io-session';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import * as config from './webpack.config';
@@ -17,7 +17,8 @@ let port = 3002;
 let app = express();
 let httpServer = http.Server( app );
 let serverSession = session({
-	secret: 'test'
+	secret: 'test',
+	resave: true
 });
 
 app.use( bodyParser.json() );
@@ -44,5 +45,8 @@ let server = app.listen( port, null, function (err) {
 });
 
 let socket = Server( server );
-socket.use( iosession( serverSession ) );
-gameManager( gameRouter, socket );
+let socketSession = iosession( serverSession, {
+	autoSave: true
+});
+socket.use( socketSession );
+gameManager( gameRouter, socket, socketSession );

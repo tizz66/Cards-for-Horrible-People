@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 let games = {};
 
-function gameManager (router, io) {
+function gameManager (router, io, socketSession) {
 
 	function gameExists (gameKey) {
 		return !_.isUndefined( games[ gameKey ] );
@@ -56,8 +56,20 @@ function gameManager (router, io) {
 	// Create a new game (ajax endpoint)
 	//-------------------------------------------
 	router.post('/new', function (req, res) {
-		const gameKey = randomstring.generate({ length: 6, readable: true }).toUpperCase();
-		const game = new Game({ key: gameKey, timeLimits: req.body.timeLimits, winCount: req.body.winCount }, io);
+				
+		const gameKey = randomstring.generate({ 
+			length: 6, 
+			readable: true 
+		}).toUpperCase();
+		
+		// Use session in namespace
+		io.of( `/${gameKey}` ).use( socketSession );
+		
+		const game = new Game({ 
+			key: gameKey, 
+			timeLimits: req.body.timeLimits, 
+			winCount: req.body.winCount 
+		}, io.of( `/${gameKey}` ) );
 
 		// If we're running with the debug flag then we'll reset the
 		// games object so we only have one in play
