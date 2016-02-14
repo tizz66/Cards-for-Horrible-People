@@ -12,8 +12,17 @@ import * as config from './webpack.config';
 //import gameRoutes from './server/routes';
 import gameManager from './server/routes';
 
-let compiler = webpack( config );
+// Get port/host
+let host = 'localhost';
 let port = 3002;
+
+if( process.env.SERVERURL ){
+ 	let hostPieces = process.env.SERVERURL.split(':');
+	host = hostPieces[0] || host;
+	port = hostPieces[1] || port;
+}
+
+let compiler = webpack( config );
 let app = express();
 let httpServer = http.Server( app );
 let serverSession = session({
@@ -33,15 +42,14 @@ app.use( '/', express.static( path.join( __dirname ) ) );
 let gameRouter = express.Router();
 app.use( '/game', gameRouter );
 
-
 // Start listening
-let server = app.listen( port, null, function (err) {
+let server = app.listen( port, host, function (err) {
 	if (err) {
 		console.log(err);
 		return;
 	}
 
-	console.log( 'server listening on port: %s', port );
+	console.log( 'server listening on %s:%s', host, port );
 });
 
 let socket = Server( server );

@@ -128,7 +128,7 @@ export class Game extends React.Component {
 		const roundActions = bindActionCreators(RoundStateActions, dispatch);
 		const handActions = bindActionCreators(HandActions, dispatch);
 
-		this.socket = io.connect( `//localhost:3002/${gameState.gameKey}` );
+		this.socket = io.connect( `${__socketURI__}/${gameState.gameKey}` );
 		
 		const socketHandlers = {
 			playCard: this.playCard.bind( this ),

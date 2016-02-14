@@ -5,6 +5,20 @@ var devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
 });
 
+// Get port/host
+let host = 'localhost';
+let port = 3002;
+
+if( process.env.SERVERURL ){
+ 	let hostPieces = process.env.SERVERURL.split(':');
+	host = hostPieces[0] || host;
+	port = hostPieces[1] || port;
+}
+
+var socketURIPlugin = new webpack.DefinePlugin({
+  __socketURI__: JSON.stringify( `${host}:${port}` || 'localhost:3002' )
+});
+
 module.exports = {
 	devtool: 'eval',
 	entry: [
@@ -19,7 +33,8 @@ module.exports = {
     plugins: [
 	    new webpack.HotModuleReplacementPlugin(),
 	    new webpack.NoErrorsPlugin(),
-	    devFlagPlugin
+	    devFlagPlugin,
+        socketURIPlugin
     ],
     devServer: {
         hot: true,
