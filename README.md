@@ -2,6 +2,13 @@ Cards for Horrible People
 =========================
 _A crappy tribute to Cards Against Humanity_
 
+Screenshot
+----------
+
+_(Judge's screen on the left, second player on the right. Naturally you'd want more than 2 players in a game ☺ )_
+
+<img src='http://i.imgur.com/eKp7Jzl.png'>
+
 Running it
 ----------
 The server defaults to localhost:3002, but you can override it with the `SERVERURL` variable.
